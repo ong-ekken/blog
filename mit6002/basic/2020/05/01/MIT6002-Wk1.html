@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>EdX MIT6002X Week 1 | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="EdX MIT6002X Week 1" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Notes on Python, Natural Language Processing, and Random Stuff" />
+<meta property="og:description" content="Notes on Python, Natural Language Processing, and Random Stuff" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/mit6002/basic/2020/05/01/MIT6002-Wk1.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/mit6002/basic/2020/05/01/MIT6002-Wk1.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/images/mit6002x.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-05-01T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/mit6002/basic/2020/05/01/MIT6002-Wk1.html","@type":"BlogPosting","headline":"EdX MIT6002X Week 1","dateModified":"2020-05-01T00:00:00-05:00","datePublished":"2020-05-01T00:00:00-05:00","image":"https://ong-ekken.github.io/images/mit6002x.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/mit6002/basic/2020/05/01/MIT6002-Wk1.html"},"description":"Notes on Python, Natural Language Processing, and Random Stuff","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">EdX MIT6002X Week 1</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-01T00:00:00-05:00" itemprop="datePublished">
+        May 1, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#mit6002">mit6002</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2020-05-01-MIT6002-Wk1.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2020-05-01-MIT6002-Wk1.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2020-05-01-MIT6002-Wk1.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Lecture-1-Review-Notes">Lecture 1 Review Notes </a></li>
+<li class="toc-entry toc-h2"><a href="#Optimization-and-Knapsack-Problem">Optimization and Knapsack Problem </a></li>
+<li class="toc-entry toc-h2"><a href="#Lecture-2-Review-Notes">Lecture 2 Review Notes </a></li>
+<li class="toc-entry toc-h2"><a href="#Decision-Trees-and-Dynamic-Programming">Decision Trees and Dynamic Programming </a></li>
+<li class="toc-entry toc-h2"><a href="#Lecture-3-Review-Notes">Lecture 3 Review Notes </a></li>
+<li class="toc-entry toc-h2"><a href="#Graph-Problems">Graph Problems </a></li>
+<li class="toc-entry toc-h1"><a href="#Problem-Set-1">Problem Set 1 </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Part-1:-Greedy-Cow-Transport">Part 1: Greedy Cow Transport </a></li>
+<li class="toc-entry toc-h2"><a href="#Assumptions:">Assumptions: </a></li>
+<li class="toc-entry toc-h2"><a href="#Test-Case">Test Case </a></li>
+<li class="toc-entry toc-h2"><a href="#Part-2">Part 2 </a></li>
+<li class="toc-entry toc-h2"><a href="#Part-3">Part 3 </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-05-01-MIT6002-Wk1.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>These notebooks are intended for the purpose of:</p>
+<ul>
+<li>keeping track of my own learning</li>
+<li>serving as part of my portfolio </li>
+<li>learning with others that already COMPLETED below-mentioned content and exercises</li>
+</ul>
+<p>As mentioned in course guidelines, learning programming and computer science is about hands-on practicing. So if you are reading this purely so you can copy answers for assignments, please turn back now. This will not serve you well.</p>
+<p>Further disclaimer: code below may be formatted and thus may not work directly on the EdX grader.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lecture-1-Review-Notes">
+<a class="anchor" href="#Lecture-1-Review-Notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lecture 1 Review Notes<a class="anchor-link" href="#Lecture-1-Review-Notes"> </a>
+</h2>
+<h2 id="Optimization-and-Knapsack-Problem">
+<a class="anchor" href="#Optimization-and-Knapsack-Problem" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optimization and Knapsack Problem<a class="anchor-link" href="#Optimization-and-Knapsack-Problem"> </a>
+</h2>
+<ol>
+<li>What are the two parts of a classic optimization problem?</li>
+<li>Why is the 0-1 Knapsack problem so much harder than the fractional/continuous knapsack problem?</li>
+<li>Explain why we should not solve knapsack problems using simple brute-force methods.</li>
+<li>Explain Greedy Algorithms. What is the algorithmic complexity when applied to knapsack problems, and why is it not optimal?</li>
+<li>Explain the parameter known as "key function".</li>
+<li>Explain how to use Lamda expressions.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lecture-2-Review-Notes">
+<a class="anchor" href="#Lecture-2-Review-Notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lecture 2 Review Notes<a class="anchor-link" href="#Lecture-2-Review-Notes"> </a>
+</h2>
+<h2 id="Decision-Trees-and-Dynamic-Programming">
+<a class="anchor" href="#Decision-Trees-and-Dynamic-Programming" aria-hidden="true"><span class="octicon octicon-link"></span></a>Decision Trees and Dynamic Programming<a class="anchor-link" href="#Decision-Trees-and-Dynamic-Programming"> </a>
+</h2>
+<ol>
+<li>Explain decision trees / search trees. How are they built, and how do they help solve the knapsack problem?</li>
+<li>Explain Dynamic Programming and memorization, and write a program utilising this method to generate 120 Fibonacci numbers within reasonable time.</li>
+<li>What are the two conditions required for Dynamic Programming to work?</li>
+<li>Why would some say Dynamic Programming works well only for Knapsacks with duplicated items, and why would that assumption be wrong?</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lecture-3-Review-Notes">
+<a class="anchor" href="#Lecture-3-Review-Notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lecture 3 Review Notes<a class="anchor-link" href="#Lecture-3-Review-Notes"> </a>
+</h2>
+<h2 id="Graph-Problems">
+<a class="anchor" href="#Graph-Problems" aria-hidden="true"><span class="octicon octicon-link"></span></a>Graph Problems<a class="anchor-link" href="#Graph-Problems"> </a>
+</h2>
+<ol>
+<li>Elaborate on the components of Graphs.</li>
+<li>Build a travel representation by creating a Graph Class.</li>
+<li>Build and compare breadth-first search (BFS) and depth-first search (DFS).</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Problem-Set-1">
+<a class="anchor" href="#Problem-Set-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 1<a class="anchor-link" href="#Problem-Set-1"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-1:-Greedy-Cow-Transport">
+<a class="anchor" href="#Part-1:-Greedy-Cow-Transport" aria-hidden="true"><span class="octicon octicon-link"></span></a>Part 1: Greedy Cow Transport<a class="anchor-link" href="#Part-1:-Greedy-Cow-Transport"> </a>
+</h2>
+<p>One way of transporting cows is to always pick the heaviest cow that will fit onto the spaceship first. This is an example of a greedy algorithm. So if there are only 2 tons of free space on your spaceship, with one cow that's 3 tons and another that's 1 ton, the 1 ton cow will get put onto the spaceship.</p>
+<p>Implement a greedy algorithm for transporting the cows back across space in the function greedy_cow_transport. The function returns a list of lists, where each inner list represents a trip and contains the names of cows taken on that trip.</p>
+<h2 id="Assumptions:">
+<a class="anchor" href="#Assumptions:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Assumptions:<a class="anchor-link" href="#Assumptions:"> </a>
+</h2>
+<p>The order of the list of trips does not matter. That is, [[1,2],[3,4]] and [[3,4],[1,2]] are considered equivalent lists of trips.
+All the cows are between 0 and 100 tons in weight.
+All the cows have unique names.
+If multiple cows weigh the same amount, break ties arbitrarily.
+The spaceship has a cargo weight limit (in tons), which is passed into the function as a parameter.</p>
+<h2 id="Test-Case">
+<a class="anchor" href="#Test-Case" aria-hidden="true"><span class="octicon octicon-link"></span></a>Test Case<a class="anchor-link" href="#Test-Case"> </a>
+</h2>
+<p>limit = 10
+cows = {"Jesse": 6, "Maybel": 3, "Callie": 2, "Maggie": 5}.
+result = [["Jesse", "Maybel"], ["Maggie", "Callie"]].</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cows</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Jesse"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">"Maybel"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">"Callie"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">"Maggie"</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">greedy_cow_transport</span><span class="p">(</span><span class="n">cows</span><span class="p">,</span> <span class="n">limit</span> <span class="o">=</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">cows_copy</span> <span class="o">=</span> <span class="n">cows</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">cows_decreasing</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">cows_copy</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">cows_copy</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">trips</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">cows_copy</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">trip</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">limit_copy</span> <span class="o">=</span> <span class="n">limit</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">cows_decreasing</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">cows_copy</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">limit_copy</span><span class="p">:</span>
+                <span class="n">limit_copy</span> <span class="o">-=</span> <span class="n">cows</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+                <span class="n">trip</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">trip</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">cows_copy</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="n">cows_decreasing</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">trips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">trip</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">trips</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">greedy_cow_transport</span><span class="p">(</span><span class="n">cows</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[['Jesse', 'Maybel'], ['Maggie', 'Callie']]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-2">
+<a class="anchor" href="#Part-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Part 2<a class="anchor-link" href="#Part-2"> </a>
+</h2>
+<p>Part 2: Brute Force Cow Transport
+0.0/20.0 points (graded)
+Another way to transport the cows is to look at every possible combination of trips and pick the best one. This is an example of a brute force algorithm.</p>
+<p>Implement a brute force algorithm to find the minimum number of trips needed to take all the cows across the universe in the function brute_force_cow_transport. The function returns a list of lists, where each inner list represents a trip and contains the names of cows taken on that trip.</p>
+<p>Notes:</p>
+<p>Make sure not to mutate the dictionary of cows!
+In order to enumerate all possible combinations of trips, you will want to work with set partitions. We have provided you with a helper function called get_partitions that generates all the set partitions for a set of cows. More details on this function are provided below.
+Assumptions:</p>
+<p>Assume that order doesn't matter. (1) [[1,2],[3,4]] and [[3,4],[1,2]] are considered equivalent lists of trips. (2) [[1,2],[3,4]] and [[2,1],[3,4]] are considered the same partitions of [1,2,3,4].
+You can assume that all the cows are between 0 and 100 tons in weight.
+All the cows have unique names.
+If multiple cows weigh the same amount, break ties arbitrarily.
+The spaceship has a cargo weight limit (in tons), which is passed into the function as a parameter.
+Helper function get_partitions in ps1_partitions.py:</p>
+<p>To generate all the possibilities for the brute force method, you will want to work with set partitions.</p>
+<p>For instance, all the possible 2-partitions of the list [1,2,3,4] are [[1,2],[3,4]], [[1,3],[2,4]], [[2,3],[1,4]], [[1],[2,3,4]], [[2],[1,3,4]], [[3],[1,2,4]], [[4],[1,2,3]].</p>
+<p>To help you with creating partitions, we have included a helper function get_partitions(L) that takes as input a list and returns a generator that contains all the possible partitions of this list, from 0-partitions to n-partitions, where n is the length of this list.</p>
+<p>You can review more on generators in the Lecture 2 Exercise 1. To use generators, you must iterate over the generator to retrieve the elements; you cannot index into a generator! For instance, the recommended way to call get_partitions on a list [1,2,3] is the following. Try it out in ps1_partitions.py to see what is printed!</p>
+<p>for partition in get_partitions([1,2,3]):
+    print(partition)
+Example:</p>
+<p>Suppose the spaceship has a cargo weight limit of 10 tons and the set of cows to transport is {"Jesse": 6, "Maybel": 3, "Callie": 2, "Maggie": 5}.</p>
+<p>The brute force algorithm will first try to fit them on only one trip, ["Jesse", "Maybel", "Callie", "Maggie"]. Since this trip contains 16 tons of cows, it is over the weight limit and does not work. Then the algorithm will try fitting them on all combinations of two trips. Suppose it first tries [["Jesse", "Maggie"], ["Maybel", "Callie"]]. This solution will be rejected because Jesse and Maggie together are over the weight limit and cannot be on the same trip. The algorithm will continue trying two trip partitions until it finds one that works, such as [["Jesse", "Callie"], ["Maybel", "Maggie"]].</p>
+<p>The final result is then [["Jesse", "Callie"], ["Maybel", "Maggie"]]. Note that depending on which cow it tries first, the algorithm may find a different, optimal solution. Another optimal result could be [["Jesse", "Maybel"],["Callie", "Maggie"]].</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">brute_force_cow_transport</span><span class="p">(</span><span class="n">cows</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">get_partitions</span><span class="p">(</span><span class="n">cows</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">trip</span> <span class="ow">in</span> <span class="n">partition</span><span class="p">:</span>
+            <span class="n">trip_load</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">trip</span><span class="p">:</span>
+                <span class="n">trip_load</span> <span class="o">+=</span> <span class="n">cows</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">trip_load</span> <span class="o">&gt;</span> <span class="n">limit</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">flag</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">partition</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brute_force_cow_transport</span><span class="p">({</span><span class="s1">'Milkshake'</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">'Lotus'</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s1">'Miss Bella'</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">'MooMoo'</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="s1">'Boo'</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span> <span class="s1">'Horns'</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-42-8dcb122e8505&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>brute_force_cow_transport<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">'Milkshake'</span><span class="ansi-blue-fg">:</span> <span class="ansi-cyan-fg">40</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">'Lotus'</span><span class="ansi-blue-fg">:</span> <span class="ansi-cyan-fg">40</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">'Miss Bella'</span><span class="ansi-blue-fg">:</span> <span class="ansi-cyan-fg">25</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">'MooMoo'</span><span class="ansi-blue-fg">:</span> <span class="ansi-cyan-fg">50</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">'Boo'</span><span class="ansi-blue-fg">:</span> <span class="ansi-cyan-fg">20</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">'Horns'</span><span class="ansi-blue-fg">:</span> <span class="ansi-cyan-fg">25</span><span class="ansi-blue-fg">}</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">100</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-41-df9c215c7e1e&gt;</span> in <span class="ansi-cyan-fg">brute_force_cow_transport</span><span class="ansi-blue-fg">(cows, limit)</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">def</span> brute_force_cow_transport<span class="ansi-blue-fg">(</span>cows<span class="ansi-blue-fg">,</span> limit<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">for</span> partition <span class="ansi-green-fg">in</span> get_partitions<span class="ansi-blue-fg">(</span>cows<span class="ansi-blue-fg">.</span>keys<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span>         flag <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span>         <span class="ansi-green-fg">for</span> trip <span class="ansi-green-fg">in</span> partition<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>             trip_load <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span>
+
+<span class="ansi-red-fg">NameError</span>: name 'get_partitions' is not defined</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brute_force_cow_transport</span><span class="p">({</span><span class="s1">'Betsy'</span><span class="p">:</span> <span class="mi">65</span><span class="p">,</span> <span class="s1">'Buttercup'</span><span class="p">:</span> <span class="mi">72</span><span class="p">,</span> <span class="s1">'Daisy'</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span> <span class="mi">75</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">brute_force_cow_transport</span><span class="p">({</span><span class="s1">'Luna'</span><span class="p">:</span> <span class="mi">41</span><span class="p">,</span> <span class="s1">'Betsy'</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span> <span class="s1">'Buttercup'</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">'Starlight'</span><span class="p">:</span> <span class="mi">54</span><span class="p">},</span> <span class="mi">145</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Part-3">
+<a class="anchor" href="#Part-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Part 3<a class="anchor-link" href="#Part-3"> </a>
+</h2>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/mit6002/basic/2020/05/01/MIT6002-Wk1.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

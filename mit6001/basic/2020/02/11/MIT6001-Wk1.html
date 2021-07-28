@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>EdX MIT6001X Week 1 | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="EdX MIT6001X Week 1" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Basics" />
+<meta property="og:description" content="Basics" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/mit6001/basic/2020/02/11/MIT6001-Wk1.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/mit6001/basic/2020/02/11/MIT6001-Wk1.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/images/mit6001x.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-11T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/mit6001/basic/2020/02/11/MIT6001-Wk1.html","@type":"BlogPosting","headline":"EdX MIT6001X Week 1","dateModified":"2020-02-11T00:00:00-06:00","datePublished":"2020-02-11T00:00:00-06:00","image":"https://ong-ekken.github.io/images/mit6001x.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/mit6001/basic/2020/02/11/MIT6001-Wk1.html"},"description":"Basics","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">EdX MIT6001X Week 1</h1><p class="page-description">Basics</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-11T00:00:00-06:00" itemprop="datePublished">
+        Feb 11, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#mit6001">mit6001</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2020-02-11-MIT6001-Wk1.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2020-02-11-MIT6001-Wk1.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2020-02-11-MIT6001-Wk1.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Lecture-Summary">Lecture Summary </a></li>
+<li class="toc-entry toc-h2"><a href="#Problem-Set-1">Problem Set 1 </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Problem-1">Problem 1 </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-2">Problem 2 </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-3">Problem 3 </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-02-11-MIT6001-Wk1.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As mentioned in the course guidelines, the course is about practicing and learning. The purpose of having my own answers here is for the sake of keeping track of my own learning, and to compare my answers with other better answers out there so we can all learn.</p>
+<p>So, if you have not already done the problem set questions on your own, please do not read further.</p>
+<p>p.s. the answers below don't work on the auto grader either, as I added a ton of stuff to make it look nice. haha.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lecture-Summary">
+<a class="anchor" href="#Lecture-Summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lecture Summary<a class="anchor-link" href="#Lecture-Summary"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>(Introduction) What is computational learning and why learn it?</li>
+<li>(Knowledge) What is the difference between Declarative and Imperative knowledge?</li>
+<li>(Machines) Explain basic computer architecture, and Turing Machines (Turing Complete).</li>
+<li>(Language) Explain syntax, static semantics, and semantics, and their corresponding errors.</li>
+<li>(Types) Name and explain basic data object types, operators (including order of precedence), and casting.</li>
+<li>(Operators and Branching) Is it possible to use if AND elif without ending with else? Explain situations where branching will not run.</li>
+<li>(Bindings) Name and explain all keywords.</li>
+<li>(Strings) Name and explain all string-related functions and methods. Why is it important to copy a string using slicing instead of just assigning?</li>
+<li>(Input/Output) Compare and explain the different ways of input and output.</li>
+<li>(Control Flow) Compare and explain loops (for, while, do while) and the escape mechanisms (continue, break).</li>
+<li>(Control Flow) Name and explain Truthy or Falsy values.</li>
+<li>How to test dat types?</li>
+<li>(Iteration) Explain namespace.</li>
+<li>(Guess and Check) Explain Guess and Check.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Problem-Set-1">
+<a class="anchor" href="#Problem-Set-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 1<a class="anchor-link" href="#Problem-Set-1"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-1">
+<a class="anchor" href="#Problem-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem 1<a class="anchor-link" href="#Problem-1"> </a>
+</h3>
+<p>Assume s is a string of lower case characters. Write a program that counts up the number of vowels contained in the string s. Valid vowels are: 'a', 'e', 'i', 'o', and 'u'. For example, if s = 'azcbobobegghakl', your program should print:</p>
+<p><code>Number of vowels: 5</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'azcbobobegghakl'</span><span class="p">,</span>
+    <span class="s1">'a'</span><span class="p">,</span>
+    <span class="s1">'v'</span><span class="p">,</span>
+    <span class="s1">'kku'</span><span class="p">]</span>
+
+<span class="c1"># List of all vowels in a string</span>
+<span class="n">VOWELS</span> <span class="o">=</span> <span class="s1">'aeiou'</span>
+
+<span class="c1"># Loop through all test input</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">test</span><span class="p">:</span>
+    <span class="n">vowel_count</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># Reset the counter</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>        <span class="c1"># Loop through each letter</span>
+        <span class="n">vowel_count</span> <span class="o">+=</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">VOWELS</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Number of vowels in </span><span class="si">{0}</span><span class="s2">: </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">' '</span><span class="p">),</span> <span class="n">vowel_count</span><span class="p">))</span>   <span class="c1"># ljust method to add padding</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of vowels in azcbobobegghakl     : 5
+Number of vowels in a                   : 1
+Number of vowels in v                   : 0
+Number of vowels in kku                 : 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-2">
+<a class="anchor" href="#Problem-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem 2<a class="anchor-link" href="#Problem-2"> </a>
+</h3>
+<p>Assume s is a string of lower case characters.</p>
+<p>Write a program that prints the number of times the string 'bob' occurs in s. For example, if s = 'azcbobobegghakl', then your program should print
+<code>Number of times bob occurs is: 2</code></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'azcbobobegbobghl'</span><span class="p">,</span>
+    <span class="s1">'abob'</span><span class="p">,</span>
+    <span class="s1">'bobobobobv'</span><span class="p">,</span>
+    <span class="s1">'kku'</span><span class="p">]</span>
+
+<span class="n">TARGET</span> <span class="o">=</span> <span class="s1">'bob'</span>
+
+<span class="c1"># Loop through all test input</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">test</span><span class="p">:</span>
+    <span class="n">match_count</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># length of string to find</span>
+    <span class="n">target_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">TARGET</span><span class="p">)</span>   <span class="c1"># length of string to find</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">target_len</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">target_len</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>        <span class="c1"># Loop through each letter</span>
+        <span class="n">match_count</span> <span class="o">+=</span> <span class="n">s</span><span class="p">[</span><span class="n">n</span><span class="p">:</span><span class="n">n</span><span class="o">+</span><span class="n">target_len</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'bob'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Number of 'bob' in </span><span class="si">{0}</span><span class="s2">: </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">' '</span><span class="p">),</span> <span class="n">match_count</span><span class="p">))</span>   <span class="c1"># ljust method to add padding</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Number of 'bob' in azcbobobegbobghl    : 3
+Number of 'bob' in abob                : 1
+Number of 'bob' in bobobobobv          : 4
+Number of 'bob' in kku                 : 0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-3">
+<a class="anchor" href="#Problem-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem 3<a class="anchor-link" href="#Problem-3"> </a>
+</h3>
+<p>Assume s is a string of lower case characters.</p>
+<p>Write a program that prints the longest substring of s in which the letters occur in alphabetical order. For example, if s = 'azcbobobegghakl', then your program should print</p>
+<p><code>Longest substring in alphabetical order is: beggh</code></p>
+<p>In the case of ties, print the first substring. For example, if s = 'abcbcd', then your program should print</p>
+<p><code>Longest substring in alphabetical order is: abc</code></p>
+<p>Note: This problem may be challenging. We encourage you to work smart. If you've spent more than a few hours on this problem, we suggest that you move on to a different part of the course. If you have time, come back to this problem after you've had a break and cleared your head.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">'abcdabobegbobghl'</span><span class="p">,</span> <span class="c1">#starts with a chain, ties with end</span>
+    <span class="s1">'zxgb'</span><span class="p">,</span>             <span class="c1">#has no chain</span>
+    <span class="s1">'bobazmhfdazbobv'</span><span class="p">,</span> <span class="c1">#has a chain of 2 letters</span>
+    <span class="s1">'kjkl'</span><span class="p">]</span>
+
+<span class="c1"># Loop through all test input</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">test</span><span class="p">:</span>
+    <span class="n">longest</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="n">running_seq</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># length of string to find</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>      <span class="c1"># Loop through each letter</span>
+        <span class="n">running_seq</span> <span class="o">=</span> <span class="p">(</span><span class="n">running_seq</span> <span class="o">+</span> <span class="n">_</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">_</span> <span class="o">&gt;=</span> <span class="n">running_seq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="k">else</span> <span class="n">_</span> 
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">running_seq</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">running_seq</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">longest</span><span class="p">):</span>
+            <span class="n">longest</span> <span class="o">=</span> <span class="n">running_seq</span>
+    <span class="k">if</span> <span class="n">longest</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
+        <span class="n">longest</span> <span class="o">=</span> <span class="s2">"Does not exist"</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Longest substring in alphabetical order in </span><span class="si">{0}</span><span class="s2"> : </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">longest</span><span class="p">))</span>   <span class="c1"># ljust method to add padding</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Longest substring in alphabetical order in abcdabobegbobghl : abcd
+Longest substring in alphabetical order in zxgb : Does not exist
+Longest substring in alphabetical order in bobazmhfdazbobv : bo
+Longest substring in alphabetical order in kjkl : jkl
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/mit6001/basic/2020/02/11/MIT6001-Wk1.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

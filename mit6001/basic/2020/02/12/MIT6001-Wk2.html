@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>EdX MIT6001X Week 2 | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="EdX MIT6001X Week 2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Simple Programs" />
+<meta property="og:description" content="Simple Programs" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/mit6001/basic/2020/02/12/MIT6001-Wk2.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/mit6001/basic/2020/02/12/MIT6001-Wk2.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/images/mit6001x.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-12T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/mit6001/basic/2020/02/12/MIT6001-Wk2.html","@type":"BlogPosting","headline":"EdX MIT6001X Week 2","dateModified":"2020-02-12T00:00:00-06:00","datePublished":"2020-02-12T00:00:00-06:00","image":"https://ong-ekken.github.io/images/mit6001x.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/mit6001/basic/2020/02/12/MIT6001-Wk2.html"},"description":"Simple Programs","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">EdX MIT6001X Week 2</h1><p class="page-description">Simple Programs</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-12T00:00:00-06:00" itemprop="datePublished">
+        Feb 12, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#mit6001">mit6001</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2020-02-12-MIT6001-Wk2.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2020-02-12-MIT6001-Wk2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2020-02-12-MIT6001-Wk2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Lecture-Review-Questions">Lecture Review Questions </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Exercise-Square">Exercise Square </a></li>
+<li class="toc-entry toc-h3"><a href="#Exercise-Eval-Quadratic">Exercise Eval Quadratic </a></li>
+<li class="toc-entry toc-h3"><a href="#Exercise:-is-in">Exercise: is in </a></li>
+<li class="toc-entry toc-h3"><a href="#Programming-Experience:-Polysum">Programming Experience: Polysum </a></li>
+<li class="toc-entry toc-h3"><a href="#Programming-Experience:-Polysum-for-readability">Programming Experience: Polysum for readability </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-Set-2-Problem-1">Problem Set 2 Problem 1 </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-Set-2-Problem-2">Problem Set 2 Problem 2 </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-Set-2-Problem-3">Problem Set 2 Problem 3 </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-02-12-MIT6001-Wk2.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As mentioned in the course guidelines, the course is about practicing and learning. The purpose of having my own answers here is for the sake of keeping track of my own learning, and to compare my answers with other better answers out there so we can all learn.
+So, if you have not already done the problem set questions on your own, please do not read further.
+Also, the below answers have been extensively formatted and might not work on the EdX grader if copied directly.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lecture-Review-Questions">
+<a class="anchor" href="#Lecture-Review-Questions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lecture Review Questions<a class="anchor-link" href="#Lecture-Review-Questions"> </a>
+</h2>
+<ol>
+<li>Explain the Newton-Rhapson method.</li>
+<li>Compare the 3 types of algorithms - guess and check, bisection search, and Newton-Rhapson.</li>
+<li>Explain decomposition (modularity) and abstraction.</li>
+<li>Explain all the components of defining a function - function name, parameters (arguments), docstring, return...</li>
+<li>Explain global frame (scope), local frame (scope), and unbound variable error.</li>
+<li>Explain keyword arguments and default values. </li>
+<li>Explain specifications (docstring) and the concepts of contract, assumptions, and guarantees.</li>
+<li>
+<p>Explain what happens when you define a function inside a function.</p>
+
+<pre><code>&gt; &gt;&gt; x = 12
+&gt;&gt;&gt; def g(x):x = x + 1      def h(y):
+       return x + y
+   return h(6)
+&gt; &gt;&gt; g(x)</code></pre>
+</li>
+<li>
+<p>Explain what happens in the following code.</p>
+
+<pre><code>&gt;&gt;&gt; a = 10
+&gt;&gt;&gt; def f(x):return x + a&gt;&gt;&gt; a = 3
+&gt;&gt;&gt; f(1)</code></pre>
+</li>
+<li>If s is a string, explain the difference between s.upper and s.upper(). </li>
+<li>Explain recursion versus iteration. (explain the background scopes as well)</li>
+<li>Explain inductive proofs and how this relates to recursion.</li>
+<li>Explain how modules work. How can I call constants without making it clunky?</li>
+<li>Explain how to open files and how to write into them, then close them.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise-Square">
+<a class="anchor" href="#Exercise-Square" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise Square<a class="anchor-link" href="#Exercise-Square"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    x: int or float.</span>
+<span class="sd">    '''</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise-Eval-Quadratic">
+<a class="anchor" href="#Exercise-Eval-Quadratic" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise Eval Quadratic<a class="anchor-link" href="#Exercise-Eval-Quadratic"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">evalQuadratic</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    a, b, c: numerical values for the coefficients of a quadratic equation</span>
+<span class="sd">    x: numerical value at which to evaluate the quadratic.</span>
+<span class="sd">    '''</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise:-is-in">
+<a class="anchor" href="#Exercise:-is-in" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise: is in<a class="anchor-link" href="#Exercise:-is-in"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">isIn</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">aStr</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    char: a single character</span>
+<span class="sd">    aStr: an alphabetized string</span>
+<span class="sd">    </span>
+<span class="sd">    returns: True if char is in aStr; False otherwise</span>
+<span class="sd">    '''</span>
+    <span class="c1"># Your code here</span>
+    <span class="n">middle</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">aStr</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">aStr</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">elif</span> <span class="n">char</span> <span class="o">==</span> <span class="n">aStr</span><span class="p">[</span><span class="n">middle</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="n">char</span> <span class="o">&lt;</span> <span class="n">aStr</span><span class="p">[</span><span class="n">middle</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">isIn</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">aStr</span><span class="p">[:</span><span class="n">middle</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">isIn</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">aStr</span><span class="p">[</span><span class="n">middle</span><span class="o">+</span><span class="mi">1</span><span class="p">:])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Programming-Experience:-Polysum">
+<a class="anchor" href="#Programming-Experience:-Polysum" aria-hidden="true"><span class="octicon octicon-link"></span></a>Programming Experience: Polysum<a class="anchor-link" href="#Programming-Experience:-Polysum"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">tan</span><span class="p">,</span> <span class="n">pi</span>
+
+<span class="k">def</span> <span class="nf">polysum</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="n">tan</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">perimeter</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">s</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">area</span> <span class="o">+</span> <span class="n">perimeter</span> <span class="o">*</span> <span class="n">perimeter</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+ 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Programming-Experience:-Polysum-for-readability">
+<a class="anchor" href="#Programming-Experience:-Polysum-for-readability" aria-hidden="true"><span class="octicon octicon-link"></span></a>Programming Experience: Polysum for readability<a class="anchor-link" href="#Programming-Experience:-Polysum-for-readability"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Import tangent function and pi value</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">tan</span><span class="p">,</span> <span class="n">pi</span>
+
+<span class="k">def</span> <span class="nf">polysum</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    Description:</span>
+<span class="sd">        polysum adds the following and returns the sum:</span>
+<span class="sd">        - area of a regular polygon with n sides</span>
+<span class="sd">        - square of the perimeter of the same polygon</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        n: number of sides of the regular polygon</span>
+<span class="sd">        s: length of each side</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Float of 4 decimal places.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Area of the regular polygon as defined by formula</span>
+    <span class="n">area</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">n</span> <span class="o">*</span> <span class="n">s</span> <span class="o">*</span> <span class="n">s</span> <span class="o">/</span> <span class="p">(</span><span class="n">tan</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">n</span><span class="p">))</span>
+
+    <span class="c1"># Perimeter is n sides times length s</span>
+    <span class="n">perimeter</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">s</span>
+    <span class="n">perimeter2</span> <span class="o">=</span> <span class="n">perimeter</span> <span class="o">*</span> <span class="n">perimeter</span>
+
+    <span class="c1"># Return 4 decimal places</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">area</span> <span class="o">+</span> <span class="n">perimeter2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-Set-2-Problem-1">
+<a class="anchor" href="#Problem-Set-2-Problem-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 2 Problem 1<a class="anchor-link" href="#Problem-Set-2-Problem-1"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balance</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">annualInterestRate</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">monthlyPaymentRate</span> <span class="o">=</span> <span class="mf">0.04</span>
+<span class="n">months</span> <span class="o">=</span> <span class="mi">12</span>
+
+
+<span class="k">def</span> <span class="nf">loan</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPaymentRate</span><span class="p">,</span> <span class="n">months</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="n">months</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">balance</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">uB</span> <span class="o">=</span> <span class="n">balance</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">monthlyPaymentRate</span><span class="p">)</span>
+        <span class="n">uBi</span> <span class="o">=</span> <span class="n">uB</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">annualInterestRate</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">loan</span><span class="p">(</span><span class="n">uBi</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPaymentRate</span><span class="p">,</span> <span class="n">months</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">loan</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPaymentRate</span><span class="p">,</span> <span class="n">months</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Remaining balance: </span><span class="si">{:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Remaining balance: 31.38
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-Set-2-Problem-2">
+<a class="anchor" href="#Problem-Set-2-Problem-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 2 Problem 2<a class="anchor-link" href="#Problem-Set-2-Problem-2"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balance</span> <span class="o">=</span> <span class="mi">3329</span>
+<span class="n">annualInterestRate</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="k">def</span> <span class="nf">repayment</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">months</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    
+    <span class="n">monthlyPayment</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">balance</span> <span class="o">/</span> <span class="mi">12</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">loan</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPayment</span><span class="p">,</span> <span class="n">months</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">months</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">balance</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">uB</span> <span class="o">=</span> <span class="n">balance</span> <span class="o">-</span> <span class="n">monthlyPayment</span>
+            <span class="n">uBi</span> <span class="o">=</span> <span class="n">uB</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">annualInterestRate</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">loan</span><span class="p">(</span><span class="n">uBi</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPayment</span><span class="p">,</span> <span class="n">months</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="n">loan</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPayment</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">monthlyPayment</span> <span class="o">+=</span> <span class="mi">10</span>
+    
+    <span class="k">return</span> <span class="n">monthlyPayment</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">repayment</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lowest Payment: </span><span class="si">{:2d}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Increasing payment amount to 290
+Increasing payment amount to 300
+Increasing payment amount to 310
+Lowest Payment: 310
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-Set-2-Problem-3">
+<a class="anchor" href="#Problem-Set-2-Problem-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 2 Problem 3<a class="anchor-link" href="#Problem-Set-2-Problem-3"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">balance</span> <span class="o">=</span> <span class="mi">320000</span>
+<span class="n">annualInterestRate</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="c1">#balance = 999999</span>
+<span class="c1">#annualInterestRate = 0.18</span>
+
+<span class="c1"># Paste your code into this box</span>
+<span class="k">def</span> <span class="nf">repayment</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">months</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">loan</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPayment</span><span class="p">,</span> <span class="n">months</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">months</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">balance</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">uB</span> <span class="o">=</span> <span class="n">balance</span> <span class="o">-</span> <span class="n">monthlyPayment</span>
+            <span class="n">uBi</span> <span class="o">=</span> <span class="n">uB</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">annualInterestRate</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">loan</span><span class="p">(</span><span class="n">uBi</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPayment</span><span class="p">,</span> <span class="n">months</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">upper</span> <span class="o">=</span> <span class="n">loan</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">monthlyPayment</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="mi">12</span>
+    <span class="n">lower</span> <span class="o">=</span> <span class="n">balance</span> <span class="o">/</span> <span class="mi">12</span>
+    
+    <span class="n">payment</span> <span class="o">=</span> <span class="p">(</span><span class="n">upper</span> <span class="o">+</span> <span class="n">lower</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    
+    <span class="n">residual</span> <span class="o">=</span> <span class="n">loan</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">payment</span><span class="p">)</span>
+    
+    <span class="k">while</span> <span class="n">residual</span> <span class="o">&gt;</span> <span class="mf">0.01</span> <span class="ow">or</span> <span class="n">residual</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">residual</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">lower</span> <span class="o">=</span> <span class="n">payment</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">upper</span> <span class="o">=</span> <span class="n">payment</span>
+        
+        <span class="n">payment</span> <span class="o">=</span> <span class="p">(</span><span class="n">lower</span> <span class="o">+</span> <span class="n">upper</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        
+        <span class="n">residual</span> <span class="o">=</span> <span class="n">loan</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">,</span> <span class="n">payment</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">residual</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">payment</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">repayment</span><span class="p">(</span><span class="n">balance</span><span class="p">,</span> <span class="n">annualInterestRate</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lowest Payment: </span><span class="si">{:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>13755.120148565638
+3968.1890276002614
+-925.2765328822256
+1521.4562473590383
+298.08985723843773
+-313.5933378219088
+-7.751740291705937
+145.16905847336218
+68.70865909071532
+30.478459399519487
+11.363359553884584
+1.8058096311374052
+-2.972965330262074
+-0.5835778496973337
+0.6111158908513364
+0.013769020490083978
+-0.284904414574036
+-0.13556769687553846
+-0.060899338120604316
+-0.02356515884669837
+-0.004898069252279431
+Lowest Payment: 29157.09
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/mit6001/basic/2020/02/12/MIT6001-Wk2.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

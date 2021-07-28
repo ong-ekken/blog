@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>EdX MIT6001X Week 3 | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="EdX MIT6001X Week 3" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Structured types" />
+<meta property="og:description" content="Structured types" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/mit6001/basic/2020/02/13/MIT6001-Wk3.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/mit6001/basic/2020/02/13/MIT6001-Wk3.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/images/mit6001x.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-02-13T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/mit6001/basic/2020/02/13/MIT6001-Wk3.html","@type":"BlogPosting","headline":"EdX MIT6001X Week 3","dateModified":"2020-02-13T00:00:00-06:00","datePublished":"2020-02-13T00:00:00-06:00","image":"https://ong-ekken.github.io/images/mit6001x.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/mit6001/basic/2020/02/13/MIT6001-Wk3.html"},"description":"Structured types","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">EdX MIT6001X Week 3</h1><p class="page-description">Structured types</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-13T00:00:00-06:00" itemprop="datePublished">
+        Feb 13, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#mit6001">mit6001</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2020-02-13-MIT6001-Wk3.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2020-02-13-MIT6001-Wk3.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2020-02-13-MIT6001-Wk3.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Lecture-Review-Questions">Lecture Review Questions </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Exercise:-odd-tuples">Exercise: odd tuples </a></li>
+<li class="toc-entry toc-h3"><a href="#Exercise:-applyToEach----converted-to-map">Exercise: applyToEach -- converted to map </a></li>
+<li class="toc-entry toc-h3"><a href="#Exercise:-how-many">Exercise: how many </a></li>
+<li class="toc-entry toc-h3"><a href="#Exercise:-biggest">Exercise: biggest </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-Set-3-Problem-1">Problem Set 3 Problem 1 </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-Set-3-Problem-2">Problem Set 3 Problem 2 </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-Set-3-Problem-3">Problem Set 3 Problem 3 </a></li>
+<li class="toc-entry toc-h3"><a href="#Problem-Set-3-Problem-4">Problem Set 3 Problem 4 </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-02-13-MIT6001-Wk3.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As mentioned in the course guidelines, the course is about practicing and learning. The purpose of having my own answers here is for the sake of keeping track of my own learning, and to compare my answers with other better answers out there so we can all learn.
+So, if you have not already done the problem set questions on your own, please do not read further.
+Also, the below answers have been extensively formatted and might not work on the EdX grader if copied directly.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lecture-Review-Questions">
+<a class="anchor" href="#Lecture-Review-Questions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lecture Review Questions<a class="anchor-link" href="#Lecture-Review-Questions"> </a>
+</h2>
+<ol>
+<li>Python Syntax: mutation? return value?<ul>
+<li>insert, append, extend</li>
+<li>remove, del, pop</li>
+<li>str, join, list, split</li>
+<li>sort, sorted, reverse</li>
+<li>range</li>
+<li>abs, int, fact, fib</li>
+<li>map, filter, reduce</li>
+</ul>
+</li>
+<li>Mutation, aliasing, cloning</li>
+<li>Why do we need to avoid mutating a list as we iterate through it?</li>
+<li>Explain 'first class objects'.</li>
+<li>Explain 'higher order programming'.</li>
+<li>Compare str, tuple, range, list, dict.</li>
+<li>Common operations for sequences<ul>
+<li>seq[i]</li>
+<li>len(seq)</li>
+<li>seq + seq</li>
+<li>seq * n</li>
+<li>seq[start:end]</li>
+<li>x in seq</li>
+<li>x not in seq</li>
+<li>for x in seq</li>
+</ul>
+</li>
+<li>Dictionary operations<ul>
+<li>.keys(), .values()</li>
+<li>assign, in, del</li>
+</ul>
+</li>
+<li>How can we implement an efficient fibonacci number generator through using dictionaries?</li>
+<li>What are the merits and demerits of using Global Variables? How do we use it?</li>
+</ol>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">string</span> <span class="kn">import</span> <span class="n">ascii_lowercase</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise:-odd-tuples">
+<a class="anchor" href="#Exercise:-odd-tuples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise: odd tuples<a class="anchor-link" href="#Exercise:-odd-tuples"> </a>
+</h3>
+<p>Write a procedure called oddTuples, which takes a tuple as input, and returns a new tuple as output, where every other element of the input tuple is copied, starting with the first one. So if test is the tuple ('I', 'am', 'a', 'test', 'tuple'), then evaluating oddTuples on this input would return the tuple ('I', 'a', 'tuple').</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">oddTuples</span><span class="p">(</span><span class="n">aTup</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    aTup: a tuple</span>
+<span class="sd">    </span>
+<span class="sd">    returns: tuple, every other element of aTup. </span>
+<span class="sd">    '''</span>
+    <span class="k">return</span> <span class="n">aTup</span><span class="p">[::</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise:-applyToEach----converted-to-map">
+<a class="anchor" href="#Exercise:-applyToEach----converted-to-map" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise: applyToEach -- converted to map<a class="anchor-link" href="#Exercise:-applyToEach----converted-to-map"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1, 9, 25, 49]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise:-how-many">
+<a class="anchor" href="#Exercise:-how-many" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise: how many<a class="anchor-link" href="#Exercise:-how-many"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">how_many</span><span class="p">(</span><span class="n">aDict</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    aDict: A dictionary, where all the values are lists.</span>
+
+<span class="sd">    returns: int, how many values are in the dictionary.</span>
+<span class="sd">    '''</span>
+    <span class="c1"># Your Code Here</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">aDict</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">aDict</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">aDict</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Exercise:-biggest">
+<a class="anchor" href="#Exercise:-biggest" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exercise: biggest<a class="anchor-link" href="#Exercise:-biggest"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">biggest</span><span class="p">(</span><span class="n">aDict</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    aDict: A dictionary, where all the values are lists.</span>
+
+<span class="sd">    returns: The key with the largest number of values associated with it</span>
+<span class="sd">    '''</span>
+    <span class="c1"># Your Code Here</span>
+    <span class="n">largest_key</span> <span class="o">=</span> <span class="s1">''</span>
+    <span class="n">largest_cnt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">aDict</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">aDict</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">aDict</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+        
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="n">largest_cnt</span><span class="p">:</span>
+            <span class="n">largest</span> <span class="o">=</span> <span class="n">index</span>
+    <span class="k">return</span> <span class="n">largest</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-Set-3-Problem-1">
+<a class="anchor" href="#Problem-Set-3-Problem-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 3 Problem 1<a class="anchor-link" href="#Problem-Set-3-Problem-1"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">isWordGuessed</span><span class="p">(</span><span class="n">secretWord</span><span class="p">,</span> <span class="n">lettersGuessed</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    secretWord: string, the word the user is guessing</span>
+<span class="sd">    lettersGuessed: list, what letters have been guessed so far</span>
+<span class="sd">    returns: boolean, True if all the letters of secretWord are in lettersGuessed;</span>
+<span class="sd">      False otherwise</span>
+<span class="sd">    '''</span>
+    <span class="c1"># FILL IN YOUR CODE HERE...</span>
+    <span class="k">for</span> <span class="n">letter</span> <span class="ow">in</span> <span class="n">secretWord</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">letter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lettersGuessed</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="kc">True</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-Set-3-Problem-2">
+<a class="anchor" href="#Problem-Set-3-Problem-2" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 3 Problem 2<a class="anchor-link" href="#Problem-Set-3-Problem-2"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getGuessedWord</span><span class="p">(</span><span class="n">secretWord</span><span class="p">,</span> <span class="n">lettersGuessed</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    secretWord: string, the word the user is guessing</span>
+<span class="sd">    lettersGuessed: list, what letters have been guessed so far</span>
+<span class="sd">    returns: string, comprised of letters and underscores that represents</span>
+<span class="sd">      what letters in secretWord have been guessed so far.</span>
+<span class="sd">    '''</span>
+    <span class="n">display</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">secretWord</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">secretWord</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">secretWord</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">lettersGuessed</span><span class="p">:</span>
+            <span class="n">display</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"_"</span>
+    <span class="k">return</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">display</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-Set-3-Problem-3">
+<a class="anchor" href="#Problem-Set-3-Problem-3" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 3 Problem 3<a class="anchor-link" href="#Problem-Set-3-Problem-3"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getAvailableLetters</span><span class="p">(</span><span class="n">lettersGuessed</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    lettersGuessed: list, what letters have been guessed so far</span>
+<span class="sd">    returns: string, comprised of letters that represents what letters have not</span>
+<span class="sd">      yet been guessed.</span>
+<span class="sd">    '''</span>
+    <span class="c1"># FILL IN YOUR CODE HERE...</span>
+<span class="c1">#    return ''.join([letter for letter in string.ascii_lowercase if letter not in lettersGuessed])</span>
+    <span class="k">return</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">ascii_lowercase</span><span class="p">)</span><span class="o">-</span><span class="nb">set</span><span class="p">(</span><span class="n">lettersGuessed</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Problem-Set-3-Problem-4">
+<a class="anchor" href="#Problem-Set-3-Problem-4" aria-hidden="true"><span class="octicon octicon-link"></span></a>Problem Set 3 Problem 4<a class="anchor-link" href="#Problem-Set-3-Problem-4"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">hangman</span><span class="p">(</span><span class="n">secretWord</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    secretWord: string, the secret word to guess.</span>
+
+<span class="sd">    Starts up an interactive game of Hangman.</span>
+
+<span class="sd">    * At the start of the game, let the user know how many </span>
+<span class="sd">      letters the secretWord contains.</span>
+
+<span class="sd">    * Ask the user to supply one guess (i.e. letter) per round.</span>
+
+<span class="sd">    * The user should receive feedback immediately after each guess </span>
+<span class="sd">      about whether their guess appears in the computers word.</span>
+
+<span class="sd">    * After each round, you should also display to the user the </span>
+<span class="sd">      partially guessed word so far, as well as letters that the </span>
+<span class="sd">      user has not yet guessed.</span>
+
+<span class="sd">    Follows the other limitations detailed in the problem write-up.</span>
+<span class="sd">    '''</span>
+    <span class="c1"># FILL IN YOUR CODE HERE...</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Welcome to the game Hangman!"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"I am thinking of a word that is </span><span class="si">{}</span><span class="s2"> letters long"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">secretWord</span><span class="p">)))</span>
+
+    <span class="n">ended</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">lettersGuessed</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">mistakesMade</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">guessesAllowed</span> <span class="o">=</span> <span class="mi">8</span>
+    
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">ended</span><span class="p">:</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"-----------"</span><span class="p">)</span>
+        
+        <span class="c1"># Print number of guesses</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"You have </span><span class="si">{}</span><span class="s2"> guesses left"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">guessesAllowed</span> <span class="o">-</span> <span class="n">mistakesMade</span><span class="p">))</span>
+
+        <span class="c1"># Print available letters</span>
+        <span class="n">availableLetters</span> <span class="o">=</span> <span class="n">getAvailableLetters</span><span class="p">(</span><span class="n">lettersGuessed</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Available letters: "</span> <span class="o">+</span> <span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">availableLetters</span><span class="p">))</span>
+        
+        <span class="c1"># Get input from user</span>
+        <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Please guess a letter: '</span><span class="p">)</span>
+
+        <span class="c1"># Conditionals</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>                     <span class="c1"># Invalid input</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">guess</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">availableLetters</span><span class="p">:</span>     <span class="c1"># Duplicate guess</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Oops! You've already guessed that letter:"</span><span class="p">,</span> <span class="n">getGuessedWord</span><span class="p">(</span><span class="n">secretWord</span><span class="p">,</span> <span class="n">lettersGuessed</span><span class="p">))</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">guess</span> <span class="ow">in</span> <span class="n">secretWord</span><span class="p">:</span>               <span class="c1"># Correct guess</span>
+            <span class="n">lettersGuessed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Good guess:"</span><span class="p">,</span> <span class="n">getGuessedWord</span><span class="p">(</span><span class="n">secretWord</span><span class="p">,</span> <span class="n">lettersGuessed</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lettersGuessed</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>        <span class="c1"># Wrong guess</span>
+            <span class="n">mistakesMade</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Oops! That letter is not in my word:"</span><span class="p">,</span> <span class="n">getGuessedWord</span><span class="p">(</span><span class="n">secretWord</span><span class="p">,</span> <span class="n">lettersGuessed</span><span class="p">))</span>
+
+        <span class="c1"># Tracking number of turns</span>
+        <span class="k">if</span> <span class="n">mistakesMade</span> <span class="o">&gt;=</span> <span class="n">guessesAllowed</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"-----------"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Sorry, you ran out of guesses. The word was </span><span class="si">{}</span><span class="s2">."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">secretWord</span><span class="p">))</span>
+            <span class="n">ended</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Successful ending</span>
+        <span class="k">if</span> <span class="n">isWordGuessed</span><span class="p">(</span><span class="n">secretWord</span><span class="p">,</span> <span class="n">lettersGuessed</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"-----------"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Congratulations, you won!"</span><span class="p">)</span>
+            <span class="n">ended</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hangman</span><span class="p">(</span><span class="s1">'kebab'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Welcome to the game Hangman!
+I am thinking of a word that is 5 letters long
+-----------
+You have 8 guesses left
+Available letters: abcdefghijklmnopqrstuvwxyz
+Please guess a letter: f
+Oops! That letter is not in my word: _____
+-----------
+You have 7 guesses left
+Available letters: abcdeghijklmnopqrstuvwxyz
+Please guess a letter: a
+Good guess: ___a_
+-----------
+You have 7 guesses left
+Available letters: bcdeghijklmnopqrstuvwxyz
+Please guess a letter: b
+Good guess: __bab
+-----------
+You have 7 guesses left
+Available letters: cdeghijklmnopqrstuvwxyz
+Please guess a letter: p
+Oops! That letter is not in my word: __bab
+-----------
+You have 6 guesses left
+Available letters: cdeghijklmnoqrstuvwxyz
+Please guess a letter: e
+Good guess: _ebab
+-----------
+You have 6 guesses left
+Available letters: cdghijklmnoqrstuvwxyz
+Please guess a letter: k
+Good guess: kebab
+-----------
+Congratulations, you won!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/mit6001/basic/2020/02/13/MIT6001-Wk3.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
