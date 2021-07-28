@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Automating Boring Stuff with Python - Chapter 05 | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Automating Boring Stuff with Python - Chapter 05" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Dictionaries &amp; Structuring Data" />
+<meta property="og:description" content="Dictionaries &amp; Structuring Data" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/basic/2020/11/25/Automate-Ch05-Dictionaries.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/basic/2020/11/25/Automate-Ch05-Dictionaries.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/blog/images/automate_boring.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-25T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/basic/2020/11/25/Automate-Ch05-Dictionaries.html","@type":"BlogPosting","headline":"Automating Boring Stuff with Python - Chapter 05","dateModified":"2020-11-25T00:00:00-06:00","datePublished":"2020-11-25T00:00:00-06:00","image":"https://ong-ekken.github.io/blog/images/automate_boring.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/basic/2020/11/25/Automate-Ch05-Dictionaries.html"},"description":"Dictionaries &amp; Structuring Data","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Automating Boring Stuff with Python - Chapter 05</h1><p class="page-description">Dictionaries & Structuring Data</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-25T00:00:00-06:00" itemprop="datePublished">
+        Nov 25, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      4 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2020-11-25-Automate-Ch05-Dictionaries.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2020-11-25-Automate-Ch05-Dictionaries.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2020-11-25-Automate-Ch05-Dictionaries.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#The-Dictionary-Data-Type">The Dictionary Data Type </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Dictionaries-vs-Lists">Dictionaries vs Lists </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Dictionaries-are-Unordered">Dictionaries are Unordered </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#The-keys(),-values(),-and-items()-Methods">The keys(), values(), and items() Methods </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#Checking-Whether-a-Key-or-Value-Exists-in-a-Dictionary">Checking Whether a Key or Value Exists in a Dictionary </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#If-Key/Value-Does-Not-Exist-in-Dictionary">If Key/Value Does Not Exist in Dictionary </a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#The-get()-Method">The get() Method </a></li>
+<li class="toc-entry toc-h4"><a href="#The-setdefault()-Method">The setdefault() Method </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Pretty-Printing">Pretty Printing </a></li>
+<li class="toc-entry toc-h2"><a href="#Using-Data-Structures-to-Model-Real-World-Things">Using Data Structures to Model Real-World Things </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#A-Tic-Tac-Toe-Board">A Tic-Tac-Toe Board </a></li>
+<li class="toc-entry toc-h3"><a href="#Nested-Dictionaries-and-Lists">Nested Dictionaries and Lists </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Practice-Questions">Practice Questions </a></li>
+<li class="toc-entry toc-h2"><a href="#Practice-Projects">Practice Projects </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Fantasy-Game-Inventory">Fantasy Game Inventory </a></li>
+<li class="toc-entry toc-h3"><a href="#List-to-Dictionary-FUnction-for-Fantasy-Game-Inventory">List to Dictionary FUnction for Fantasy Game Inventory </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-11-25-Automate-Ch05-Dictionaries.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Dictionary-Data-Type">
+<a class="anchor" href="#The-Dictionary-Data-Type" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Dictionary Data Type<a class="anchor-link" href="#The-Dictionary-Data-Type"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Keys can be any immutable data type, including primitives &amp; tuples</span>
+
+<span class="n">dict_a</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'size'</span><span class="p">:</span> <span class="s1">'tiny'</span><span class="p">,</span> <span class="mf">1234.5</span><span class="p">:</span> <span class="s1">'locker'</span><span class="p">}</span>
+
+<span class="c1"># You can add entries by assigning values to the keys</span>
+
+<span class="n">dict_a</span><span class="p">[(</span><span class="mi">42</span><span class="p">,</span> <span class="s1">'answer'</span><span class="p">)]</span> <span class="o">=</span> <span class="s1">'Hitchhiker'</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">dict_a</span><span class="p">[</span><span class="s1">'size'</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="n">dict_a</span><span class="p">[</span><span class="mf">1234.5</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="n">dict_a</span><span class="p">[(</span><span class="mi">42</span><span class="p">,</span> <span class="s1">'answer'</span><span class="p">)]</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>tiny
+locker
+Hitchhiker
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Dictionaries-vs-Lists">
+<a class="anchor" href="#Dictionaries-vs-Lists" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dictionaries vs Lists<a class="anchor-link" href="#Dictionaries-vs-Lists"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Dictionaries-are-Unordered">
+<a class="anchor" href="#Dictionaries-are-Unordered" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dictionaries are Unordered<a class="anchor-link" href="#Dictionaries-are-Unordered"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">list_a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">list_b</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Lists are unordered: "</span><span class="p">,</span> <span class="n">list_a</span> <span class="o">==</span> <span class="n">list_b</span> <span class="p">)</span>
+
+<span class="n">dict_b</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">'a'</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">'b'</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s1">'c'</span><span class="p">}</span>
+<span class="n">dict_c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span><span class="s1">'c'</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">'b'</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="s1">'a'</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Dicionaries are unordered: "</span><span class="p">,</span> <span class="n">dict_b</span> <span class="o">==</span> <span class="n">dict_c</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Lists are unordered:  False
+Dicionaries are unordered:  True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dict_b</span><span class="p">[:]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-4-f98fa6ad38ca&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># Therefore Dictionaries cannot be sliced</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> 
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>dict_b<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-red-fg">TypeError</span>: unhashable type: 'slice'</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># (similar to List's IndexError)</span>
+<span class="c1"># (note: this behaviour is overridden in DefaultDicts)</span>
+
+<span class="n">dict_b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-5-de0852bac040&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-red-fg"># (note: this behaviour is overridden in DefaultDicts)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span>dict_b<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-red-fg">KeyError</span>: 0</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">birthdays</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Alice'</span><span class="p">:</span> <span class="s1">'Apr 4'</span><span class="p">,</span> <span class="s1">'Bob'</span><span class="p">:</span> <span class="s1">'Dec 12'</span><span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Carol'</span>
+<span class="n">n_bday</span> <span class="o">=</span> <span class="s1">'Mar 3'</span>
+
+<span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">birthdays</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">birthdays</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span> <span class="s1">' is the birthday of '</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">birthdays</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">n_bday</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Birthday database updated'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Birthday database updated
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-keys(),-values(),-and-items()-Methods">
+<a class="anchor" href="#The-keys(),-values(),-and-items()-Methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>The <em>keys(), values(), and items()</em> Methods<a class="anchor-link" href="#The-keys(),-values(),-and-items()-Methods"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'Return value of birthdays.keys() belongs to '</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Return value of birthdays.values() belongs to '</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Return value of birthdays.items() belongs to '</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">)</span> <span class="p">)</span>
+
+<span class="c1"># The implication: you cannot directly change it nor use indexing/slicing </span>
+
+<span class="c1"># birthdays.keys()[0]  # &lt;-- run this to see the error</span>
+<span class="c1"># birthdays.keys().append(0) # &lt;-- run this to see the error</span>
+
+<span class="c1"># BUT you can pass it to the list() function</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">birthdays</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Return value of birthdays.keys() belongs to  &lt;class 'dict_keys'&gt;
+Return value of birthdays.values() belongs to  &lt;class 'dict_values'&gt;
+Return value of birthdays.items() belongs to  &lt;class 'dict_items'&gt;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>['Alice', 'Bob', 'Carol']</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>  <span class="c1"># Note the multiple assignment!</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Alice
+Bob
+Carol
+Apr 4
+Dec 12
+Mar 3
+Alice Apr 4
+Bob Dec 12
+Carol Mar 3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># What is the default behaviour of the for loop below?</span>
+
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">birthdays</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Alice
+Bob
+Carol
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Checking-Whether-a-Key-or-Value-Exists-in-a-Dictionary">
+<a class="anchor" href="#Checking-Whether-a-Key-or-Value-Exists-in-a-Dictionary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Checking Whether a Key or Value Exists in a Dictionary<a class="anchor-link" href="#Checking-Whether-a-Key-or-Value-Exists-in-a-Dictionary"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'The key Alice exists in the dict.keys(): '</span><span class="p">,</span> <span class="s1">'Alice'</span> <span class="ow">in</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="c1"># Checking if the value exists in a dictionary</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'The value Apr 4 exists in the dict.values(): '</span><span class="p">,</span> <span class="s1">'Apr 4'</span> <span class="ow">in</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="c1"># BUT what is the default outcome of the following?</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'The key Alice exists in the dict.items(): '</span><span class="p">,</span> <span class="s1">'Alice'</span> <span class="ow">in</span> <span class="n">birthdays</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'The key Alice exists in the dict: '</span><span class="p">,</span> <span class="s1">'Alice'</span> <span class="ow">in</span> <span class="n">birthdays</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'The value Apr 4 exists in the dict: '</span><span class="p">,</span> <span class="s1">'Apr 4'</span> <span class="ow">in</span> <span class="n">birthdays</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The key Alice exists in the dict.keys():  True
+The value Apr 4 exists in the dict.values():  True
+The key Alice exists in the dict.items():  False
+The key Alice exists in the dict:  True
+The value Apr 4 exists in the dict:  False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="If-Key/Value-Does-Not-Exist-in-Dictionary">
+<a class="anchor" href="#If-Key/Value-Does-Not-Exist-in-Dictionary" aria-hidden="true"><span class="octicon octicon-link"></span></a>If Key/Value Does Not Exist in Dictionary<a class="anchor-link" href="#If-Key/Value-Does-Not-Exist-in-Dictionary"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-get()-Method">
+<a class="anchor" href="#The-get()-Method" aria-hidden="true"><span class="octicon octicon-link"></span></a>The <em>get()</em> Method<a class="anchor-link" href="#The-get()-Method"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Use get() method to prevent error</span>
+
+<span class="n">picnicItems</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'apples'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'cups'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+
+<span class="s1">'I am bringing '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">picnicItems</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'eggs'</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">+</span> <span class="s1">' eggs'</span>
+
+<span class="c1"># get() method has 2 parameters: get(&lt;KEY&gt;, &lt;DEFAULT RETURN IF KEY NOT EXIST&gt;)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'I am bringing 0 eggs'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-setdefault()-Method">
+<a class="anchor" href="#The-setdefault()-Method" aria-hidden="true"><span class="octicon octicon-link"></span></a>The <em>setdefault()</em> Method<a class="anchor-link" href="#The-setdefault()-Method"> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dog</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Pooka'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+<span class="k">if</span> <span class="s1">'color'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dog</span><span class="p">:</span>
+    <span class="n">dog</span><span class="p">[</span><span class="s1">'color'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'black'</span>
+
+<span class="c1"># Note that this code will not assign a new color if something it exists!</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'In the above cell, we already set the dog color as :'</span><span class="p">,</span> <span class="n">dog</span><span class="p">[</span><span class="s1">'color'</span><span class="p">])</span>
+
+<span class="n">dog</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">'color'</span><span class="p">,</span> <span class="s1">'white'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Even if you run setdefault again, the dog color remains :'</span><span class="p">,</span> <span class="n">dog</span><span class="p">[</span><span class="s1">'color'</span><span class="p">])</span>
+
+<span class="c1"># This method is useful as a post-check to ensure that all instances have</span>
+<span class="c1"># at least a default value if not already specified</span>
+<span class="c1"># It's the write version of get method</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>In the above cell, we already set the dog color as : black
+Even if you run setdefault again, the dog color remains : black
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Pretty-Printing">
+<a class="anchor" href="#Pretty-Printing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pretty Printing<a class="anchor-link" href="#Pretty-Printing"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Using-Data-Structures-to-Model-Real-World-Things">
+<a class="anchor" href="#Using-Data-Structures-to-Model-Real-World-Things" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using Data Structures to Model Real-World Things<a class="anchor-link" href="#Using-Data-Structures-to-Model-Real-World-Things"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-Tic-Tac-Toe-Board">
+<a class="anchor" href="#A-Tic-Tac-Toe-Board" aria-hidden="true"><span class="octicon octicon-link"></span></a>A Tic-Tac-Toe Board<a class="anchor-link" href="#A-Tic-Tac-Toe-Board"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Nested-Dictionaries-and-Lists">
+<a class="anchor" href="#Nested-Dictionaries-and-Lists" aria-hidden="true"><span class="octicon octicon-link"></span></a>Nested Dictionaries and Lists<a class="anchor-link" href="#Nested-Dictionaries-and-Lists"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Practice-Questions">
+<a class="anchor" href="#Practice-Questions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Practice Questions<a class="anchor-link" href="#Practice-Questions"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>What does the code for an empty dictionary look like?</li>
+<li>What does a dictionary value with a key 'foo' and a value 42 look like?</li>
+<li>What is the main difference between a dictionary and a list?</li>
+<li>What happens if you try to access spam['foo'] if spam is {'bar': 100}?</li>
+<li>If a dictionary is stored in spam, what is the difference between the expressions 'cat' in spam and 'cat' in spam.keys()?</li>
+<li>If a dictionary is stored in spam, what is the difference between the expressions 'cat' in spam and 'cat' in spam.values()?</li>
+<li>
+<p>What is a shortcut for the following code?</p>
+</li>
+<li>
+<p>What module and function can be used to "pretty print" dictionary values?</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Practice-Projects">
+<a class="anchor" href="#Practice-Projects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Practice Projects<a class="anchor-link" href="#Practice-Projects"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Fantasy-Game-Inventory">
+<a class="anchor" href="#Fantasy-Game-Inventory" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fantasy Game Inventory<a class="anchor-link" href="#Fantasy-Game-Inventory"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="List-to-Dictionary-FUnction-for-Fantasy-Game-Inventory">
+<a class="anchor" href="#List-to-Dictionary-FUnction-for-Fantasy-Game-Inventory" aria-hidden="true"><span class="octicon octicon-link"></span></a>List to Dictionary FUnction for Fantasy Game Inventory<a class="anchor-link" href="#List-to-Dictionary-FUnction-for-Fantasy-Game-Inventory"> </a>
+</h3>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/basic/2020/11/25/Automate-Ch05-Dictionaries.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

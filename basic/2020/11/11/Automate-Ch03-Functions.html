@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Automating Boring Stuff with Python - Chapter 03 | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Automating Boring Stuff with Python - Chapter 03" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Functions" />
+<meta property="og:description" content="Functions" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/basic/2020/11/11/Automate-Ch03-Functions.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/basic/2020/11/11/Automate-Ch03-Functions.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/blog/images/automate_boring.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-11T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/basic/2020/11/11/Automate-Ch03-Functions.html","@type":"BlogPosting","headline":"Automating Boring Stuff with Python - Chapter 03","dateModified":"2020-11-11T00:00:00-06:00","datePublished":"2020-11-11T00:00:00-06:00","image":"https://ong-ekken.github.io/blog/images/automate_boring.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/basic/2020/11/11/Automate-Ch03-Functions.html"},"description":"Functions","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Automating Boring Stuff with Python - Chapter 03</h1><p class="page-description">Functions</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-11T00:00:00-06:00" itemprop="datePublished">
+        Nov 11, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2020-11-11-Automate-Ch03-Functions.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2020-11-11-Automate-Ch03-Functions.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2020-11-11-Automate-Ch03-Functions.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Define,-Call,-Pass,-Argument,-Parameter">Define, Call, Pass, Argument, Parameter </a></li>
+<li class="toc-entry toc-h2"><a href="#Keyword-Arguments">Keyword Arguments </a></li>
+<li class="toc-entry toc-h2"><a href="#Function-Call-Stack">Function Call Stack </a></li>
+<li class="toc-entry toc-h2"><a href="#Local-and-Global-Scopes">Local and Global Scopes </a></li>
+<li class="toc-entry toc-h2"><a href="#Exception-Handling">Exception Handling </a></li>
+<li class="toc-entry toc-h2"><a href="#Project:-Zig-Zag">Project: Zig Zag </a></li>
+<li class="toc-entry toc-h2"><a href="#Practice-Questions">Practice Questions </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-11-11-Automate-Ch03-Functions.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Define,-Call,-Pass,-Argument,-Parameter">
+<a class="anchor" href="#Define,-Call,-Pass,-Argument,-Parameter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Define, Call, Pass, Argument, Parameter<a class="anchor-link" href="#Define,-Call,-Pass,-Argument,-Parameter"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>  <span class="c1"># Define (Parameter in brackets)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Hello '</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="n">hello</span><span class="p">(</span><span class="s1">'Alice'</span><span class="p">)</span>    <span class="c1"># Call (Argument in brackets)</span>
+<span class="n">hello</span><span class="p">(</span><span class="s1">'Bob'</span><span class="p">)</span>      <span class="c1"># Call</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello Alice
+Hello Bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">getAnswer</span><span class="p">(</span><span class="n">answerNumber</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'It is certain'</span>
+    <span class="k">elif</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'It is decidedly so'</span>
+    <span class="k">elif</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'Yes'</span>
+    <span class="k">elif</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'Reply hazy try again'</span>
+    <span class="k">elif</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'Ask again later'</span>
+    <span class="k">elif</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'Concentrate and ask again'</span>
+    <span class="k">elif</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'My reply is no'</span>
+    <span class="k">elif</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'Outlook not so good'</span>
+    <span class="k">elif</span> <span class="n">answerNumber</span> <span class="o">==</span> <span class="mi">9</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">'Very doubtful'</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="n">fortune</span> <span class="o">=</span> <span class="n">getAnswer</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fortune</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4
+Reply hazy try again
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">getAnswer</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Reply hazy try again
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spam</span> <span class="o">=</span> <span class="nb">print</span><span class="p">(</span><span class="s2">"Value 1"</span><span class="p">)</span>
+<span class="n">spam</span> <span class="o">==</span> <span class="kc">None</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Value 1
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>True</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Keyword-Arguments">
+<a class="anchor" href="#Keyword-Arguments" aria-hidden="true"><span class="octicon octicon-link"></span></a>Keyword Arguments<a class="anchor-link" href="#Keyword-Arguments"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">,</span> <span class="s1">'$'</span><span class="p">,</span> <span class="s1">'&amp;'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">','</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">'|'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">,</span> <span class="s1">'$'</span><span class="p">,</span> <span class="s1">'&amp;'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'.'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">'</span><span class="se">\n\n</span><span class="s1">'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'+'</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">,</span> <span class="s1">'$'</span><span class="p">,</span> <span class="s1">'&amp;'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'-'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>+,*,$,&amp;|+.*.$.&amp;
+
++-*-$-&amp;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Function-Call-Stack">
+<a class="anchor" href="#Function-Call-Stack" aria-hidden="true"><span class="octicon octicon-link"></span></a>Function Call Stack<a class="anchor-link" href="#Function-Call-Stack"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">a</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'a() starts'</span><span class="p">)</span>
+    <span class="n">b</span><span class="p">()</span>
+    <span class="n">d</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'a() returns'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">b</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'b() starts'</span><span class="p">)</span>
+    <span class="n">c</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'b() returns'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">c</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'c() starts'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'c() returns'</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">d</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'d() starts'</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'d() returns'</span><span class="p">)</span>
+
+<span class="n">a</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>a() starts
+b() starts
+c() starts
+c() returns
+b() returns
+d() starts
+d() returns
+a() returns
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Local-and-Global-Scopes">
+<a class="anchor" href="#Local-and-Global-Scopes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Local and Global Scopes<a class="anchor-link" href="#Local-and-Global-Scopes"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">():</span>
+    <span class="n">eggs</span> <span class="o">=</span> <span class="mi">99</span>
+    <span class="n">bacon</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">bacon</span><span class="p">():</span>
+    <span class="n">ham</span> <span class="o">=</span> <span class="mi">101</span>
+    <span class="n">eggs</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">spam</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>99
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>
+<span class="n">eggs</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="n">spam</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>42
+42
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">():</span>
+    <span class="n">eggs</span> <span class="o">=</span> <span class="s1">'spam local'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>    <span class="c1"># prints 'spam local'</span>
+
+<span class="k">def</span> <span class="nf">bacon</span><span class="p">():</span>
+    <span class="n">eggs</span> <span class="o">=</span> <span class="s1">'bacon local'</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>    <span class="c1"># prints 'bacon local'</span>
+    <span class="n">spam</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>    <span class="c1"># prints 'bacon local'</span>
+
+<span class="n">eggs</span> <span class="o">=</span> <span class="s1">'global'</span>
+<span class="n">bacon</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>        <span class="c1"># prints 'global'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>bacon local
+spam local
+bacon local
+global
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">eggs</span>
+    <span class="n">eggs</span> <span class="o">=</span> <span class="s1">'spam'</span>
+
+<span class="n">eggs</span> <span class="o">=</span> <span class="s1">'global'</span>
+<span class="n">spam</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>spam
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">eggs</span>
+    <span class="n">eggs</span> <span class="o">=</span> <span class="s1">'spam'</span> <span class="c1"># this is the global</span>
+
+<span class="k">def</span> <span class="nf">bacon</span><span class="p">():</span>
+    <span class="n">eggs</span> <span class="o">=</span> <span class="s1">'bacon'</span> <span class="c1"># this is a local</span>
+
+<span class="k">def</span> <span class="nf">ham</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span> <span class="c1"># this is the global</span>
+    
+<span class="n">eggs</span> <span class="o">=</span> <span class="mi">42</span> <span class="c1"># this is the global</span>
+<span class="n">spam</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>spam
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">eggs</span><span class="p">)</span> <span class="c1"># ERROR!</span>
+    <span class="n">eggs</span> <span class="o">=</span> <span class="s1">'spam local'</span>
+    
+<span class="n">eggs</span> <span class="o">=</span> <span class="s1">'global'</span>
+<span class="n">spam</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">UnboundLocalError</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-12-16951f77ab3e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span> 
+<span class="ansi-green-intense-fg ansi-bold">      7</span> eggs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">'global'</span>
+<span class="ansi-green-fg">----&gt; 8</span><span class="ansi-red-fg"> </span>spam<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-12-16951f77ab3e&gt;</span> in <span class="ansi-cyan-fg">spam</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> 
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">def</span> spam<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg">     </span>print<span class="ansi-blue-fg">(</span>eggs<span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># ERROR!</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>     eggs <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">'spam local'</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span> 
+
+<span class="ansi-red-fg">UnboundLocalError</span>: local variable 'eggs' referenced before assignment</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exception-Handling">
+<a class="anchor" href="#Exception-Handling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exception Handling<a class="anchor-link" href="#Exception-Handling"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="n">divideBy</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">42</span> <span class="o">/</span> <span class="n">divideBy</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'Error: Invalid argument.'</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>21.0
+3.5
+Error: Invalid argument.
+None
+42.0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">spam</span><span class="p">(</span><span class="n">divideBy</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">42</span> <span class="o">/</span> <span class="n">divideBy</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">spam</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Error: Invalid argument.'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>21.0
+3.5
+Error: Invalid argument.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Project:-Zig-Zag">
+<a class="anchor" href="#Project:-Zig-Zag" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project: Zig Zag<a class="anchor-link" href="#Project:-Zig-Zag"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">indent</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># How many spaces to indent.</span>
+<span class="n">indentIncreasing</span> <span class="o">=</span> <span class="kc">True</span> <span class="c1"># Whether the indentation is increasing or not.</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># The main program loop.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">' '</span> <span class="o">*</span> <span class="n">indent</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'********'</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> <span class="c1"># Pause for 1/10 of a second.</span>
+
+        <span class="k">if</span> <span class="n">indentIncreasing</span><span class="p">:</span>
+            <span class="c1"># Increase the number of spaces:</span>
+            <span class="n">indent</span> <span class="o">=</span> <span class="n">indent</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">indent</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
+                <span class="c1"># Change direction:</span>
+                <span class="n">indentIncreasing</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Decrease the number of spaces:</span>
+            <span class="n">indent</span> <span class="o">=</span> <span class="n">indent</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">indent</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Change direction:</span>
+                <span class="n">indentIncreasing</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>********
+ ********
+  ********
+   ********
+    ********
+     ********
+      ********
+       ********
+        ********
+         ********
+          ********
+           ********
+            ********
+             ********
+              ********
+               ********
+                ********
+                 ********
+                  ********
+                   ********
+                    ********
+                   ********
+                  ********
+                 ********
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>ERROR:root:Internal Python error in the inspect module.
+Below is the traceback from this internal error.
+
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Traceback (most recent call last):
+  File "&lt;ipython-input-16-4a7fe06d4580&gt;", line 9, in &lt;module&gt;
+    time.sleep(0.1) # Pause for 1/10 of a second.
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.8/site-packages/IPython/core/interactiveshell.py", line 3427, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File "&lt;ipython-input-16-4a7fe06d4580&gt;", line 25, in &lt;module&gt;
+    sys.exit()
+SystemExit
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py", line 1101, in get_records
+    return _fixed_getinnerframes(etb, number_of_lines_of_context, tb_offset)
+  File "/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py", line 248, in wrapped
+    return f(*args, **kwargs)
+  File "/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py", line 281, in _fixed_getinnerframes
+    records = fix_frame_records_filenames(inspect.getinnerframes(etb, context))
+  File "/opt/conda/lib/python3.8/inspect.py", line 1503, in getinnerframes
+    frameinfo = (tb.tb_frame,) + getframeinfo(tb, context)
+AttributeError: 'tuple' object has no attribute 'tb_frame'
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-16-4a7fe06d4580&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      8</span>         print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'********'</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 9</span><span class="ansi-red-fg">         </span>time<span class="ansi-blue-fg">.</span>sleep<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0.1</span><span class="ansi-blue-fg">)</span> <span class="ansi-red-fg"># Pause for 1/10 of a second.</span>
+<span class="ansi-green-intense-fg ansi-bold">     10</span> 
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: 
+
+During handling of the above exception, another exception occurred:
+
+<span class="ansi-red-fg">SystemExit</span>                                Traceback (most recent call last)
+    <span class="ansi-red-fg">[... skipping hidden 1 frame]</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-16-4a7fe06d4580&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     24</span> <span class="ansi-green-fg">except</span> KeyboardInterrupt<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 25</span><span class="ansi-red-fg">     </span>sys<span class="ansi-blue-fg">.</span>exit<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">SystemExit</span>: 
+
+During handling of the above exception, another exception occurred:
+
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+    <span class="ansi-red-fg">[... skipping hidden 1 frame]</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/IPython/core/interactiveshell.py</span> in <span class="ansi-cyan-fg">showtraceback</span><span class="ansi-blue-fg">(self, exc_tuple, filename, tb_offset, exception_only, running_compiled_code)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2045</span>                     stb = ['An exception has occurred, use %tb to see '
+<span class="ansi-green-intense-fg ansi-bold">   2046</span>                            'the full traceback.\n']
+<span class="ansi-green-fg">-&gt; 2047</span><span class="ansi-red-fg">                     stb.extend(self.InteractiveTB.get_exception_only(etype,
+</span><span class="ansi-green-intense-fg ansi-bold">   2048</span>                                                                      value))
+<span class="ansi-green-intense-fg ansi-bold">   2049</span>                 <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py</span> in <span class="ansi-cyan-fg">get_exception_only</span><span class="ansi-blue-fg">(self, etype, value)</span>
+<span class="ansi-green-intense-fg ansi-bold">    752</span>         value <span class="ansi-blue-fg">:</span> exception value
+<span class="ansi-green-intense-fg ansi-bold">    753</span>         """
+<span class="ansi-green-fg">--&gt; 754</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> ListTB<span class="ansi-blue-fg">.</span>structured_traceback<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> etype<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    755</span> 
+<span class="ansi-green-intense-fg ansi-bold">    756</span>     <span class="ansi-green-fg">def</span> show_exception_only<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> etype<span class="ansi-blue-fg">,</span> evalue<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py</span> in <span class="ansi-cyan-fg">structured_traceback</span><span class="ansi-blue-fg">(self, etype, evalue, etb, tb_offset, context)</span>
+<span class="ansi-green-intense-fg ansi-bold">    627</span>             chained_exceptions_tb_offset <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0</span>
+<span class="ansi-green-intense-fg ansi-bold">    628</span>             out_list = (
+<span class="ansi-green-fg">--&gt; 629</span><span class="ansi-red-fg">                 self.structured_traceback(
+</span><span class="ansi-green-intense-fg ansi-bold">    630</span>                     etype<span class="ansi-blue-fg">,</span> evalue<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">(</span>etb<span class="ansi-blue-fg">,</span> chained_exc_ids<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    631</span>                     chained_exceptions_tb_offset, context)
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py</span> in <span class="ansi-cyan-fg">structured_traceback</span><span class="ansi-blue-fg">(self, etype, value, tb, tb_offset, number_of_lines_of_context)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1365</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1366</span>             self<span class="ansi-blue-fg">.</span>tb <span class="ansi-blue-fg">=</span> tb
+<span class="ansi-green-fg">-&gt; 1367</span><span class="ansi-red-fg">         return FormattedTB.structured_traceback(
+</span><span class="ansi-green-intense-fg ansi-bold">   1368</span>             self, etype, value, tb, tb_offset, number_of_lines_of_context)
+<span class="ansi-green-intense-fg ansi-bold">   1369</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py</span> in <span class="ansi-cyan-fg">structured_traceback</span><span class="ansi-blue-fg">(self, etype, value, tb, tb_offset, number_of_lines_of_context)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1265</span>         <span class="ansi-green-fg">if</span> mode <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>verbose_modes<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1266</span>             <span class="ansi-red-fg"># Verbose modes need a full traceback</span>
+<span class="ansi-green-fg">-&gt; 1267</span><span class="ansi-red-fg">             return VerboseTB.structured_traceback(
+</span><span class="ansi-green-intense-fg ansi-bold">   1268</span>                 self<span class="ansi-blue-fg">,</span> etype<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">,</span> tb<span class="ansi-blue-fg">,</span> tb_offset<span class="ansi-blue-fg">,</span> number_of_lines_of_context
+<span class="ansi-green-intense-fg ansi-bold">   1269</span>             )
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py</span> in <span class="ansi-cyan-fg">structured_traceback</span><span class="ansi-blue-fg">(self, etype, evalue, etb, tb_offset, number_of_lines_of_context)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1122</span>         <span class="ansi-blue-fg">"""Return a nice text document describing the traceback."""</span>
+<span class="ansi-green-intense-fg ansi-bold">   1123</span> 
+<span class="ansi-green-fg">-&gt; 1124</span><span class="ansi-red-fg">         formatted_exception = self.format_exception_as_a_whole(etype, evalue, etb, number_of_lines_of_context,
+</span><span class="ansi-green-intense-fg ansi-bold">   1125</span>                                                                tb_offset)
+<span class="ansi-green-intense-fg ansi-bold">   1126</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py</span> in <span class="ansi-cyan-fg">format_exception_as_a_whole</span><span class="ansi-blue-fg">(self, etype, evalue, etb, number_of_lines_of_context, tb_offset)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1080</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1081</span> 
+<span class="ansi-green-fg">-&gt; 1082</span><span class="ansi-red-fg">         </span>last_unique<span class="ansi-blue-fg">,</span> recursion_repeat <span class="ansi-blue-fg">=</span> find_recursion<span class="ansi-blue-fg">(</span>orig_etype<span class="ansi-blue-fg">,</span> evalue<span class="ansi-blue-fg">,</span> records<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1083</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1084</span>         frames <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>format_records<span class="ansi-blue-fg">(</span>records<span class="ansi-blue-fg">,</span> last_unique<span class="ansi-blue-fg">,</span> recursion_repeat<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/IPython/core/ultratb.py</span> in <span class="ansi-cyan-fg">find_recursion</span><span class="ansi-blue-fg">(etype, value, records)</span>
+<span class="ansi-green-intense-fg ansi-bold">    380</span>     <span class="ansi-red-fg"># first frame (from in to out) that looks different.</span>
+<span class="ansi-green-intense-fg ansi-bold">    381</span>     <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> is_recursion_error<span class="ansi-blue-fg">(</span>etype<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">,</span> records<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 382</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> len<span class="ansi-blue-fg">(</span>records<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span>
+<span class="ansi-green-intense-fg ansi-bold">    383</span> 
+<span class="ansi-green-intense-fg ansi-bold">    384</span>     <span class="ansi-red-fg"># Select filename, lineno, func_name to track frames with</span>
+
+<span class="ansi-red-fg">TypeError</span>: object of type 'NoneType' has no len()</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Practice-Questions">
+<a class="anchor" href="#Practice-Questions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Practice Questions<a class="anchor-link" href="#Practice-Questions"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>
+<p>Why are functions advantageous to have in your programs?</p>
+<ul>
+<li>DRY = Don't Repeat Yourself</li>
+<li>Modular and adaptable to other code</li>
+</ul>
+</li>
+<li>
+<p>When does the code in a function execute: when the function is defined or when the function is called?</p>
+<ul>
+<li>when called</li>
+</ul>
+</li>
+<li>
+<p>What statement creates a function?</p>
+<ul>
+<li>define statement</li>
+</ul>
+</li>
+<li>
+<p>What is the difference between a function and a function call?</p>
+<p>-</p>
+</li>
+<li>
+<p>How many global scopes are there in a Python program? How many local scopes?</p>
+<ul>
+<li>global is 1</li>
+<li>local is as many as function calls (possibly inifinite)</li>
+</ul>
+</li>
+<li>
+<p>What happens to variables in a local scope when the function call returns?</p>
+<ul>
+<li>forgotten</li>
+</ul>
+</li>
+<li>
+<p>What is a return value? Can a return value be part of an expression?</p>
+<ul>
+<li>value that a function call evaluates to</li>
+</ul>
+</li>
+<li>
+<p>If a function does not have a return statement, what is the return value of a call to that function?</p>
+<ul>
+<li>None</li>
+</ul>
+</li>
+<li>
+<p>How can you force a variable in a function to refer to the global variable?</p>
+<ul>
+<li>global statement</li>
+</ul>
+</li>
+<li>
+<p>What is the data type of None?</p>
+<ul>
+<li>None type</li>
+</ul>
+</li>
+<li>
+<p>What does the import areallyourpetsnamederic statement do?</p>
+<ul>
+<li>imports the module areallyourpetsnamederic</li>
+<li>includes variables defined, including functions</li>
+</ul>
+</li>
+<li>
+<p>If you had a function named bacon() in a module named spam, how would you call it after importing spam?</p>
+<ul>
+<li>spam.bacon()</li>
+</ul>
+</li>
+<li>
+<p>How can you prevent a program from crashing when it gets an error?</p>
+<ul>
+<li>try... except...</li>
+</ul>
+</li>
+<li>
+<p>What goes in the try clause? What goes in the except clause?</p>
+<ul>
+<li>try: &lt; possibly erroneous code &gt;</li>
+<li>except: &lt; response to the error &gt;</li>
+</ul>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/basic/2020/11/11/Automate-Ch03-Functions.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

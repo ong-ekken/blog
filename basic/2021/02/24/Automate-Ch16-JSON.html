@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Automating Boring Stuff with Python - Chapter 16b | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Automating Boring Stuff with Python - Chapter 16b" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Working with JSON" />
+<meta property="og:description" content="Working with JSON" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/basic/2021/02/24/Automate-Ch16-JSON.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/basic/2021/02/24/Automate-Ch16-JSON.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/blog/images/automate_boring.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-24T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/basic/2021/02/24/Automate-Ch16-JSON.html","@type":"BlogPosting","headline":"Automating Boring Stuff with Python - Chapter 16b","dateModified":"2021-02-24T00:00:00-06:00","datePublished":"2021-02-24T00:00:00-06:00","image":"https://ong-ekken.github.io/blog/images/automate_boring.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/basic/2021/02/24/Automate-Ch16-JSON.html"},"description":"Working with JSON","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Automating Boring Stuff with Python - Chapter 16b</h1><p class="page-description">Working with JSON</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-02-24T00:00:00-06:00" itemprop="datePublished">
+        Feb 24, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2021-02-24-Automate-Ch16-JSON.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2021-02-24-Automate-Ch16-JSON.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2021-02-24-Automate-Ch16-JSON.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Fundamentals">Fundamentals </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#"What-is-JSON-and-why-learn-it?"">&quot;What is JSON and why learn it?&quot; </a></li>
+<li class="toc-entry toc-h2"><a href="#"What-are-the-limitations-of-JSON-in-Python-context?"">&quot;What are the limitations of JSON in Python context?&quot; </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Reading-Data-from-JSON-format">Reading Data from JSON format </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Reading-using-the-loads-function">Reading using the loads function </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Translating-Python-Data-into-JSON-format">Translating Python Data into JSON format </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Converting-Python-dictionary-into-JSON-format-using-json.dumps">Converting Python dictionary into JSON format using json.dumps </a></li>
+<li class="toc-entry toc-h2"><a href="#Using-json.dumps-to-make-Python-dictionaries-easy-to-read">Using json.dumps to make Python dictionaries easy to read </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Project:-Fetching-Current-Weather-Data-(Didn't-manage-to-work-on-Colaboratory)">Project: Fetching Current Weather Data (Didn&#39;t manage to work on Colaboratory) </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-02-24-Automate-Ch16-JSON.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this notebook, we are working with data that came with Colaboratory instead of the example files from the Book, because it's less trouble than if we try to import the files into the Colaboratory data folder.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Fundamentals">
+<a class="anchor" href="#Fundamentals" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fundamentals<a class="anchor-link" href="#Fundamentals"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id='"What-is-JSON-and-why-learn-it?"'>
+<a class="anchor" href="#" what-is-json-and-why-learn-it aria-hidden="true"><span class="octicon octicon-link"></span></a>"What is JSON and why learn it?"<a class="anchor-link" href="#%22What-is-JSON-and-why-learn-it?%22"> </a>
+</h2>
+<ul>
+<li>JavaScript Object Notation. Pronounced "Jason" or "Jay-Sawn".</li>
+<li>main way avaScript saves data, but you don't need to know JS to use JSON. </li>
+</ul>
+<p>Example</p>
+
+<pre><code>{"name": "Zophie", "isCat": true, "miceCaught": 0, "napsTaken": 37.5,"felineIQ": null}
+# looks like a dictionary, doesn't it...</code></pre>
+<ul>
+<li>
+<p>many websites offer JSON data via application programming interface (API)</p>
+<ul>
+<li>Facebook, Twitter, Yahoo, Google, Tumblr, Wikipedia, Flickr, Data.gov, Reddit, IMDb, Rotten Tomatoes, LinkedIn, and many other popular sites offer </li>
+</ul>
+</li>
+<li>
+<p>Using APIs, you could write programs that do the following:</p>
+<ul>
+<li>Scrape raw data from websites. (more convenient scraping web pages)</li>
+<li>Auto download of new posts from social network accounts</li>
+<li>Furnish your personal databases by pulling data from IMDb, Rotten Tomatoes, and Wikipedia</li>
+</ul>
+</li>
+<li>
+<p>More commonly seen alternative formats include:</p>
+<ul>
+<li>XML (eXtensible Markup Language)</li>
+<li>YML (Yet another Markup Language) </li>
+<li>INI (Initialization)</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id='"What-are-the-limitations-of-JSON-in-Python-context?"'>
+<a class="anchor" href="#" what-are-the-limitations-of-json-in-python-context aria-hidden="true"><span class="octicon octicon-link"></span></a>"What are the limitations of JSON in Python context?"<a class="anchor-link" href="#%22What-are-the-limitations-of-JSON-in-Python-context?%22"> </a>
+</h2>
+<ul>
+<li>Python uses the json module to handles JSON data</li>
+<li>BUT, JSON can’t store every kind of Python value. It can contain values of only the following Python data types: <ul>
+<li>strings</li>
+<li>integers-</li>
+<li>floats</li>
+<li>Booleans</li>
+<li>lists</li>
+<li>dictionaries</li>
+<li>NoneType. </li>
+</ul>
+</li>
+<li>JSON cannot represent Python-specific objects, such as <ul>
+<li>File objects</li>
+<li>CSV reader or writer objects</li>
+<li>Regex objects</li>
+<li>Selenium WebElement objects</li>
+<li>etc.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Reading-Data-from-JSON-format">
+<a class="anchor" href="#Reading-Data-from-JSON-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reading Data from JSON format<a class="anchor-link" href="#Reading-Data-from-JSON-format"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Reading-using-the-loads-function">
+<a class="anchor" href="#Reading-using-the-loads-function" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reading using the loads function<a class="anchor-link" href="#Reading-using-the-loads-function"> </a>
+</h2>
+<ul>
+<li>note that after loading, the data becomes available as Python dictionary</li>
+<li>note that the JSON strings will always be in double quotes \" \"</li>
+<li>dictionaries are not sorted, so likewise the loaded JSON won't be sorted</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">stringOfJsonData</span> <span class="o">=</span> <span class="s1">'{"name": "Zophie", "isCat": true, "miceCaught": 0, "felineIQ": null, "personality": {"happy": True, "sad": False}}'</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">jsonDataAsPythonValue</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">stringOfJsonData</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonDataAsPythonValue</span><span class="p">)</span>
+<span class="c1"># you should get </span>
+<span class="c1"># {'isCat': True, 'miceCaught': 0, 'name': 'Zophie', 'felineIQ': None}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"---- Separator ----"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Now, Let's try reading the big file that comes in the Colaboratory sample data</span>
+<span class="c1"># Note: you must use read() so that you get string instead of TextWrapper obj.</span>
+<span class="n">json_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"/content/sample_data/anscombe.json"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">jsonFileAsPythonValue</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">jsonFileAsPythonValue</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">JSONDecodeError</span>                           Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-1-29e474400bbe&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">import</span> json
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-fg">----&gt; 5</span><span class="ansi-red-fg"> </span>jsonDataAsPythonValue <span class="ansi-blue-fg">=</span> json<span class="ansi-blue-fg">.</span>loads<span class="ansi-blue-fg">(</span>stringOfJsonData<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      6</span> 
+<span class="ansi-green-intense-fg ansi-bold">      7</span> print<span class="ansi-blue-fg">(</span>jsonDataAsPythonValue<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/usr/lib/python3.6/json/__init__.py</span> in <span class="ansi-cyan-fg">loads</span><span class="ansi-blue-fg">(s, encoding, cls, object_hook, parse_float, parse_int, parse_constant, object_pairs_hook, **kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">    352</span>             parse_int <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">and</span> parse_float <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span> <span class="ansi-green-fg">and</span>
+<span class="ansi-green-intense-fg ansi-bold">    353</span>             parse_constant is None and object_pairs_hook is None and not kw):
+<span class="ansi-green-fg">--&gt; 354</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> _default_decoder<span class="ansi-blue-fg">.</span>decode<span class="ansi-blue-fg">(</span>s<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    355</span>     <span class="ansi-green-fg">if</span> cls <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    356</span>         cls <span class="ansi-blue-fg">=</span> JSONDecoder
+
+<span class="ansi-green-fg">/usr/lib/python3.6/json/decoder.py</span> in <span class="ansi-cyan-fg">decode</span><span class="ansi-blue-fg">(self, s, _w)</span>
+<span class="ansi-green-intense-fg ansi-bold">    337</span> 
+<span class="ansi-green-intense-fg ansi-bold">    338</span>         """
+<span class="ansi-green-fg">--&gt; 339</span><span class="ansi-red-fg">         </span>obj<span class="ansi-blue-fg">,</span> end <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>raw_decode<span class="ansi-blue-fg">(</span>s<span class="ansi-blue-fg">,</span> idx<span class="ansi-blue-fg">=</span>_w<span class="ansi-blue-fg">(</span>s<span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>end<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    340</span>         end <span class="ansi-blue-fg">=</span> _w<span class="ansi-blue-fg">(</span>s<span class="ansi-blue-fg">,</span> end<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>end<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    341</span>         <span class="ansi-green-fg">if</span> end <span class="ansi-blue-fg">!=</span> len<span class="ansi-blue-fg">(</span>s<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/usr/lib/python3.6/json/decoder.py</span> in <span class="ansi-cyan-fg">raw_decode</span><span class="ansi-blue-fg">(self, s, idx)</span>
+<span class="ansi-green-intense-fg ansi-bold">    355</span>             obj<span class="ansi-blue-fg">,</span> end <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>scan_once<span class="ansi-blue-fg">(</span>s<span class="ansi-blue-fg">,</span> idx<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    356</span>         <span class="ansi-green-fg">except</span> StopIteration <span class="ansi-green-fg">as</span> err<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 357</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> JSONDecodeError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">"Expecting value"</span><span class="ansi-blue-fg">,</span> s<span class="ansi-blue-fg">,</span> err<span class="ansi-blue-fg">.</span>value<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">from</span> <span class="ansi-green-fg">None</span>
+<span class="ansi-green-intense-fg ansi-bold">    358</span>         <span class="ansi-green-fg">return</span> obj<span class="ansi-blue-fg">,</span> end
+
+<span class="ansi-red-fg">JSONDecodeError</span>: Expecting value: line 1 column 95 (char 94)</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Translating-Python-Data-into-JSON-format">
+<a class="anchor" href="#Translating-Python-Data-into-JSON-format" aria-hidden="true"><span class="octicon octicon-link"></span></a>Translating Python Data into JSON format<a class="anchor-link" href="#Translating-Python-Data-into-JSON-format"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Converting-Python-dictionary-into-JSON-format-using-json.dumps">
+<a class="anchor" href="#Converting-Python-dictionary-into-JSON-format-using-json.dumps" aria-hidden="true"><span class="octicon octicon-link"></span></a>Converting Python dictionary into JSON format using json.dumps<a class="anchor-link" href="#Converting-Python-dictionary-into-JSON-format-using-json.dumps"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pythonValue</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'isCat'</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span><span class="s1">'miceCaught'</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">'name'</span><span class="p">:</span><span class="s1">'Zophie'</span><span class="p">,</span><span class="s1">'felineIQ'</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span>
+
+<span class="kn">import</span> <span class="nn">json</span>     <span class="c1"># not necessary if imported already</span>
+
+<span class="n">stringOfJsonData</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">pythonValue</span><span class="p">)</span>
+<span class="n">stringOfJsonData</span>   <span class="c1"># in Jupyter Notebook, you don't need to print the last line</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'{"isCat": true, "miceCaught": 0, "name": "Zophie", "felineIQ": null}'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Using-json.dumps-to-make-Python-dictionaries-easy-to-read">
+<a class="anchor" href="#Using-json.dumps-to-make-Python-dictionaries-easy-to-read" aria-hidden="true"><span class="octicon octicon-link"></span></a>Using json.dumps to make Python dictionaries easy to read<a class="anchor-link" href="#Using-json.dumps-to-make-Python-dictionaries-easy-to-read"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">pythonValue</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">pythonValue</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{
+                "felineIQ": null,
+                "isCat": true,
+                "miceCaught": 0,
+                "name": "Zophie"
+}
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>'{\n    "felineIQ": null,\n    "isCat": true,\n    "miceCaught": 0,\n    "name": "Zophie"\n}'</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Project:-Fetching-Current-Weather-Data-(Didn't-manage-to-work-on-Colaboratory)">
+<a class="anchor" href="#Project:-Fetching-Current-Weather-Data-(Didn't-manage-to-work-on-Colaboratory)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project: Fetching Current Weather Data (Didn't manage to work on Colaboratory)<a class="anchor-link" href="#Project:-Fetching-Current-Weather-Data-(Didn't-manage-to-work-on-Colaboratory)"> </a>
+</h1>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/basic/2021/02/24/Automate-Ch16-JSON.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

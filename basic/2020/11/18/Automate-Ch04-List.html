@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Automating Boring Stuff with Python - Chapter 04 | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Automating Boring Stuff with Python - Chapter 04" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Lists" />
+<meta property="og:description" content="Lists" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/basic/2020/11/18/Automate-Ch04-List.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/basic/2020/11/18/Automate-Ch04-List.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/blog/images/automate_boring.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-18T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/basic/2020/11/18/Automate-Ch04-List.html","@type":"BlogPosting","headline":"Automating Boring Stuff with Python - Chapter 04","dateModified":"2020-11-18T00:00:00-06:00","datePublished":"2020-11-18T00:00:00-06:00","image":"https://ong-ekken.github.io/blog/images/automate_boring.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/basic/2020/11/18/Automate-Ch04-List.html"},"description":"Lists","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Automating Boring Stuff with Python - Chapter 04</h1><p class="page-description">Lists</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-18T00:00:00-06:00" itemprop="datePublished">
+        Nov 18, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      10 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2020-11-18-Automate-Ch04-List.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2020-11-18-Automate-Ch04-List.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2020-11-18-Automate-Ch04-List.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Recap-of-Python-Basics">Recap of Python Basics </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#"What-are-some-of-the-most-basic-data-types-built-in-within-Python?"">&quot;What are some of the most basic data types built-in within Python?&quot; </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Values">Values </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Lists-and-Creating-them">Lists and Creating them </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#How-do-we-create-a-list?"">How do we create a list?&quot; </a></li>
+<li class="toc-entry toc-h2"><a href="#What-can-be-inside-a-list?">What can be inside a list? </a></li>
+<li class="toc-entry toc-h2"><a href="#"How-do-we-know-how-many-items-there-are-inside-a-big-list?"">&quot;How do we know how many items there are inside a big list?&quot; </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Reading-value-of-elements-in-a-list">Reading value of elements in a list </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#"How-do-we-access-specific-item-or-items-of-a-list?"">&quot;How do we access specific item or items of a list?&quot; </a></li>
+<li class="toc-entry toc-h2"><a href="#Strings-are-kinda-like-lists-(when-indexing-and-slicing)">Strings are kinda like lists (when indexing and slicing) </a></li>
+<li class="toc-entry toc-h2"><a href="#"How-do-we-loop-once-through-all-elements-of-a-list?"">&quot;How do we loop once through all elements of a list?&quot; </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Adding,-Removing,-or-Changing-contents-of-a-list?">Adding, Removing, or Changing contents of a list? </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#"How-do-we-add-or-remove-item-or-items-from-a-list?"">&quot;How do we add or remove item or items from a list?&quot; </a></li>
+<li class="toc-entry toc-h2"><a href="#Concatenation-aka-joining-two-lists-together">Concatenation aka joining two lists together </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Difference-between-lists,-sets,-dictionaries,-tuples">Difference between lists, sets, dictionaries, tuples </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#The-Use-Cases">The Use Cases </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-11-18-Automate-Ch04-List.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Recap-of-Python-Basics">
+<a class="anchor" href="#Recap-of-Python-Basics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Recap of Python Basics<a class="anchor-link" href="#Recap-of-Python-Basics"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id='"What-are-some-of-the-most-basic-data-types-built-in-within-Python?"'>
+<a class="anchor" href="#" what-are-some-of-the-most-basic-data-types-built-in-within-python aria-hidden="true"><span class="octicon octicon-link"></span></a>"What are some of the most basic data types built-in within Python?"<a class="anchor-link" href="#%22What-are-some-of-the-most-basic-data-types-built-in-within-Python?%22"> </a>
+</h2>
+<h3 id="Values">
+<a class="anchor" href="#Values" aria-hidden="true"><span class="octicon octicon-link"></span></a>Values<a class="anchor-link" href="#Values"> </a>
+</h3>
+<ul>
+<li>integers : 0, 1, 322, -27</li>
+<li>floats : 0.0, 1.9, -49.001</li>
+<li>boolean : True, False</li>
+<li>None (note: this is not Zero)</li>
+</ul>
+<p>and also...</p>
+<ul>
+<li>strings : "a", "42", "$3.00 for two 'wugs' "</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Lists-and-Creating-them">
+<a class="anchor" href="#Lists-and-Creating-them" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lists and Creating them<a class="anchor-link" href="#Lists-and-Creating-them"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id='How-do-we-create-a-list?"'>
+<a class="anchor" href="#How-do-we-create-a-list?" aria-hidden="true"><span class="octicon octicon-link"></span></a>How do we create a list?"<a class="anchor-link" href="#How-do-we-create-a-list?%22"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># You can create list by start and ending with square brackets [ ]</span>
+<span class="c1"># and having items seperated by commas</span>
+
+<span class="n">int_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">9</span><span class="p">]</span>
+
+<span class="c1"># Another way to create lists is to use the inbuilt list function</span>
+<span class="n">another_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>   <span class="c1"># but you need to put in other sequences or strings</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"another_list is of the type"</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">another_list</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>another_list is of the type &lt;class 'list'&gt;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-can-be-inside-a-list?">
+<a class="anchor" href="#What-can-be-inside-a-list?" aria-hidden="true"><span class="octicon octicon-link"></span></a>What can be inside a list?<a class="anchor-link" href="#What-can-be-inside-a-list?"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">empty_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># or can contain any type of item, mixed types</span>
+<span class="n">string_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Albert"</span><span class="p">,</span> <span class="s2">"Charlie"</span><span class="p">,</span> <span class="s2">"Benny"</span><span class="p">]</span>
+<span class="n">float_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.9</span><span class="p">]</span>
+<span class="n">bool_list</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+<span class="n">mixed_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"one"</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="mi">2020</span><span class="p">]</span>
+
+<span class="c1"># or can even contain list of lists of list of... ("Nested Lists")</span>
+<span class="n">list_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">string_list</span><span class="p">,</span> <span class="n">float_list</span><span class="p">,</span> <span class="p">[</span><span class="s2">"abc"</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mf">5.5</span><span class="p">]]]]</span>
+
+<span class="c1"># A single value in a list is not equivalent to the same single value</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Saying [1] is equivalent to 1 is"</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">)</span>    <span class="c1"># you will get false</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Saying [1] is equivalent to 1 is False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id='"How-do-we-know-how-many-items-there-are-inside-a-big-list?"'>
+<a class="anchor" href="#" how-do-we-know-how-many-items-there-are-inside-a-big-list aria-hidden="true"><span class="octicon octicon-link"></span></a>"How do we know how many items there are inside a big list?"<a class="anchor-link" href="#%22How-do-we-know-how-many-items-there-are-inside-a-big-list?%22"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Length of list is"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">example_list</span><span class="p">))</span>
+
+<span class="c1"># However, even if a list in a list contains more item, nested items don't count</span>
+
+<span class="n">nested_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"one"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"two-a"</span><span class="p">,</span> <span class="s2">"two-b"</span><span class="p">,</span> <span class="s2">"two-c"</span><span class="p">],</span> <span class="s2">"three"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Length of nested list is"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">nested_list</span><span class="p">))</span>
+
+<span class="c1"># If you definitely must count those nested items, you need to build a </span>
+<span class="c1"># RECURSIVE function, which is beyond the scope of this chapter</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-3-76717939fc4c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># You can see how many items are inside by using the len (length) function</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> 
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">"Length of list is"</span><span class="ansi-blue-fg">,</span> len<span class="ansi-blue-fg">(</span>example_list<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span> <span class="ansi-red-fg"># However, even if a list in a list contains more item, nested items don't count</span>
+
+<span class="ansi-red-fg">NameError</span>: name 'example_list' is not defined</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Reading-value-of-elements-in-a-list">
+<a class="anchor" href="#Reading-value-of-elements-in-a-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Reading value of elements in a list<a class="anchor-link" href="#Reading-value-of-elements-in-a-list"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id='"How-do-we-access-specific-item-or-items-of-a-list?"'>
+<a class="anchor" href="#" how-do-we-access-specific-item-or-items-of-a-list aria-hidden="true"><span class="octicon octicon-link"></span></a>"How do we access specific item or items of a list?"<a class="anchor-link" href="#%22How-do-we-access-specific-item-or-items-of-a-list?%22"> </a>
+</h2>
+<p>Feel free to experiment by changing up the variable "n"</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># i.e. putting in the index in square brackets after the list</span>
+<span class="c1"># Index meaning whether it is the first, second or third item in the list</span>
+<span class="c1"># However, Computer science likes counting from 0, </span>
+<span class="c1"># whereas mathematicians like to count from 1</span>
+<span class="c1"># So, in Python, the index is always n-1</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>    <span class="c1"># the second item</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Item number </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> is"</span><span class="p">,</span> <span class="n">example_list</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># For the following list:</span>
+<span class="n">example_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"First Item"</span><span class="p">,</span> <span class="s2">"Second Item"</span><span class="p">,</span> <span class="s2">"Third Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">[</span><span class="mf">1.0</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># You can just have the list "raw" in its square bracket form</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>    <span class="c1"># the third item</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Item number </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> is"</span><span class="p">,</span> \
+      <span class="p">[</span><span class="s2">"First Item"</span><span class="p">,</span> <span class="s2">"Second Item"</span><span class="p">,</span> <span class="s2">"Third Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">][</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Take note that in this case, -1 is last, -2 is second last, </span>
+<span class="c1"># i.e. you don't have to worry about n-1 anymore</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>    <span class="c1"># the second item</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Item number </span><span class="si">{</span><span class="o">-</span><span class="n">n</span><span class="si">}</span><span class="s2"> from the back is"</span><span class="p">,</span> <span class="n">example_list</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
+
+<span class="c1"># The other way to do this is more troublesome</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>    <span class="c1"># get the number of items in the list</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Item number </span><span class="si">{</span><span class="o">-</span><span class="n">n</span><span class="si">}</span><span class="s2"> from the back is"</span><span class="p">,</span> <span class="n">example_list</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"First Item"</span><span class="p">,</span> <span class="s2">"Second Item"</span><span class="p">,</span> <span class="s2">"Third Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">]</span>
+
+<span class="c1"># You can even get multiple items by SLICING</span>
+<span class="c1"># You need to give the computer the indexes of both START and STOP points</span>
+<span class="c1"># which you put in the square brackets, seperated by a ":" (Colon)</span>
+<span class="c1"># let's say I want the middle two items i.e. I don"t want first and fourth items</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="mi">1</span>   <span class="c1"># index 1 means start AT the second item</span>
+
+<span class="n">stop</span> <span class="o">=</span> <span class="mi">3</span>    <span class="c1"># index 3 means stop BEFORE the fourth item</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">])</span>
+
+<span class="c1"># Emphasis : the item at stop (fourth item) is excluded!</span>
+
+<span class="c1"># Emphasis : stop minus start equals number of items returned</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['Second Item', 'Third Item']
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"First Item"</span><span class="p">,</span> <span class="s2">"Second Item"</span><span class="p">,</span> <span class="s2">"Third Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">]</span>
+
+<span class="c1"># You can even slice and take every alternate value</span>
+<span class="c1"># let's say I want First and Third item, i.e. take 2 steps at a time</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># You include a second ":" colon, and the third parameter is the step</span>
+<span class="c1"># 2 will give every two items, 3 will give every three items, etc</span>
+<span class="c1"># a negative value for step will give you items counting from the end</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">[::</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Note in the above example that you don't always need to put in all values </span>
+<span class="c1"># when slicing! the default is assumed as below if you omit them: </span>
+<span class="c1"># start = 0 (or number of items in list if you use negative steps)</span>
+<span class="c1"># stop = number of items in list (or 0 if you use negative steps)</span>
+<span class="c1"># skip = 1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">[:</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># The above way DOES NOT change example_list, it just returns you a view</span>
+<span class="c1"># You can make a permanent change to example_list by doing it with</span>
+
+<span class="n">new_list</span> <span class="o">=</span> <span class="n">example_list</span><span class="p">[:]</span>  <span class="c1"># Note: the slice generates a new copy</span>
+
+<span class="c1"># If you don't slice, they will refer to the same data in the memory</span>
+<span class="c1"># See the part on REFERENCES in Automating the Boring Stuff</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"New list:"</span><span class="p">,</span> <span class="n">new_list</span><span class="p">)</span>
+
+<span class="n">new_list</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"New list reversed"</span><span class="p">,</span> <span class="n">new_list</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['First Item', 'Third Item']
+['Last Item', 'Second Item']
+['Last Item', 'Third Item']
+New list: ['First Item', 'Second Item', 'Third Item', 'Last Item']
+New list reversed ['Last Item', 'Third Item', 'Second Item', 'First Item']
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Strings-are-kinda-like-lists-(when-indexing-and-slicing)">
+<a class="anchor" href="#Strings-are-kinda-like-lists-(when-indexing-and-slicing)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Strings are kinda like lists (when indexing and slicing)<a class="anchor-link" href="#Strings-are-kinda-like-lists-(when-indexing-and-slicing)"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">word</span> <span class="o">=</span> <span class="s2">"supercalifragilistic"</span>
+
+<span class="n">last_char</span> <span class="o">=</span> <span class="n">word</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">last_char</span><span class="p">)</span>
+
+<span class="nb">super</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">super</span><span class="p">)</span>
+
+<span class="n">word_reversed</span> <span class="o">=</span> <span class="n">word</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">word_reversed</span><span class="p">)</span>
+
+<span class="c1"># BUT while you can change items in a list, you can't do that for strings!</span>
+<span class="c1"># (we'll talk more about this later)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>c
+super
+citsiligarfilacrepus
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">char_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="s2">"string"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"String as a string: "</span><span class="p">,</span> <span class="s2">"string"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Seperated into a list:"</span><span class="p">,</span> <span class="n">char_list</span><span class="p">)</span>
+
+<span class="c1"># But you can join a list back into a string</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Joining back the list into a string: "</span><span class="p">,</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">char_list</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>String as a string:  string
+Seperated into a list: ['s', 't', 'r', 'i', 'n', 'g']
+Joining back the list into a string:  string
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id='"How-do-we-loop-once-through-all-elements-of-a-list?"'>
+<a class="anchor" href="#" how-do-we-loop-once-through-all-elements-of-a-list aria-hidden="true"><span class="octicon octicon-link"></span></a>"How do we loop once through all elements of a list?"<a class="anchor-link" href="#%22How-do-we-loop-once-through-all-elements-of-a-list?%22"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"First Item"</span><span class="p">,</span> <span class="s2">"Second Item"</span><span class="p">,</span> <span class="s2">"Third Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">]</span>
+
+<span class="c1"># if you want to use the items in a list one by one</span>
+<span class="c1"># use the for loop</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">example_list</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"First"</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Line Break</span>
+
+<span class="c1"># Combine with slicing if you want to select specific items in a pattern</span>
+
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">example_list</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>First Item
+
+
+Second Item
+Last Item
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"First Item"</span><span class="p">,</span> <span class="s2">"Second Item"</span><span class="p">,</span> <span class="s2">"Third Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">]</span>
+
+<span class="c1"># Using range</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">example_list</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Line Break</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0
+First Item
+1
+Second Item
+2
+Third Item
+3
+Last Item
+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"First Item"</span><span class="p">,</span> <span class="s2">"Second Item"</span><span class="p">,</span> <span class="s2">"Third Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">]</span>
+
+<span class="c1"># Using enumerate</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">example_list</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Line Break</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0
+First Item
+1
+Second Item
+2
+Third Item
+3
+Last Item
+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Adding,-Removing,-or-Changing-contents-of-a-list?">
+<a class="anchor" href="#Adding,-Removing,-or-Changing-contents-of-a-list?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding, Removing, or Changing contents of a list?<a class="anchor-link" href="#Adding,-Removing,-or-Changing-contents-of-a-list?"> </a>
+</h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id='"How-do-we-add-or-remove-item-or-items-from-a-list?"'>
+<a class="anchor" href="#" how-do-we-add-or-remove-item-or-items-from-a-list aria-hidden="true"><span class="octicon octicon-link"></span></a>"How do we add or remove item or items from a list?"<a class="anchor-link" href="#%22How-do-we-add-or-remove-item-or-items-from-a-list?%22"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"First Item is Gone?"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['First Item is Gone?', 'Second Item', 'Third Item', 'Last Item']
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Extra Item"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['First Item is Gone?', 'Second Item', 'Third Item', 'Last Item', 'Extra Item']
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"Item before First Item"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['Item before First Item', 'First Item is Gone?', 'Second Item', 'Third Item', 'Last Item', 'Extra Item']
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Last Item"</span><span class="p">)</span>
+<span class="n">example_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Last Item"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+
+<span class="n">example_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"Last Item"</span><span class="p">)</span>        
+
+<span class="c1"># Note! This removes only the first instance found</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+
+<span class="c1"># Running remove when the item doesn't exist raises an error</span>
+
+<span class="n">example_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"Last Item"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+
+<span class="n">example_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"Last Item"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+
+<span class="n">example_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">"Last Item"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['Item before First Item', 'First Item is Gone?', 'Second Item', 'Third Item', 'Last Item', 'Extra Item', 'Last Item', 'Last Item']
+['Item before First Item', 'First Item is Gone?', 'Second Item', 'Third Item', 'Extra Item', 'Last Item', 'Last Item']
+['Item before First Item', 'First Item is Gone?', 'Second Item', 'Third Item', 'Extra Item', 'Last Item']
+['Item before First Item', 'First Item is Gone?', 'Second Item', 'Third Item', 'Extra Item']
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-14-62796600f273&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">     22</span> print<span class="ansi-blue-fg">(</span>example_list<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     23</span> 
+<span class="ansi-green-fg">---&gt; 24</span><span class="ansi-red-fg"> </span>example_list<span class="ansi-blue-fg">.</span>remove<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">"Last Item"</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">ValueError</span>: list.remove(x): x not in list</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># But instead of passing the value of the item to be deleted</span>
+<span class="c1"># You pass in the index of the item to be deleted</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+
+<span class="k">del</span> <span class="n">example_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['Item before First Item', 'First Item is Gone?', 'Second Item', 'Third Item', 'Extra Item']
+['Item before First Item', 'First Item is Gone?', 'Second Item', 'Third Item']
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+
+<span class="n">removed_item</span> <span class="o">=</span> <span class="n">example_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+
+<span class="c1"># Difference between remove and pop is that pop by default works on</span>
+<span class="c1"># the last item, and will return the "popped" item as outcome</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The removed item is"</span><span class="p">,</span> <span class="n">removed_item</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['Item before First Item', 'First Item is Gone?', 'Second Item', 'Third Item']
+['Item before First Item', 'First Item is Gone?', 'Second Item']
+The removed item is Third Item
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Concatenation-aka-joining-two-lists-together">
+<a class="anchor" href="#Concatenation-aka-joining-two-lists-together" aria-hidden="true"><span class="octicon octicon-link"></span></a>Concatenation aka joining two lists together<a class="anchor-link" href="#Concatenation-aka-joining-two-lists-together"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">list_one</span> <span class="o">=</span> <span class="s2">"This is the first half"</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">list_two</span> <span class="o">=</span> <span class="s2">"and this is the second"</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="c1"># Python over-rided the plus operator and allowed it to link two lists</span>
+
+<span class="n">list_all</span> <span class="o">=</span> <span class="n">list_one</span> <span class="o">+</span> <span class="n">list_two</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_all</span><span class="p">)</span>
+
+<span class="c1"># Note that this won't work if one of them isn't a list</span>
+
+<span class="n">list_one</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['This', 'is', 'the', 'first', 'half', 'and', 'this', 'is', 'the', 'second']
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-17-6b05ee29f1c0&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      9</span> <span class="ansi-red-fg"># Note that this won't work if one of them isn't a list</span>
+<span class="ansi-green-intense-fg ansi-bold">     10</span> 
+<span class="ansi-green-fg">---&gt; 11</span><span class="ansi-red-fg"> </span>list_one <span class="ansi-blue-fg">+</span> <span class="ansi-cyan-fg">1</span>
+
+<span class="ansi-red-fg">TypeError</span>: can only concatenate list (not "int") to list</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Because it would attach the WHOLE LIST AS ONE ITEM IN ITSELF</span>
+
+<span class="n">list_one</span> <span class="o">=</span> <span class="s2">"This is the first half"</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="n">list_two</span> <span class="o">=</span> <span class="s2">"and this is the second"</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">list_one</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_two</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">list_one</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['This', 'is', 'the', 'first', 'half', ['and', 'this', 'is', 'the', 'second']]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Difference-between-lists,-sets,-dictionaries,-tuples">
+<a class="anchor" href="#Difference-between-lists,-sets,-dictionaries,-tuples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Difference between lists, sets, dictionaries, tuples<a class="anchor-link" href="#Difference-between-lists,-sets,-dictionaries,-tuples"> </a>
+</h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"First Item"</span><span class="p">,</span> <span class="s2">"Second Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">,</span> <span class="s2">"Last Item"</span><span class="p">]</span>
+
+<span class="c1"># One big difference is the "brackets"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The list uses square brackets, e.g.: "</span><span class="p">,</span> <span class="n">example_list</span><span class="p">)</span>
+
+<span class="n">example_tuple</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The tuple uses parenthesis, e.g.: "</span><span class="p">,</span> <span class="n">example_tuple</span><span class="p">)</span>
+
+<span class="n">example_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">example_list</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The set uses curly brackets, e.g.: "</span><span class="p">,</span> <span class="n">example_set</span><span class="p">)</span>
+
+<span class="c1"># Note that the 2 x "Last Items" became only 1. Because sets need unique values.</span>
+
+<span class="n">example_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="s2">"One"</span><span class="p">,</span><span class="s2">"Two"</span><span class="p">,</span><span class="s2">"Three"</span><span class="p">,</span><span class="s2">"Four"</span><span class="p">],</span> <span class="n">example_list</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The dict also uses curly brackets, e.g.: "</span><span class="p">,</span> <span class="n">example_dict</span><span class="p">)</span>
+
+<span class="c1"># Even though they both use curly brackets, dictionaries have "Key:Value" format</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The list uses square brackets, e.g.:  ['First Item', 'Second Item', 'Last Item', 'Last Item']
+The tuple uses parenthesis, e.g.:  ('First Item', 'Second Item', 'Last Item', 'Last Item')
+The set uses curly brackets, e.g.:  {'First Item', 'Last Item', 'Second Item'}
+The dict also uses curly brackets, e.g.:  {'One': 'First Item', 'Two': 'Second Item', 'Three': 'Last Item', 'Four': 'Last Item'}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Use-Cases">
+<a class="anchor" href="#The-Use-Cases" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Use Cases<a class="anchor-link" href="#The-Use-Cases"> </a>
+</h2>
+<p>As a general guide,</p>
+<ul>
+<li>TUPLE is helpful when you don't want to modify the data</li>
+<li>SET is helpful to track Yes/No (if a value occured or not)</li>
+<li>DICT is helpful to count events or when you have structured data</li>
+</ul>
+<p>Because tuple is basically ordered just like lists, you can index or slice tuples. But you cannot do the same for sets or dictionaries.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example_set</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-21-ef8c89818ed8&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>example_set<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-red-fg">TypeError</span>: 'set' object is not subscriptable</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">example_dict</span><span class="p">[</span><span class="s2">"One"</span><span class="p">])</span>
+
+<span class="n">example_dict</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>First Item
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-22-9d2427061b84&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> print<span class="ansi-blue-fg">(</span>example_dict<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">"One"</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> 
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>example_dict<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-red-fg">KeyError</span>: 1</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"cat"</span><span class="p">,</span> <span class="s2">"bat"</span><span class="p">,</span> <span class="s2">"rat"</span><span class="p">,</span> <span class="s2">"elephant"</span><span class="p">,</span> <span class="s2">"rat"</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['bat', 'cat', 'elephant', 'rat', 'rat']
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['bat', 'cat', 'elephant', 'rat', 'rat']
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">animal</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">animal</span> <span class="ow">in</span> <span class="n">a</span> <span class="k">if</span> <span class="s2">"at"</span> <span class="ow">in</span> <span class="n">animal</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>['BAT', 'CAT', 'RAT', 'RAT']</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/basic/2020/11/18/Automate-Ch04-List.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,1476 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Automating Boring Stuff with Python - Chapter 06 | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Automating Boring Stuff with Python - Chapter 06" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Manipulating Strings" />
+<meta property="og:description" content="Manipulating Strings" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/basic/2020/12/02/Automate-Ch06-Strings.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/basic/2020/12/02/Automate-Ch06-Strings.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/blog/images/automate_boring.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-02T00:00:00-06:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/basic/2020/12/02/Automate-Ch06-Strings.html","@type":"BlogPosting","headline":"Automating Boring Stuff with Python - Chapter 06","dateModified":"2020-12-02T00:00:00-06:00","datePublished":"2020-12-02T00:00:00-06:00","image":"https://ong-ekken.github.io/blog/images/automate_boring.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/basic/2020/12/02/Automate-Ch06-Strings.html"},"description":"Manipulating Strings","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper">
+<a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)'s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger">
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewbox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"></path>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+<a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a>
+</div>
+      </nav>
+</div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Automating Boring Stuff with Python - Chapter 06</h1>
+<p class="page-description">Manipulating Strings</p>
+<p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-12-02T00:00:00-06:00" itemprop="datePublished">
+        Dec 2, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#basic">basic</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2020-12-02-Automate-Ch06-Strings.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2020-12-02-Automate-Ch06-Strings.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2020-12-02-Automate-Ch06-Strings.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab">
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2">
+<a href="#Working-with-Strings">Working with Strings </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#String-Literals">String Literals </a></li>
+<li class="toc-entry toc-h3"><a href="#Indexing-and-Slicing-Strings">Indexing and Slicing Strings </a></li>
+<li class="toc-entry toc-h3"><a href="#The-in-and-not-in-Operator-with-Strings">The in and not in Operator with Strings </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2">
+<a href="#Useful-String-Methods">Useful String Methods </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#upper(-),-lower(-),-isupper(-),-and-islower(-)-Methods">upper( ), lower( ), isupper( ), and islower( ) Methods </a></li>
+<li class="toc-entry toc-h3"><a href="#isX-String-Methods">isX String Methods </a></li>
+<li class="toc-entry toc-h3"><a href="#startswith(-)-and-endswith(-)-String-Methods">startswith( ) and endswith( ) String Methods </a></li>
+<li class="toc-entry toc-h3"><a href="#join(-)-and-split(-)-String-Methods">join( ) and split( ) String Methods </a></li>
+<li class="toc-entry toc-h3"><a href="#Justifying-Text-with-rjust(-),-ljust(-),-and-center(-)">Justifying Text with rjust( ), ljust( ), and center( ) </a></li>
+<li class="toc-entry toc-h3"><a href="#Removing-Whitespace-with-strip(-),-rstrip(-),-and-lstrip(-)">Removing Whitespace with strip( ), rstrip( ), and lstrip( ) </a></li>
+<li class="toc-entry toc-h3"><a href="#Copying-and-Pasting-Strings-with-the-pyperclip-Module">Copying and Pasting Strings with the pyperclip Module </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2">
+<a href="#Project:-Password-Locker">Project: Password Locker </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#*Does-not-work-on-Colaboratory">*Does not work on Colaboratory </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Project:-Adding-Bullets-to-Wiki-Markup">Project: Adding Bullets to Wiki Markup </a></li>
+<li class="toc-entry toc-h2">
+<a href="#Practice-Questions">Practice Questions </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Answers">Answers </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Practice-Project">Practice Project </a></li>
+</ul>
+<!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-12-02-Automate-Ch06-Strings.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Working-with-Strings">
+<a class="anchor" href="#Working-with-Strings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working with Strings<a class="anchor-link" href="#Working-with-Strings"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="String-Literals">
+<a class="anchor" href="#String-Literals" aria-hidden="true"><span class="octicon octicon-link"></span></a>String Literals<a class="anchor-link" href="#String-Literals"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">str0</span> <span class="o">=</span> <span class="s2">"That is Alice's cat."</span>
+<span class="n">str1</span> <span class="o">=</span> <span class="s1">'"Why not?"'</span>
+
+<span class="n">bad_string</span> <span class="o">=</span> <span class="s1">' What'</span><span class="n">s</span> <span class="n">up</span> <span class="err">?</span> <span class="s1">'</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-cyan-fg">  File </span><span class="ansi-green-fg">"&lt;ipython-input-1-1d5d35e1c4ea&gt;"</span><span class="ansi-cyan-fg">, line </span><span class="ansi-green-fg">5</span>
+<span class="ansi-red-fg">    bad_string = ' What's up ? '</span>
+                        ^
+<span class="ansi-red-fg">SyntaxError</span><span class="ansi-red-fg">:</span> invalid syntax
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">str2</span> <span class="o">=</span> <span class="s2">"single quote (</span><span class="se">\'</span><span class="s2">)</span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">double quote (</span><span class="se">\"</span><span class="s2">)</span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">tab (</span><span class="se">\t</span><span class="s2">)</span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">backslash (</span><span class="se">\\</span><span class="s2">)</span><span class="se">\</span>
+<span class="se">\n</span><span class="s2">newline (</span><span class="se">\n</span><span class="s2">)"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>single quote (')
+double quote (")
+tab (	)
+backslash (\)
+newline (
+)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">str3</span> <span class="o">=</span> <span class="s2">"That</span><span class="se">\'</span><span class="s2">s Carol</span><span class="se">\'</span><span class="s2">s cat!</span><span class="se">\n</span><span class="s2">Yeah!"</span>
+<span class="n">str4</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"That\'s Carol\'s cat!\nYeah!"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">str3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">str4</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>That's Carol's cat!
+Yeah!
+That\'s Carol\'s cat!\nYeah!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">str5</span> <span class="o">=</span> <span class="s2">"This is a sentence that will </span><span class="se">\</span>
+<span class="s2">break across many different lines by </span><span class="se">\</span>
+<span class="s2">using a back slash"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">str5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>This is a sentence that will break across many different lines by using a back slash
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">'''Dear Alice,</span>
+
+<span class="s1">Eve's cat has been arrested for catnapping, cat burglary, and extortion.</span>
+
+<span class="s1">Sincerely,</span>
+<span class="s1">Bob'''</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dear Alice,
+
+Eve's cat has been arrested for catnapping, cat burglary, and extortion.
+
+Sincerely,
+Bob
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">"""This is a test Python program.</span>
+<span class="sd">Writen by Al Sweigart al@inventwithpython.com</span>
+
+<span class="sd">This program was designed for Python 3, not Python 2.</span>
+<span class="sd">"""</span>
+
+<span class="k">def</span> <span class="nf">spam</span><span class="p">():</span>
+    <span class="sd">"""This is a multiline comment to help</span>
+<span class="sd">    explain what the spam() function does."""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Hello!'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Indexing-and-Slicing-Strings">
+<a class="anchor" href="#Indexing-and-Slicing-Strings" aria-hidden="true"><span class="octicon octicon-link"></span></a>Indexing and Slicing Strings<a class="anchor-link" href="#Indexing-and-Slicing-Strings"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">str6</span> <span class="o">=</span> <span class="s2">"Hello World!"</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">letter</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">str6</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">letter</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">" --- "</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s2">"Index 0 is :"</span><span class="p">,</span> <span class="n">str6</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">"Index -1 is :"</span><span class="p">,</span>  <span class="n">str6</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">"Slice 6: is :"</span><span class="p">,</span> <span class="n">str6</span><span class="p">[</span><span class="mi">6</span><span class="p">:]</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">"Slice 0:-1:2 is :"</span><span class="p">,</span> <span class="n">str6</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>H --- 0
+e --- 1
+l --- 2
+l --- 3
+o --- 4
+  --- 5
+W --- 6
+o --- 7
+r --- 8
+l --- 9
+d --- 10
+! --- 11
+Index 0 is : H
+Index -1 is : !
+Slice 6: is : World!
+Slice 0:-1:2 is : HloWrd
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">str7</span> <span class="o">=</span> <span class="s2">"Hello lovely world!"</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">str7</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Using str.find()"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">str7</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'lo'</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">str7</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'lo'</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>  <span class="c1"># start search from index 4</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">str7</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'lo'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c1"># end search by index 5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> Using str.index()"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">str7</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">'lo'</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">str7</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">'lo'</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="c1"># start search from index 4</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">str7</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">'lo'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c1"># end search by index 5</span>
+<span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">"ValueError: substring not found"</span> <span class="p">)</span>
+
+<span class="c1"># Difference = str.find() returns -1 if not found</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello lovely world!
+
+Using str.find()
+3
+6
+-1
+
+ Using str.index()
+3
+6
+ValueError: substring not found
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-in-and-not-in-Operator-with-Strings">
+<a class="anchor" href="#The-in-and-not-in-Operator-with-Strings" aria-hidden="true"><span class="octicon octicon-link"></span></a>The in and not in Operator with Strings<a class="anchor-link" href="#The-in-and-not-in-Operator-with-Strings"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"&gt;&gt;&gt; 'Hello' in 'Hello World!' "</span><span class="p">,</span> <span class="s1">'Hello'</span> <span class="ow">in</span> <span class="s1">'Hello World!'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"&gt;&gt;&gt; 'Hello' in 'Hello' "</span><span class="p">,</span> <span class="s1">'Hello'</span> <span class="ow">in</span> <span class="s1">'Hello'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"&gt;&gt;&gt; 'HELLO' in 'Hello World!' "</span><span class="p">,</span> <span class="s1">'HELLO'</span> <span class="ow">in</span> <span class="s1">'Hello World!'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"&gt;&gt;&gt; '' in 'spam!' "</span><span class="p">,</span> <span class="s1">''</span> <span class="ow">in</span> <span class="s1">'spam'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"&gt;&gt;&gt; 'cats' not in 'cats and dogs' "</span><span class="p">,</span> <span class="s1">'cats'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="s1">'cats and dogs'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&gt;&gt;&gt; 'Hello' in 'Hello World!' 
+True
+&gt;&gt;&gt; 'Hello' in 'Hello' 
+True
+&gt;&gt;&gt; 'HELLO' in 'Hello World!' 
+False
+&gt;&gt;&gt; '' in 'spam!' 
+True
+&gt;&gt;&gt; 'cats' not in 'cats and dogs' 
+False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Useful-String-Methods">
+<a class="anchor" href="#Useful-String-Methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>Useful String Methods<a class="anchor-link" href="#Useful-String-Methods"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="upper(-),-lower(-),-isupper(-),-and-islower(-)-Methods">
+<a class="anchor" href="#upper(-),-lower(-),-isupper(-),-and-islower(-)-Methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>upper( ), lower( ), isupper( ), and islower( ) Methods<a class="anchor-link" href="#upper(-),-lower(-),-isupper(-),-and-islower(-)-Methods"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spam</span> <span class="o">=</span> <span class="s1">'Hello world!'</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">spam</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spam.upper() : "</span><span class="p">,</span> <span class="n">spam</span><span class="p">)</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">spam</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spam.lower() : "</span><span class="p">,</span> <span class="n">spam</span><span class="p">)</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">spam</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spam.capitalize() : "</span><span class="p">,</span> <span class="n">spam</span><span class="p">)</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">spam</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spam.title() : "</span><span class="p">,</span> <span class="n">spam</span><span class="p">)</span>
+<span class="n">spam</span> <span class="o">=</span> <span class="n">spam</span><span class="o">.</span><span class="n">swapcase</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"spam.swapcase() : "</span><span class="p">,</span> <span class="n">spam</span><span class="p">)</span>
+
+<span class="c1"># if non-English text, .casefold() method preferred to .lower()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>spam.upper() :  HELLO WORLD!
+spam.lower() :  hello world!
+spam.capitalize() :  Hello world!
+spam.title() :  Hello World!
+spam.swapcase() :  hELLO wORLD!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spam</span> <span class="o">=</span> <span class="s1">'Hello world!'</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">spam</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="p">)</span> <span class="c1"># mixed_case.islower() returns False </span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">spam</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="p">)</span> <span class="c1"># mixed_case.isupper() returns False </span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'HELLO'</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc12345'</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="p">)</span> <span class="c1">#mixed_with_numbers.islower() returns True</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'ABC12345'</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="p">)</span> <span class="c1">#MIXED_with_numbers.isupper() returns True</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'12345'</span><span class="o">.</span><span class="n">islower</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'12345'</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>False
+False
+True
+True
+True
+False
+False
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="isX-String-Methods">
+<a class="anchor" href="#isX-String-Methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>isX String Methods<a class="anchor-link" href="#isX-String-Methods"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">isalpha()'</span><span class="p">,</span> <span class="s1">'=========='</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc'</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc123'</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">isdecimal()'</span><span class="p">,</span> <span class="s1">'=========='</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'123'</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc123'</span><span class="o">.</span><span class="n">isdecimal</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">isalnum()'</span><span class="p">,</span> <span class="s1">'=========='</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc'</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'123'</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc123'</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc123!!!'</span><span class="o">.</span><span class="n">isalnum</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">isspace()'</span><span class="p">,</span> <span class="s1">'=========='</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">' '</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">' </span><span class="se">\t</span><span class="s1"> '</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">' </span><span class="se">\n</span><span class="s1"> '</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">''</span><span class="o">.</span><span class="n">isspace</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">istitle()'</span><span class="p">,</span> <span class="s1">'=========='</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Title Words Start Capital 123'</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'U.F.O.'</span><span class="o">.</span><span class="n">istitle</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="c1"># Useful for validating input type</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+isalpha()
+==========
+True
+False
+
+isdecimal()
+==========
+True
+False
+
+isalnum()
+==========
+True
+True
+True
+False
+
+isspace()
+==========
+True
+True
+True
+False
+
+istitle()
+==========
+True
+True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="startswith(-)-and-endswith(-)-String-Methods">
+<a class="anchor" href="#startswith(-)-and-endswith(-)-String-Methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>startswith( ) and endswith( ) String Methods<a class="anchor-link" href="#startswith(-)-and-endswith(-)-String-Methods"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello world!'</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc123'</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'abcdef'</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello world!'</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'Hello world!'</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello world!'</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'world!'</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'abc123'</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'12'</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello world!'</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">'Hello world!'</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>True
+False
+True
+True
+False
+True
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="join(-)-and-split(-)-String-Methods">
+<a class="anchor" href="#join(-)-and-split(-)-String-Methods" aria-hidden="true"><span class="octicon octicon-link"></span></a>join( ) and split( ) String Methods<a class="anchor-link" href="#join(-)-and-split(-)-String-Methods"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'cats'</span><span class="p">,</span> <span class="s1">'rats'</span><span class="p">,</span> <span class="s1">'bats'</span><span class="p">])</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'My'</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">,</span> <span class="s1">'is'</span><span class="p">,</span> <span class="s1">'Simon'</span><span class="p">])</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'ABC'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">'My'</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">,</span> <span class="s1">'is'</span><span class="p">,</span> <span class="s1">'Simon'</span><span class="p">])</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>cats, rats, bats
+My name is Simon
+MyABCnameABCisABCSimon
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="s1">'My name is Simon'</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'MyABCnameABCisABCSimon'</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'ABC'</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'My name is Simon'</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'m'</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="n">spam</span> <span class="o">=</span> <span class="s1">'''Dear Alice,</span>
+<span class="s1">How have you been? I am fine.</span>
+
+<span class="s1">See you next week at "Club Bistro".</span>
+<span class="s1">Sincerely,</span>
+<span class="s1">Bob'''</span>
+
+<span class="n">spam</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['My', 'name', 'is', 'Simon']
+['My', 'name', 'is', 'Simon']
+['My na', 'e is Si', 'on']
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>['Dear Alice,',
+ 'How have you been? I am fine.',
+ '',
+ 'See you next week at "Club Bistro".',
+ 'Sincerely,',
+ 'Bob']</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Justifying-Text-with-rjust(-),-ljust(-),-and-center(-)">
+<a class="anchor" href="#Justifying-Text-with-rjust(-),-ljust(-),-and-center(-)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Justifying Text with rjust( ), ljust( ), and center( )<a class="anchor-link" href="#Justifying-Text-with-rjust(-),-ljust(-),-and-center(-)"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="s1">'0123456789'</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello'</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello'</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello World'</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello'</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello'</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'*'</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello'</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello'</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s1">'Hello'</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="s1">'='</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0123456789
+     Hello
+               Hello
+         Hello World
+Hello     
+***************Hello
+Hello---------------
+       Hello        
+=======Hello========
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">printPicnic</span><span class="p">(</span><span class="n">itemsDict</span><span class="p">,</span> <span class="n">leftWidth</span><span class="p">,</span> <span class="n">rightWidth</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'PICNIC ITEMS'</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="n">leftWidth</span> <span class="o">+</span> <span class="n">rightWidth</span><span class="p">,</span> <span class="s1">'-'</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">itemsDict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">leftWidth</span><span class="p">,</span> <span class="s1">'.'</span><span class="p">)</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">rightWidth</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="n">picnicItems</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'sandwiches'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">'apples'</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s1">'cups'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">'cookies'</span><span class="p">:</span> <span class="mi">8000</span><span class="p">}</span>
+
+<span class="n">printPicnic</span><span class="p">(</span><span class="n">picnicItems</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">printPicnic</span><span class="p">(</span><span class="n">picnicItems</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>---PICNIC ITEMS--
+sandwiches..    4
+apples......   12
+cups........    4
+cookies..... 8000
+
+
+-------PICNIC ITEMS-------
+sandwiches..........     4
+apples..............    12
+cups................     4
+cookies.............  8000
+
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Removing-Whitespace-with-strip(-),-rstrip(-),-and-lstrip(-)">
+<a class="anchor" href="#Removing-Whitespace-with-strip(-),-rstrip(-),-and-lstrip(-)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Removing Whitespace with strip( ), rstrip( ), and lstrip( )<a class="anchor-link" href="#Removing-Whitespace-with-strip(-),-rstrip(-),-and-lstrip(-)"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">spam</span> <span class="o">=</span> <span class="s1">'    Hello World    </span><span class="se">\n</span><span class="s1">'</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">spam</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">spam</span><span class="o">.</span><span class="n">lstrip</span><span class="p">()</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">spam</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="n">spam2</span> <span class="o">=</span> <span class="s1">'SpamSpamBaconSpamEggsSpamSpam'</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">spam2</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">'ampS'</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello World
+Hello World    
+
+    Hello World
+BaconSpamEggs
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Copying-and-Pasting-Strings-with-the-pyperclip-Module">
+<a class="anchor" href="#Copying-and-Pasting-Strings-with-the-pyperclip-Module" aria-hidden="true"><span class="octicon octicon-link"></span></a>Copying and Pasting Strings with the pyperclip Module<a class="anchor-link" href="#Copying-and-Pasting-Strings-with-the-pyperclip-Module"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pip</span> install pyperclip
+
+<span class="kn">import</span> <span class="nn">pyperclip</span>
+<span class="n">pyperclip</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s1">'Hello world!'</span><span class="p">)</span>
+<span class="n">pyperclip</span><span class="o">.</span><span class="n">paste</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting pyperclip
+  Downloading pyperclip-1.8.2.tar.gz (20 kB)
+Building wheels for collected packages: pyperclip
+  Building wheel for pyperclip (setup.py) ... done
+  Created wheel for pyperclip: filename=pyperclip-1.8.2-py3-none-any.whl size=11106 sha256=7ca1ebca1b606ec0b82d556aa45a67d7e0e9f07c1770a047df98cca6a9f90469
+  Stored in directory: /root/.cache/pip/wheels/7f/1a/65/84ff8c386bec21fca6d220ea1f5498a0367883a78dd5ba6122
+Successfully built pyperclip
+Installing collected packages: pyperclip
+Successfully installed pyperclip-1.8.2
+Note: you may need to restart the kernel to use updated packages.
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">PyperclipException</span>                        Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-33-80522375466e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> 
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-green-fg">import</span> pyperclip
+<span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>pyperclip<span class="ansi-blue-fg">.</span>copy<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">'Hello world!'</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> pyperclip<span class="ansi-blue-fg">.</span>paste<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pyperclip/__init__.py</span> in <span class="ansi-cyan-fg">lazy_load_stub_copy</span><span class="ansi-blue-fg">(text)</span>
+<span class="ansi-green-intense-fg ansi-bold">    657</span>     <span class="ansi-green-fg">global</span> copy<span class="ansi-blue-fg">,</span> paste
+<span class="ansi-green-intense-fg ansi-bold">    658</span>     copy<span class="ansi-blue-fg">,</span> paste <span class="ansi-blue-fg">=</span> determine_clipboard<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 659</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> copy<span class="ansi-blue-fg">(</span>text<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    660</span> 
+<span class="ansi-green-intense-fg ansi-bold">    661</span> 
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/pyperclip/__init__.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    334</span> 
+<span class="ansi-green-intense-fg ansi-bold">    335</span>         <span class="ansi-green-fg">def</span> __call__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">--&gt; 336</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> PyperclipException<span class="ansi-blue-fg">(</span>EXCEPT_MSG<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    337</span> 
+<span class="ansi-green-intense-fg ansi-bold">    338</span>         <span class="ansi-green-fg">if</span> PY2<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">PyperclipException</span>: 
+    Pyperclip could not find a copy/paste mechanism for your system.
+    For more information, please visit https://pyperclip.readthedocs.io/en/latest/index.html#not-implemented-error </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Project:-Password-Locker">
+<a class="anchor" href="#Project:-Password-Locker" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project: Password Locker<a class="anchor-link" href="#Project:-Password-Locker"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="*Does-not-work-on-Colaboratory">
+<a class="anchor" href="#*Does-not-work-on-Colaboratory" aria-hidden="true"><span class="octicon octicon-link"></span></a>*Does not work on Colaboratory<a class="anchor-link" href="#*Does-not-work-on-Colaboratory"> </a>
+</h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#! python3</span>
+<span class="c1"># pw.py - An insecure password locker program.</span>
+
+<span class="n">PASSWORDS</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'email'</span><span class="p">:</span> <span class="s1">'gibberish1'</span><span class="p">,</span>
+             <span class="s1">'blog'</span><span class="p">:</span> <span class="s1">'gibberish2'</span><span class="p">,</span>
+             <span class="s1">'luggage'</span><span class="p">:</span> <span class="s1">'12345'</span><span class="p">}</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1">### Step 2: Handle Command Line Arguments</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Usage: python pw.py [account] - copy account password'</span><span class="p">)</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># first command line arg is the account name</span>
+
+<span class="c1"># STEP 3 : Extract Password</span>
+
+<span class="k">if</span> <span class="n">account</span> <span class="ow">in</span> <span class="n">PASSWORDS</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Password for '</span> <span class="o">+</span> <span class="n">account</span> <span class="o">+</span> <span class="s1">' is '</span> <span class="o">+</span> <span class="n">PASSWORDS</span><span class="p">[</span><span class="n">account</span><span class="p">]</span> <span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'There is no account named '</span> <span class="o">+</span> <span class="n">account</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>There is no account named -f
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Project:-Adding-Bullets-to-Wiki-Markup">
+<a class="anchor" href="#Project:-Adding-Bullets-to-Wiki-Markup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project: Adding Bullets to Wiki Markup<a class="anchor-link" href="#Project:-Adding-Bullets-to-Wiki-Markup"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Practice-Questions">
+<a class="anchor" href="#Practice-Questions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Practice Questions<a class="anchor-link" href="#Practice-Questions"> </a>
+</h2>
+<ol>
+<li>What are escape characters?</li>
+<li>What do the \n and \t escape characters represent?</li>
+<li>How can you put a \ backslash character in a string?</li>
+<li>The string value "Howl's Moving Castle" is a valid string. Why isn't it a problem that the single quote character in the word <em>Howl's</em> isn't escaped?</li>
+<li>If you don't want to put \n in your string, how can you write a string with newlines in it?</li>
+<li>What do the following expressions evaluate to?  <ul>
+<li>'Hello world!'[1]</li>
+<li>'Hello world!'[0:5]</li>
+<li>'Hello world!'[:5]</li>
+<li>'Hello world!'[3:]</li>
+</ul>
+</li>
+<li>What do the following expressions evaluate to?<ul>
+<li>'Hello'.upper()</li>
+<li>'Hello'.upper().isupper()</li>
+<li>'Hello'.upper().lower()</li>
+</ul>
+</li>
+<li>What do the following expressions evaluate to?<ul>
+<li>'Remember, remember, the fifth of November.'.split()</li>
+<li>'-'.join('There can be only one.'.split())</li>
+</ul>
+</li>
+<li>What string methods can you use to right-justify, left-justify, and center a string?</li>
+<li>How can you trim whitespace characters from the beginning or end of a string?</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Answers">
+<a class="anchor" href="#Answers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Answers<a class="anchor-link" href="#Answers"> </a>
+</h3>
+<ol>
+<li>Consists of a backslash and the character that would otherwise be parsed differently if entered alone, such as '\', '\t', '\n', and '\"' or "\'"</li>
+<li>new line, tab</li>
+<li>'\\'</li>
+<li>Enclosed by double quotes</li>
+<li>Use multiline strings via triple quotes</li>
+<li>
+<ul>
+<li>'e'</li>
+<li>'Hello'</li>
+<li>'Hello'</li>
+<li>'lo world!'</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>'HELLO'</li>
+<li>True</li>
+<li>'hello'</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>['Remember,', 'remember,', 'the', 'fifth', 'of', 'November.']</li>
+<li>'There-can-be-only-one.'</li>
+</ul>
+</li>
+<li>rjust(), ljust(), center()</li>
+<li>rstrip(), lstrip(), strip()</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Practice-Project">
+<a class="anchor" href="#Practice-Project" aria-hidden="true"><span class="octicon octicon-link"></span></a>Practice Project<a class="anchor-link" href="#Practice-Project"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tableData</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">'apples'</span><span class="p">,</span> <span class="s1">'oranges'</span><span class="p">,</span> <span class="s1">'cherries'</span><span class="p">,</span> <span class="s1">'banana'</span><span class="p">],</span>
+             <span class="p">[</span><span class="s1">'Alice'</span><span class="p">,</span> <span class="s1">'Bob'</span><span class="p">,</span> <span class="s1">'Carol'</span><span class="p">,</span> <span class="s1">'David'</span><span class="p">],</span>
+             <span class="p">[</span><span class="s1">'dogs'</span><span class="p">,</span> <span class="s1">'cats'</span><span class="p">,</span> <span class="s1">'moose'</span><span class="p">,</span> <span class="s1">'goose'</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">printTable</span><span class="p">(</span><span class="n">list_of_lists</span><span class="p">):</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_of_lists</span><span class="p">)</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list_of_lists</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">longest</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">list_of_strings</span> <span class="ow">in</span> <span class="n">list_of_lists</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">string</span> <span class="ow">in</span> <span class="n">list_of_strings</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">longest</span><span class="p">:</span>
+                <span class="n">longest</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">list_of_lists</span><span class="p">[</span><span class="n">col</span><span class="p">][</span><span class="n">row</span><span class="p">]</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">longest</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="n">printTable</span><span class="p">(</span><span class="n">tableData</span><span class="p">)</span>        
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>  apples    Alice     dogs 
+
+ oranges      Bob     cats 
+
+cherries    Carol    moose 
+
+  banana    David    goose 
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div>
+<!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js" repo="ong-ekken/blog" issue-term="title" label="blogpost-comment" theme="github-light" crossorigin="anonymous" async>
+</script><a class="u-url" href="/blog/basic/2020/12/02/Automate-Ch06-Strings.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links">
+<ul class="social-media-list">
+<li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li>
+<li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li>
+</ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
