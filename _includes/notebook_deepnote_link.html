@@ -1,5 +1,5 @@
 <div class="px-2">
-    <a href="https://deepnote.com/launch?url={{site.github_username}}/{{site.github_repo | default: site.baseurl | remove: "/" }}/{{page.branch | default: "master"}}?filepath={{page.nb_path | url_encode }}" target="_blank">
+    <a href="https://deepnote.com/launch?url=https://github.com/{{site.github_username}}/{{site.github_repo | default: site.baseurl | remove: "/" }}/tree/{{page.branch | default: "master" }}/{{page.nb_path}}" role="button" target="_blank">
         <img class="notebook-badge-image" src="{{ "assets/badges/deepnote.svg" | relative_url }}" alt="Open In Deepnote"/>
     </a>
 </div>
