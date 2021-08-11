@@ -10,14 +10,14 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Using convolutions to generalize : Understanding convolution; Building a convolutional neural network; Creating custom nn.Module subclasses; The difference between the module and functional APIs; Design choices for neural networks" />
 <meta property="og:description" content="Using convolutions to generalize : Understanding convolution; Building a convolutional neural network; Creating custom nn.Module subclasses; The difference between the module and functional APIs; Design choices for neural networks" />
-<link rel="canonical" href="https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/07/21/dlwpt-08-convolutions.html" />
-<meta property="og:url" content="https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/07/21/dlwpt-08-convolutions.html" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/08/11/dlwpt-08-convolutions.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/08/11/dlwpt-08-convolutions.html" />
 <meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
 <meta property="og:image" content="https://ong-ekken.github.io/blog/images/dlwpt-screenshots/dlwpt-08-logo.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2021-07-21T00:00:00-05:00" />
+<meta property="article:published_time" content="2021-08-11T00:00:00-05:00" />
 <script type="application/ld+json">
-{"url":"https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/07/21/dlwpt-08-convolutions.html","@type":"BlogPosting","headline":"Notes for Deep Learning with PyTorch Chapter 08","dateModified":"2021-07-21T00:00:00-05:00","datePublished":"2021-07-21T00:00:00-05:00","image":"https://ong-ekken.github.io/blog/images/dlwpt-screenshots/dlwpt-08-logo.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/07/21/dlwpt-08-convolutions.html"},"description":"Using convolutions to generalize : Understanding convolution; Building a convolutional neural network; Creating custom nn.Module subclasses; The difference between the module and functional APIs; Design choices for neural networks","@context":"https://schema.org"}</script>
+{"url":"https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/08/11/dlwpt-08-convolutions.html","@type":"BlogPosting","headline":"Notes for Deep Learning with PyTorch Chapter 08","dateModified":"2021-08-11T00:00:00-05:00","datePublished":"2021-08-11T00:00:00-05:00","image":"https://ong-ekken.github.io/blog/images/dlwpt-screenshots/dlwpt-08-logo.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/08/11/dlwpt-08-convolutions.html"},"description":"Using convolutions to generalize : Understanding convolution; Building a convolutional neural network; Creating custom nn.Module subclasses; The difference between the module and functional APIs; Design choices for neural networks","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
@@ -88,13 +88,13 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Notes for Deep Learning with PyTorch Chapter 08</h1><p class="page-description">Using convolutions to generalize : Understanding convolution; Building a convolutional neural network; Creating custom nn.Module subclasses; The difference between the module and functional APIs; Design choices for neural networks</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-07-21T00:00:00-05:00" itemprop="datePublished">
-        Jul 21, 2021
+    <h1 class="post-title p-name" itemprop="name headline">Notes for Deep Learning with PyTorch Chapter 08</h1><p class="page-description">Using convolutions to generalize : Understanding convolution; Building a convolutional neural network; Creating custom nn.Module subclasses; The difference between the module and functional APIs; Design choices for neural networks</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-08-11T00:00:00-05:00" itemprop="datePublished">
+        Aug 11, 2021
       </time>
        • <span class="read-time" title="Estimated read time">
     
     
-      32 min read
+      39 min read
     
 </span></p>
 
@@ -115,24 +115,24 @@ window.onload = wrap_img;
         <div class="pb-5 d-flex flex-wrap flex-justify-end">
           <div class="px-2">
 
-    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2021-07-21-dlwpt-08-convolutions.ipynb" role="button" target="_blank">
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/2021-08-11-dlwpt-08-convolutions.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2021-07-21-dlwpt-08-convolutions.ipynb" target="_blank">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2F2021-08-11-dlwpt-08-convolutions.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
           <div class="px-2">
-    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2021-07-21-dlwpt-08-convolutions.ipynb" target="_blank">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/2021-08-11-dlwpt-08-convolutions.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
           <div class="px-2">
-    <a href="https://deepnote.com/launch?url=https://github.com/ong-ekken/blog/tree/master/_notebooks/2021-07-21-dlwpt-08-convolutions.ipynb" role="button" target="_blank">
+    <a href="https://deepnote.com/launch?url=https://github.com/ong-ekken/blog/tree/master/_notebooks/2021-08-11-dlwpt-08-convolutions.ipynb" role="button" target="_blank">
         <img class="notebook-badge-image" src="/blog/assets/badges/deepnote.svg" alt="Open In Deepnote"/>
     </a>
 </div>
@@ -145,7 +145,7 @@ window.onload = wrap_img;
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
-# file to edit: _notebooks/2021-07-21-dlwpt-08-convolutions.ipynb
+# file to edit: _notebooks/2021-08-11-dlwpt-08-convolutions.ipynb
 -->
 
 <div class="container" id="notebook-container">
@@ -165,23 +165,23 @@ window.onload = wrap_img;
 </ul>
 </li>
 <li><a href="#8.3.">8.3. subclassing nn.Module</a><ul>
-<li><a href="#8.3.1.">8.2.1. out network as an nn.Module</a></li>
-<li><a href="#8.3.2.">8.2.2. how PyTorch keeps track of parameters and submodules</a></li>
-<li><a href="#8.3.3.">8.2.3. the functional API</a></li>
+<li><a href="#8.3.1.">8.3.1. out network as an nn.Module</a></li>
+<li><a href="#8.3.2.">8.3.2. how PyTorch keeps track of parameters and submodules</a></li>
+<li><a href="#8.3.3.">8.3.3. the functional API</a></li>
 </ul>
 </li>
 <li><a href="#8.4.">8.4. training our convnet</a><ul>
-<li><a href="#8.4.1.">8.2.1. measuring accuracy</a></li>
-<li><a href="#8.4.2.">8.2.2. saving and loading our model</a></li>
-<li><a href="#8.4.3.">8.2.3. training on the gpu</a></li>
+<li><a href="#8.4.1.">8.4.1. measuring accuracy</a></li>
+<li><a href="#8.4.2.">8.4.2. saving and loading our model</a></li>
+<li><a href="#8.4.3.">8.4.3. training on the gpu</a></li>
 </ul>
 </li>
 <li><a href="#8.5.">8.5. model design</a><ul>
-<li><a href="#8.5.1.">8.2.1. adding memory capacity</a></li>
-<li><a href="#8.5.2.">8.2.2. helping our model to converge and generalize: regularization</a></li>
-<li><a href="#8.5.3.">8.2.3. going deeper to learn more complex structure: depth</a></li>
-<li><a href="#8.5.4.">8.2.4. comparing the designs from this section</a></li>
-<li><a href="#8.5.5.">8.2.5. it's already outdated</a></li>
+<li><a href="#8.5.1.">8.5.1. adding memory capacity</a></li>
+<li><a href="#8.5.2.">8.5.2. helping our model to converge and generalize: regularization</a></li>
+<li><a href="#8.5.3.">8.5.3. going deeper to learn more complex structure: depth</a></li>
+<li><a href="#8.5.4.">8.5.4. comparing the designs from this section</a></li>
+<li><a href="#8.5.5.">8.5.5. it's already outdated</a></li>
 </ul>
 </li>
 <li><a href="#8.6.">8.6. conclusion</a></li>
@@ -431,13 +431,6 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a id="Something"></a></p>
-<h2 id="8.1.-Something">8.1. Something<a class="anchor-link" href="#8.1.-Something"> </a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>to recognize patterns corresponding to objects, we likely need to look at how nearby pixels are arranged</li>
 <li>i.e. less interested in how pixels that are far from each other appear in combination<ul>
@@ -454,7 +447,7 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a id="8.1.X."></a></p>
+<p><a id="8.1.1."></a></p>
 <h3 id="8.1.1.-what-convolutions-do">8.1.1. what convolutions do<a class="anchor-link" href="#8.1.1.-what-convolutions-do"> </a></h3>
 </div>
 </div>
@@ -2423,7 +2416,7 @@ Accuracy val: 0.88
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a id="8.5."></a></p>
+<p><a id="#8.5."></a></p>
 <h2 id="8.5.-model-design">8.5. model design<a class="anchor-link" href="#8.5.-model-design"> </a></h2>
 </div>
 </div>
@@ -3123,6 +3116,542 @@ Accuracy val: 0.89
 </div>
     
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id="8.5.3."></a></p>
+<h3 id="8.5.3.-going-deeper-to-learn-more-complex-structure:-depth">8.5.3. going deeper to learn more complex structure: depth<a class="anchor-link" href="#8.5.3.-going-deeper-to-learn-more-complex-structure:-depth"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>increasing depth is equivalent to increasing length of sequence of operations<ul>
+<li>imagine a Photoshop artist fixing an image<ul>
+<li>more steps they have, the more they can do</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>but! while deeper may be more powerful, it's not always better<ul>
+<li>same metaphor: ask a Photoshop beginner to do the same task<ul>
+<li>the most steps they make, the more messed up the image becomes</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>this problem prevented models to reach 20 or more layers (until 2015)<ul>
+<li>more layers -&gt; harder to converge<ul>
+<li>long chains of multiplications tends to make contribution of the parameter to the gradient vanish<ul>
+<li>known as the <strong>vanishing gradient</strong> problem</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>skip connections (Dec 2015) helped alleviate the problem somewhat</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="skip-connections">skip connections<a class="anchor-link" href="#skip-connections"> </a></h4><ul>
+<li><a href="https://arxiv.org/abs/1512.03385">Kaiming He et al (2015) Residual Networks</a>(aka ResNets)</li>
+<li>allowed networks ranging from tens to a hundred layers in depth</li>
+<li>the trick: using a skip connection to short-circuit blocks of layers<ul>
+<li>add input to the output of a block of layers</li>
+<li>also known as identity mapping<ul>
+<li>called "identity" because one copy of the output is unchanged (thus identity)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/blog/images/copied_from_nb/../images/dlwpt-screenshots/dlwpt-08-11.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="NetDepth:-a-&quot;vanilla&quot;-network-with-an-additionall-layer">NetDepth: a "vanilla" network with an additionall layer<a class="anchor-link" href="#NetDepth:-a-&quot;vanilla&quot;-network-with-an-additionall-layer"> </a></h5><ul>
+<li>"vanilla" meaning no regularization etc applied</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">NetDepth</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chans1</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_chans1</span> <span class="o">=</span> <span class="n">n_chans1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_chans1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">n_chans1</span><span class="p">,</span> <span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                               <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                               <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="c1"># note that as compared to the Net subclass we defined before,</span>
+        <span class="c1"># this one added conv3 as an additional convolutional layer</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+               
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">out</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv3</span><span class="p">(</span><span class="n">out</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">NetDepth</span><span class="p">(</span><span class="n">n_chans1</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+
+<span class="n">training_loop</span><span class="p">(</span>
+    <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">,</span>
+    <span class="n">loss_fn</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">,</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">train_loader</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">all_acc_dict</span><span class="p">[</span><span class="s2">&quot;depth&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="NetRes:-same-as-NetDepth-but-with-a-skip-connecction">NetRes: same as NetDepth but with a skip connecction<a class="anchor-link" href="#NetRes:-same-as-NetDepth-but-with-a-skip-connecction"> </a></h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">NetRes</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chans1</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_chans1</span> <span class="o">=</span> <span class="n">n_chans1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_chans1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">n_chans1</span><span class="p">,</span> <span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                               <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                               <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">out</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        
+        <span class="c1"># the trick below basically just allows one copy of &quot;out&quot; </span>
+        <span class="c1"># to bypass conv3. the reason why we use &quot;out1&quot; is to prevent</span>
+        <span class="c1"># accidents, because &quot;out&quot; is being overwritten after all</span>
+                
+        <span class="n">out1</span> <span class="o">=</span> <span class="n">out</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv3</span><span class="p">(</span><span class="n">out</span><span class="p">))</span> <span class="o">+</span> <span class="n">out1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_chans1</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">NetRes</span><span class="p">(</span><span class="n">n_chans1</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+
+<span class="n">training_loop</span><span class="p">(</span>
+    <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">,</span>
+    <span class="n">loss_fn</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">,</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">train_loader</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">all_acc_dict</span><span class="p">[</span><span class="s2">&quot;res&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="so-how-exactly-does-skip-connections-help?">so how exactly does skip connections help?<a class="anchor-link" href="#so-how-exactly-does-skip-connections-help?"> </a></h5><ul>
+<li>it basically makes the layer's contribution to the loss gradient more direct</li>
+<li>metaphors again! imagine, you eat an apple pie:<ul>
+<li>baked by your friend (A)</li>
+<li>made by the baker</li>
+<li>apple sauce made by the </li>
+<li>apples sold by the grocer</li>
+<li>apples grown by the farmer (B)</li>
+</ul>
+</li>
+<li>who to blame if it tastes bad?</li>
+<li>a "skip connection" might be the equivalent of letting you eat the apple pie (A) with a bite of the apple (B) mixed together in a mouthful. If it tastes bad, there's a good chance anything in between A to B is at fault, but if you don't even taste the sweetness of the apple in your mouth, you know there's a more probable chance (B) grew bad apples, and you know to whom to write a complaint letter (feedback via backward propagation).</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="what's-the-difference-between-ResNet,-U-Net-and-Highway-Networks?">what's the difference between ResNet, U-Net and Highway Networks?<a class="anchor-link" href="#what's-the-difference-between-ResNet,-U-Net-and-Highway-Networks?"> </a></h5><ul>
+<li>Highway Networks <ul>
+<li>same: both used shortcut connections (in fact, Highway networks came first, inspired by LSTM); ResNet can be thought of as a special case of Highway Network with gates fully open</li>
+<li>difference: Highway networks are <strong>gated</strong>, meaning parameterized gates control how much information is allowed to flow</li>
+<li>comparison: Highway Network performs no better than ResNet (strange since Highway Networks solution space comprises ResNet, so it should at least be as good)</li>
+<li>see <a href="https://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035">this blog on "towards data science"</a> for more details</li>
+</ul>
+</li>
+<li>U-Net<ul>
+<li>specific for segmentation?</li>
+<li>see <a href="https://aditi-mittal.medium.com/introduction-to-u-net-and-res-net-for-image-segmentation-9afcb432ee2f">this blog</a> for more details</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="building-very-deep-models-in-pytorch">building very deep models in pytorch<a class="anchor-link" href="#building-very-deep-models-in-pytorch"> </a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/blog/images/copied_from_nb/../images/dlwpt-screenshots/dlwpt-08-12.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>we first create the subclass for <strong>a block</strong></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ResBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chans</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">n_chans</span><span class="p">,</span> <span class="n">n_chans</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                              <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+        <span class="c1"># &lt;1&gt; BatchNorm layer would cancel the effect of bias</span>
+        <span class="c1"># so the bias is customarily left out</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="n">n_chans</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
+                                      <span class="n">nonlinearity</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span>  
+        <span class="c1"># &lt;2&gt; uses custom initializations : .kaiming_normal_initializes</span>
+        <span class="c1"># with normal random elements with standard deviation is computed</span>
+        <span class="c1"># in the ResNet paper. the batch norm is initialized to produce </span>
+        <span class="c1"># output distributions that initially have 0 mean and 0.5 variance</span>
+                
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">zeros_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>then the whole NetResDeep comprising the blocks.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">NetResDeep</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chans1</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">n_blocks</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_chans1</span> <span class="o">=</span> <span class="n">n_chans1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_chans1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resblocks</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="o">*</span><span class="p">(</span><span class="n">n_blocks</span> <span class="o">*</span> <span class="p">[</span><span class="n">ResBlock</span><span class="p">(</span><span class="n">n_chans</span><span class="o">=</span><span class="n">n_chans1</span><span class="p">)]))</span>
+        <span class="c1"># notice the use of ResBlock here? ^</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">n_chans1</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resblocks</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_chans1</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">NetResDeep</span><span class="p">(</span><span class="n">n_chans1</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">n_blocks</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">3e-3</span><span class="p">)</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+
+<span class="n">training_loop</span><span class="p">(</span>
+    <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">,</span>
+    <span class="n">loss_fn</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">,</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">train_loader</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">all_acc_dict</span><span class="p">[</span><span class="s2">&quot;res deep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>note that:</p>
+<ul>
+<li>NetResDeep is using lr=3e-3 instead of 1e-2<ul>
+<li>this is because the network is slower to converge and more fragile</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="initialization">initialization<a class="anchor-link" href="#initialization"> </a></h4><ul>
+<li>for historical reasons, PyTorch default weight initializations are not ideal...</li>
+<li>we'll look at this later... (such as Chapter 11, though not much explanation)</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id="8.5.4."></a></p>
+<h3 id="8.5.4.-comparing-the-designs-from-this-section">8.5.4. comparing the designs from this section<a class="anchor-link" href="#8.5.4.-comparing-the-designs-from-this-section"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/blog/images/copied_from_nb/../images/dlwpt-screenshots/dlwpt-08-13.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trn_acc</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;train&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">all_acc_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">val_acc</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;val&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">all_acc_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+<span class="n">width</span> <span class="o">=</span><span class="mf">0.3</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">trn_acc</span><span class="p">)),</span> <span class="n">trn_acc</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">val_acc</span><span class="p">))</span><span class="o">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">val_acc</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;val&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">val_acc</span><span class="p">))</span><span class="o">+</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">all_acc_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+           <span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;accuracy&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;accuracy_comparison.png&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>hard to compare these numbers as they are... don't overinterpret</li>
+<li>qualitatively speaking... <ul>
+<li>weight decay and dropout regularizations, which have a more rigorous statistical estimation interpretation as regularization than batch norm, have a much narrower gap between the two accuracies</li>
+<li>batch_norm is more a convergence helpeer.... training almost up to 100%</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id="8.5.5."></a></p>
+<h3 id="8.5.5.-it's-already-outdated">8.5.5. it's already outdated<a class="anchor-link" href="#8.5.5.-it's-already-outdated"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>curse? blessing?</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id="8.6."></a></p>
+<h2 id="8.6.-Conclusion">8.6. Conclusion<a class="anchor-link" href="#8.6.-Conclusion"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>to be frank:</p>
+<ul>
+<li>limited in function: can only classify as bird or plane, but not able to segment images </li>
+<li>but is a learning process </li>
+<li>next: <ul>
+<li>spending multiple chapters breaking down a bigger, real-world problem. Part 2 uses automatic detection of lung cancer as an ongoing example; we will go from being familiar with the PyTorch API to being able to implement entire projects using PyTorch. We’ll start in the next chapter by explaining the problem from a high level, and then we’ll get into the details of the data we’ll be using.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a id="8.7."></a></p>
+<h2 id="8.7.-Exercises">8.7. Exercises<a class="anchor-link" href="#8.7.-Exercises"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ol>
+<li>Change our model to use a 5 × 5 kernel with kernel_size=5 passed to the nn.Conv2d constructor.<ol>
+<li>What impact does this change have on the number of parameters in the model?</li>
+<li>b Does the change improve or degrade overfitting?</li>
+<li>Read <a href="https://pytorch.org/docs/stable/nn.html#conv2d">https://pytorch.org/docs/stable/nn.html#conv2d</a>.</li>
+<li>Can you describe what kernel_size=(1,3) will do?</li>
+<li>How does the model behave with such a kernel?</li>
+</ol>
+</li>
+<li>Can you find an image that contains neither a bird nor an airplane, but that the model claims has one or the other with more than 95% confidence?<ol>
+<li>Can you manually edit a neutral image to make it more airplane-like?</li>
+<li>Can you manually edit an airplane image to trick the model into reporting a bird?</li>
+<li>Do these tasks get easier with a network with less capacity? More capacity?</li>
+</ol>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
 </div>
 
 
@@ -3135,7 +3664,7 @@ Accuracy val: 0.89
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/blog/image%20recognition/cifar-10/2021/07/21/dlwpt-08-convolutions.html" hidden></a>
+</script><a class="u-url" href="/blog/image%20recognition/cifar-10/2021/08/11/dlwpt-08-convolutions.html" hidden></a>
 </article>
 
       </div>
