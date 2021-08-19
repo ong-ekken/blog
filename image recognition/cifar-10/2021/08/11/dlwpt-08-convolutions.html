@@ -94,7 +94,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      39 min read
+      43 min read
     
 </span></p>
 
@@ -243,7 +243,7 @@ window.onload = wrap_img;
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;torch._C.Generator at 0x7f684a1d7ed0&gt;</pre>
+<pre>&lt;torch._C.Generator at 0x7f782cbf0230&gt;</pre>
 </div>
 
 </div>
@@ -564,7 +564,7 @@ window.onload = wrap_img;
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../data-unversioned/p1ch6/&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../../dlwpt-code/data-unversioned/p1ch6/&#39;</span>
 <span class="n">cifar10</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
     <span class="n">data_path</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
@@ -584,8 +584,8 @@ window.onload = wrap_img;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ../data-unversioned/p1ch6/cifar-10-python.tar.gz
-Extracting ../data-unversioned/p1ch6/cifar-10-python.tar.gz to ../data-unversioned/p1ch6/
+<pre>Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ../../dlwpt-code/data-unversioned/p1ch6/cifar-10-python.tar.gz
+Extracting ../../dlwpt-code/data-unversioned/p1ch6/cifar-10-python.tar.gz to ../../dlwpt-code/data-unversioned/p1ch6/
 </pre>
 </div>
 </div>
@@ -651,20 +651,6 @@ Extracting ../data-unversioned/p1ch6/cifar-10-python.tar.gz to ../data-unversion
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -1286,7 +1272,7 @@ Extracting ../data-unversioned/p1ch6/cifar-10-python.tar.gz to ../data-unversion
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">3</span> <span class="o">*</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">3</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">3</span> <span class="o">*</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">5</span>
 <span class="c1"># in channel is the amount of kernels we have in the first model</span>
 </pre></div>
 
@@ -1302,7 +1288,7 @@ Extracting ../data-unversioned/p1ch6/cifar-10-python.tar.gz to ../data-unversion
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>432</pre>
+<pre>1200</pre>
 </div>
 
 </div>
@@ -2416,7 +2402,7 @@ Accuracy val: 0.88
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a id="#8.5."></a></p>
+<p><a id="8.5."></a></p>
 <h2 id="8.5.-model-design">8.5. model design<a class="anchor-link" href="#8.5.-model-design"> </a></h2>
 </div>
 </div>
@@ -3412,8 +3398,8 @@ Accuracy val: 0.89
         <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="n">n_chans</span><span class="p">)</span>
         <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
                                       <span class="n">nonlinearity</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span>  
-        <span class="c1"># &lt;2&gt; uses custom initializations : .kaiming_normal_initializes</span>
-        <span class="c1"># with normal random elements with standard deviation is computed</span>
+        <span class="c1"># &lt;2&gt; uses custom initializations : .kaiming_normal_ initializes</span>
+        <span class="c1"># with normal random elements with standard deviation as computed</span>
         <span class="c1"># in the ResNet paper. the batch norm is initialized to produce </span>
         <span class="c1"># output distributions that initially have 0 mean and 0.5 variance</span>
                 
@@ -3499,6 +3485,29 @@ Accuracy val: 0.89
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-5-96e306ff0715&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>model <span class="ansi-blue-fg">=</span> NetResDeep<span class="ansi-blue-fg">(</span>n_chans1<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">32</span><span class="ansi-blue-fg">,</span> n_blocks<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">100</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>device<span class="ansi-blue-fg">=</span>device<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> optimizer <span class="ansi-blue-fg">=</span> optim<span class="ansi-blue-fg">.</span>SGD<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">.</span>parameters<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> lr<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">3e-3</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> loss_fn <span class="ansi-blue-fg">=</span> nn<span class="ansi-blue-fg">.</span>CrossEntropyLoss<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span> training_loop(
+
+<span class="ansi-red-fg">NameError</span>: name &#39;device&#39; is not defined</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -3632,19 +3641,44 @@ Accuracy val: 0.89
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>In the context of CIFA 32x32</p>
 <ol>
 <li>Change our model to use a 5 × 5 kernel with kernel_size=5 passed to the nn.Conv2d constructor.<ol>
-<li>What impact does this change have on the number of parameters in the model?</li>
-<li>b Does the change improve or degrade overfitting?</li>
+<li>What impact does this change have on the number of parameters in the model?<ul>
+<li>bigger!</li>
+</ul>
+</li>
+<li>b Does the change improve or degrade overfitting?<ul>
+<li>overfitting becomes a worse problem by memorize</li>
+<li>rule of thumb: try to scale your model to your data</li>
+</ul>
+</li>
 <li>Read <a href="https://pytorch.org/docs/stable/nn.html#conv2d">https://pytorch.org/docs/stable/nn.html#conv2d</a>.</li>
-<li>Can you describe what kernel_size=(1,3) will do?</li>
-<li>How does the model behave with such a kernel?</li>
+<li>Can you describe what kernel_size=(1,3) will do?<ul>
+<li>for now, kernels become like horizontal row</li>
+<li>shrinks the total number of parameters in the model</li>
+</ul>
+</li>
+<li>How does the model behave with such a kernel?<ul>
+<li>some of the edge detection capabilities are compromised</li>
+<li>model doesn't function so well</li>
+</ul>
+</li>
 </ol>
 </li>
 <li>Can you find an image that contains neither a bird nor an airplane, but that the model claims has one or the other with more than 95% confidence?<ol>
-<li>Can you manually edit a neutral image to make it more airplane-like?</li>
+<li>Can you manually edit a neutral image to make it more airplane-like?<ul>
+<li>would a "plus" sign image work better</li>
+<li>paper airplane?</li>
+<li>kite</li>
+<li>cartoon planes : thomas the train</li>
+</ul>
+</li>
 <li>Can you manually edit an airplane image to trick the model into reporting a bird?</li>
-<li>Do these tasks get easier with a network with less capacity? More capacity?</li>
+<li>Do these tasks get easier with a network with less capacity? More capacity?<ul>
+<li>see answer for 1.B. : scale your model to your data.</li>
+</ul>
+</li>
 </ol>
 </li>
 </ol>
@@ -3652,6 +3686,323 @@ Accuracy val: 0.89
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">edgeitems</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;torch._C.Generator at 0x7f782cbf0230&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter nbextension <span class="nb">enable</span> --py widgetsnbextension
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">transforms</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">&#39;../../dlwpt-code/data-unversioned/p1ch6/&#39;</span>
+<span class="n">cifar10</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
+    <span class="n">data_path</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.4915</span><span class="p">,</span> <span class="mf">0.4823</span><span class="p">,</span> <span class="mf">0.4468</span><span class="p">),</span>
+                             <span class="p">(</span><span class="mf">0.2470</span><span class="p">,</span> <span class="mf">0.2435</span><span class="p">,</span> <span class="mf">0.2616</span><span class="p">))</span>
+    <span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ../../dlwpt-code/data-unversioned/p1ch6/cifar-10-python.tar.gz
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-12-f3c5afc9c868&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">from</span> torchvision <span class="ansi-green-fg">import</span> datasets<span class="ansi-blue-fg">,</span> transforms
+<span class="ansi-green-intense-fg ansi-bold">      2</span> data_path <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;../../dlwpt-code/data-unversioned/p1ch6/&#39;</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> cifar10 = datasets.CIFAR10(
+</span><span class="ansi-green-intense-fg ansi-bold">      4</span>     data_path<span class="ansi-blue-fg">,</span> train<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span> download<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span>     transform=transforms.Compose([
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torchvision/datasets/cifar.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, root, train, transform, target_transform, download)</span>
+<span class="ansi-green-intense-fg ansi-bold">     63</span> 
+<span class="ansi-green-intense-fg ansi-bold">     64</span>         <span class="ansi-green-fg">if</span> download<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 65</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>download<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     66</span> 
+<span class="ansi-green-intense-fg ansi-bold">     67</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> self<span class="ansi-blue-fg">.</span>_check_integrity<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torchvision/datasets/cifar.py</span> in <span class="ansi-cyan-fg">download</span><span class="ansi-blue-fg">(self)</span>
+<span class="ansi-green-intense-fg ansi-bold">    141</span>             print<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;Files already downloaded and verified&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    142</span>             <span class="ansi-green-fg">return</span>
+<span class="ansi-green-fg">--&gt; 143</span><span class="ansi-red-fg">         </span>download_and_extract_archive<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>url<span class="ansi-blue-fg">,</span> self<span class="ansi-blue-fg">.</span>root<span class="ansi-blue-fg">,</span> filename<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>filename<span class="ansi-blue-fg">,</span> md5<span class="ansi-blue-fg">=</span>self<span class="ansi-blue-fg">.</span>tgz_md5<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    144</span> 
+<span class="ansi-green-intense-fg ansi-bold">    145</span>     <span class="ansi-green-fg">def</span> extra_repr<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> str<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torchvision/datasets/utils.py</span> in <span class="ansi-cyan-fg">download_and_extract_archive</span><span class="ansi-blue-fg">(url, download_root, extract_root, filename, md5, remove_finished)</span>
+<span class="ansi-green-intense-fg ansi-bold">    255</span>         filename <span class="ansi-blue-fg">=</span> os<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">.</span>basename<span class="ansi-blue-fg">(</span>url<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    256</span> 
+<span class="ansi-green-fg">--&gt; 257</span><span class="ansi-red-fg">     </span>download_url<span class="ansi-blue-fg">(</span>url<span class="ansi-blue-fg">,</span> download_root<span class="ansi-blue-fg">,</span> filename<span class="ansi-blue-fg">,</span> md5<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    258</span> 
+<span class="ansi-green-intense-fg ansi-bold">    259</span>     archive <span class="ansi-blue-fg">=</span> os<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">.</span>join<span class="ansi-blue-fg">(</span>download_root<span class="ansi-blue-fg">,</span> filename<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torchvision/datasets/utils.py</span> in <span class="ansi-cyan-fg">download_url</span><span class="ansi-blue-fg">(url, root, filename, md5)</span>
+<span class="ansi-green-intense-fg ansi-bold">     69</span>             urllib.request.urlretrieve(
+<span class="ansi-green-intense-fg ansi-bold">     70</span>                 url<span class="ansi-blue-fg">,</span> fpath<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">---&gt; 71</span><span class="ansi-red-fg">                 </span>reporthook<span class="ansi-blue-fg">=</span>gen_bar_updater<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     72</span>             )
+<span class="ansi-green-intense-fg ansi-bold">     73</span>         <span class="ansi-green-fg">except</span> <span class="ansi-blue-fg">(</span>urllib<span class="ansi-blue-fg">.</span>error<span class="ansi-blue-fg">.</span>URLError<span class="ansi-blue-fg">,</span> IOError<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>  <span class="ansi-red-fg"># type: ignore[attr-defined]</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/torchvision/datasets/utils.py</span> in <span class="ansi-cyan-fg">gen_bar_updater</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span> 
+<span class="ansi-green-intense-fg ansi-bold">     13</span> <span class="ansi-green-fg">def</span> gen_bar_updater<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">-&gt;</span> Callable<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">[</span>int<span class="ansi-blue-fg">,</span> int<span class="ansi-blue-fg">,</span> int<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 14</span><span class="ansi-red-fg">     </span>pbar <span class="ansi-blue-fg">=</span> tqdm<span class="ansi-blue-fg">(</span>total<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span> 
+<span class="ansi-green-intense-fg ansi-bold">     16</span>     <span class="ansi-green-fg">def</span> bar_update<span class="ansi-blue-fg">(</span>count<span class="ansi-blue-fg">,</span> block_size<span class="ansi-blue-fg">,</span> total_size<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/tqdm/notebook.py</span> in <span class="ansi-cyan-fg">__init__</span><span class="ansi-blue-fg">(self, *args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    229</span>         unit_scale <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">1</span> <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>unit_scale <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">True</span> <span class="ansi-green-fg">else</span> self<span class="ansi-blue-fg">.</span>unit_scale <span class="ansi-green-fg">or</span> <span class="ansi-cyan-fg">1</span>
+<span class="ansi-green-intense-fg ansi-bold">    230</span>         total <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>total <span class="ansi-blue-fg">*</span> unit_scale <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>total <span class="ansi-green-fg">else</span> self<span class="ansi-blue-fg">.</span>total
+<span class="ansi-green-fg">--&gt; 231</span><span class="ansi-red-fg">         self.container = self.status_printer(
+</span><span class="ansi-green-intense-fg ansi-bold">    232</span>             self.fp, total, self.desc, self.ncols)
+<span class="ansi-green-intense-fg ansi-bold">    233</span>         <span class="ansi-green-fg">if</span> display_here<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/opt/conda/lib/python3.8/site-packages/tqdm/notebook.py</span> in <span class="ansi-cyan-fg">status_printer</span><span class="ansi-blue-fg">(_, total, desc, ncols)</span>
+<span class="ansi-green-intense-fg ansi-bold">     94</span>         <span class="ansi-red-fg"># Prepare IPython progress bar</span>
+<span class="ansi-green-intense-fg ansi-bold">     95</span>         <span class="ansi-green-fg">if</span> IProgress <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>  <span class="ansi-red-fg"># #187 #451 #558 #872</span>
+<span class="ansi-green-fg">---&gt; 96</span><span class="ansi-red-fg">             raise ImportError(
+</span><span class="ansi-green-intense-fg ansi-bold">     97</span>                 <span class="ansi-blue-fg">&#34;IProgress not found. Please update jupyter and ipywidgets.&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">     98</span>                 <span class="ansi-blue-fg">&#34; See https://ipywidgets.readthedocs.io/en/stable&#34;</span>
+
+<span class="ansi-red-fg">ImportError</span>: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cifar10_val</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span>
+    <span class="n">data_path</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">([</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">(),</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">Normalize</span><span class="p">((</span><span class="mf">0.4915</span><span class="p">,</span> <span class="mf">0.4823</span><span class="p">,</span> <span class="mf">0.4468</span><span class="p">),</span>
+                             <span class="p">(</span><span class="mf">0.2470</span><span class="p">,</span> <span class="mf">0.2435</span><span class="p">,</span> <span class="mf">0.2616</span><span class="p">))</span>
+    <span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">label_map</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">class_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;airplane&#39;</span><span class="p">,</span> <span class="s1">&#39;bird&#39;</span><span class="p">]</span>
+<span class="n">cifar2</span> <span class="o">=</span> <span class="p">[(</span><span class="n">img</span><span class="p">,</span> <span class="n">label_map</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+          <span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">cifar10</span>
+          <span class="k">if</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">cifar2_val</span> <span class="o">=</span> <span class="p">[(</span><span class="n">img</span><span class="p">,</span> <span class="n">label_map</span><span class="p">[</span><span class="n">label</span><span class="p">])</span>
+              <span class="k">for</span> <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">cifar10_val</span>
+              <span class="k">if</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">ResBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chans</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ResBlock</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="n">n_chans</span><span class="p">,</span> <span class="n">n_chans</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                              <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+        <span class="c1"># &lt;1&gt; BatchNorm layer would cancel the effect of bias</span>
+        <span class="c1"># so the bias is customarily left out</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm2d</span><span class="p">(</span><span class="n">num_features</span><span class="o">=</span><span class="n">n_chans</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span>
+                                      <span class="n">nonlinearity</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)</span>  
+        <span class="c1"># &lt;2&gt; uses custom initializations : .kaiming_normal_ initializes</span>
+        <span class="c1"># with normal random elements with standard deviation as computed</span>
+        <span class="c1"># in the ResNet paper. the batch norm is initialized to produce </span>
+        <span class="c1"># output distributions that initially have 0 mean and 0.5 variance</span>
+                
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">constant_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">zeros_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_norm</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span> <span class="o">+</span> <span class="n">x</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">NetResDeep</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_chans1</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">n_blocks</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_chans1</span> <span class="o">=</span> <span class="n">n_chans1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Conv2d</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_chans1</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resblocks</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="o">*</span><span class="p">(</span><span class="n">n_blocks</span> <span class="o">*</span> <span class="p">[</span><span class="n">ResBlock</span><span class="p">(</span><span class="n">n_chans</span><span class="o">=</span><span class="n">n_chans1</span><span class="p">)]))</span>
+        <span class="c1"># notice the use of ResBlock here? ^</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">n_chans1</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resblocks</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">max_pool2d</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_chans1</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">NetResDeep</span><span class="p">(</span><span class="n">n_chans1</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">n_blocks</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">3e-3</span><span class="p">)</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+
+<span class="n">training_loop</span><span class="p">(</span>
+    <span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="p">,</span>
+    <span class="n">loss_fn</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">,</span>
+    <span class="n">train_loader</span> <span class="o">=</span> <span class="n">train_loader</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">all_acc_dict</span><span class="p">[</span><span class="s2">&quot;res deep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_loader</span><span class="p">,</span> <span class="n">val_loader</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 </div>
 
 

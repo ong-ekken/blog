@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Review of Deep Learning with PyTorch (Part 1 : Ch 01 - 08) | Ong Yuhchian (Ekken)’s Study Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Review of Deep Learning with PyTorch (Part 1 : Ch 01 - 08)" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Review of content covered from Chapters 1 to 8" />
+<meta property="og:description" content="Review of content covered from Chapters 1 to 8" />
+<link rel="canonical" href="https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/08/18/backup.html" />
+<meta property="og:url" content="https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/08/18/backup.html" />
+<meta property="og:site_name" content="Ong Yuhchian (Ekken)’s Study Blog" />
+<meta property="og:image" content="https://ong-ekken.github.io/blog/images/dlwpt-screenshots/dlwpt-08-logo.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-18T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/08/18/backup.html","@type":"BlogPosting","headline":"Review of Deep Learning with PyTorch (Part 1 : Ch 01 - 08)","dateModified":"2021-08-18T00:00:00-05:00","datePublished":"2021-08-18T00:00:00-05:00","image":"https://ong-ekken.github.io/blog/images/dlwpt-screenshots/dlwpt-08-logo.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://ong-ekken.github.io/blog/image%20recognition/cifar-10/2021/08/18/backup.html"},"description":"Review of content covered from Chapters 1 to 8","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://ong-ekken.github.io/blog/feed.xml" title="Ong Yuhchian (Ekken)'s Study Blog" /><link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" /><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Ong Yuhchian (Ekken)&#39;s Study Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Review of Deep Learning with PyTorch (Part 1 : Ch 01 - 08)</h1><p class="page-description">Review of content covered from Chapters 1 to 8</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-08-18T00:00:00-05:00" itemprop="datePublished">
+        Aug 18, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#image recognition">image recognition</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/blog/categories/#CIFAR-10">CIFAR-10</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/ong-ekken/blog/tree/master/_notebooks/backup.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/ong-ekken/blog/master?filepath=_notebooks%2Fbackup.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/ong-ekken/blog/blob/master/_notebooks/backup.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+    <a href="https://deepnote.com/launch?url=https://github.com/ong-ekken/blog/tree/master/_notebooks/backup.ipynb" role="button" target="_blank">
+        <img class="notebook-badge-image" src="/blog/assets/badges/deepnote.svg" alt="Open In Deepnote"/>
+    </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/backup.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>This learning assessment was created by Ong-Ekken, leveraging materials from <em>Deep Learning with PyTorch</em> (2021) from Manning. </li>
+<li>Each subsection should not take more than 20 minutes to cover (especially Q1)</li>
+<li>By the end of this review, you should be able to train (while Googling and refering to the textbook) a Deep ResNet Neural Network to perform a classification task between 4 types of images in CIFAR-10.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.-Working-with-PyTorch-tensors">1. Working with PyTorch tensors<a class="anchor-link" href="#1.-Working-with-PyTorch-tensors"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">py_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">np_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">13</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q1.1.-What-is-a-Tensor?-Why-can't-we-just-use-numpy-arrays-or-Python-lists?">Q1.1. What is a Tensor? Why can't we just use numpy arrays or Python lists?<a class="anchor-link" href="#Q1.1.-What-is-a-Tensor?-Why-can't-we-just-use-numpy-arrays-or-Python-lists?"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q1.2.-Convert-both-py_list-and-np_array-to-tensors,-and-name-them-predictions-and-labels-respectively.">Q1.2. Convert both <code>py_list</code> and <code>np_array</code> to tensors, and name them <code>predictions</code> and <code>labels</code> respectively.<a class="anchor-link" href="#Q1.2.-Convert-both-py_list-and-np_array-to-tensors,-and-name-them-predictions-and-labels-respectively."> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([1, 2, 3, 4])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([ 4,  7, 10, 13])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q1.3.-Find-the-absolute-errors-(losses)-of-predictions-against-labels.">Q1.3. Find the absolute errors (losses) of <code>predictions</code> against <code>labels</code>.<a class="anchor-link" href="#Q1.3.-Find-the-absolute-errors-(losses)-of-predictions-against-labels."> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q1.4.-Sum-up-all-values-in-the-tensor">Q1.4. Sum up all values in the tensor<a class="anchor-link" href="#Q1.4.-Sum-up-all-values-in-the-tensor"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q1.5.-In-a-single-function,-how-can-we-create:">Q1.5. In a single function, how can we create:<a class="anchor-link" href="#Q1.5.-In-a-single-function,-how-can-we-create:"> </a></h3><ul>
+<li>a 5x5 tensor of zeroes</li>
+<li>a 4x4 tensor of ones</li>
+<li>a 3x3 tensor of random values between -1 and 1</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([[0.9447, 0.4112, 0.5508, 0.3091, 0.6765],
+        [0.9771, 0.4540, 0.4889, 0.3915, 0.8193],
+        [0.4343, 0.2813, 0.0829, 0.2936, 0.7214],
+        [0.1688, 0.2734, 0.9265, 0.7302, 0.8511],
+        [0.0652, 0.4613, 0.8419, 0.1605, 0.9629]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([[1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.],
+        [1., 1., 1., 1.]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([[0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.],
+        [0., 0., 0., 0., 0.]])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q1.6.-Where-can-we-find-more-information-about-tensor-operations?">Q1.6. Where can we find more information about tensor operations?<a class="anchor-link" href="#Q1.6.-Where-can-we-find-more-information-about-tensor-operations?"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Converting-Real-World-Data-into-Tensors-(Image-only)">2. Converting Real World Data into Tensors (Image only)<a class="anchor-link" href="#2.-Converting-Real-World-Data-into-Tensors-(Image-only)"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q2.1.-Download-the-CIFAR-10-Dataset,-then-create-a-training-set-cifar10-and-a-validation-set-cifar10_val">Q2.1. Download the CIFAR-10 Dataset, then create a training set <code>cifar10</code> and a validation set <code>cifar10_val</code><a class="anchor-link" href="#Q2.1.-Download-the-CIFAR-10-Dataset,-then-create-a-training-set-cifar10-and-a-validation-set-cifar10_val"> </a></h3><p>they should be transformed to tensors</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;./data/&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data/cifar-10-python.tar.gz
+Extracting ./data/cifar-10-python.tar.gz to ./data/
+Files already downloaded and verified
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q2.2.-Stack-all-images-in-cifar10,-checking-that-the-shape-of-the-tensor-is-(3,-32,-32,-50000)">Q2.2. Stack all images in <code>cifar10</code>, checking that the shape of the tensor is (3, 32, 32, 50000)<a class="anchor-link" href="#Q2.2.-Stack-all-images-in-cifar10,-checking-that-the-shape-of-the-tensor-is-(3,-32,-32,-50000)"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q2.3.-Normalize-the-images-by-first-finding-the-mean-and-the-standard-deviation">Q2.3. Normalize the images by first finding the mean and the standard deviation<a class="anchor-link" href="#Q2.3.-Normalize-the-images-by-first-finding-the-mean-and-the-standard-deviation"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([0.4914, 0.4822, 0.4465])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>tensor([0.2470, 0.2435, 0.2616])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q2.4.-Create-a-normalized-dataset-trans_cifar10-and-trans_cifar10_val">Q2.4. Create a normalized dataset <code>trans_cifar10</code> and <code>trans_cifar10_val</code><a class="anchor-link" href="#Q2.4.-Create-a-normalized-dataset-trans_cifar10-and-trans_cifar10_val"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q2.5.-Create-CIFAR-4-(NOT-CIFAR-2),-leaving-behind-the-following-images:">Q2.5. Create CIFAR-4 (NOT CIFAR-2), leaving behind the following images:<a class="anchor-link" href="#Q2.5.-Create-CIFAR-4-(NOT-CIFAR-2),-leaving-behind-the-following-images:"> </a></h3><ul>
+<li>airplanes </li>
+<li>automobiles</li>
+<li>ships</li>
+<li>trucks</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">img_t</span> <span class="o">=</span> <span class="n">cifar4</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">img_t</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Q2.6.-Display-any-image-from-cifar4-via-pyplot">Q2.6. Display any image from cifar4 via pyplot<a class="anchor-link" href="#Q2.6.-Display-any-image-from-cifar4-via-pyplot"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_t</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPsAAAD5CAYAAADhukOtAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjMuNCwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8QVMy6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAYFElEQVR4nO3de3TV1ZUH8O8WAgGDBAzyFgKGCgOITkilFRUf1KIW7PjAlg6u2gYrTEvfFFu1nWmrdnwwrWONhQGntEBBC23FSoE10NUsSHgIaJTwlDdEiBAwSMyeP+5lGfTsk+Tm3t9NPN/PWi5uzs75/Y4/svnl/vY954iqgog+/s5L9wCIKBpMdqJAMNmJAsFkJwoEk50oEEx2okC0bkpnEbkJwAwArQD8RlUf8X1/u8452rFnX2fs0M4ddseTxxo/uDYXmqFuvd1jAIALsj2HNNp3H3zb7HNi3y77gAmz/42W1m2d7YMvG2T2sf6/6nP0neNmrLb2jLP9TM17Zp/9b+1PcCRUl6qKq10SrbOLSCsAWwHcCGAvgBIAd6vq61afbkPy9UuLS52xJybcYZ6rtnhh4wfYd6IZmvbUTDN2w9hWZizXaC98ZI7ZZ/kP7jFjiTvfjLTpNsDZXn5gvdnn4gRHMfcvL5ux6upDzvaDFW+ZfX5434MJjoTqspK9Kb/GFwDYpqo7VPU9APMAjG3C8YgohZqS7D0B7Knz9d54GxE1Qyl/QCcihSJSKiKlp44eSfXpiMjQlGTfB6B3na97xdvOoapFqpqvqvntO3dpwumIqCmakuwlAPJEJFdE2gAYD2BJcoZFRMmWcOlNVWtEZAqAvyJWepulqq/5+lQdfxfFyzY7Y7ded6PZb/GGZe5AdoHZ594f/sSMnai2S2XtcJEZqzbad71iP5X26ZPd1Yz94PuPmrFJ0+xKQ5S+ePNNST3eylc2mbHlLyRQkaFzNKnOrqovAXgpSWMhohTiJ+iIAsFkJwoEk50oEEx2okAw2YkCkfBEmERk9fyEDvvas85YTXmx2W/N89Od7Xc9YJdjtp2wJ4sc8EzGKJpdaMZyM9zte7YeNvt8ZoBdyqNzbdpx0oxd1j8rwpG0bKmYCENELQiTnSgQTHaiQDDZiQLBZCcKRJM+G99Y758+jcqd290Dqazy9HSvibH6hT+ZPW798mQzNn2GPYEjkSWaBiX4xH2rJ1bmXsINAFBhVAUA4CtjpjrbX5v/lNlnUAfPQCLUrbtdQQHcy23F+K4kncU7O1EgmOxEgWCyEwWCyU4UCCY7USCY7ESBiLT09l51NfaUuTeMuTyvj9nvn0aNc7avXfErs0/7Ro3sA/ZeMUCxMX9m40r3unoAsG7FUvuAz6+0YyNus2OZH1nE9wMrZzibR97s3hYKAN5eZa93F6WCTz5gB3M8WxJUsPTWELyzEwWCyU4UCCY7USCY7ESBYLITBYLJThSIJpXeRGQXgBMA3gdQo6r5vu9v06Y1evfOccYqsq4w+5XnDXW2P7DWPtfqDfY6c+sW29sMYek8O2ZertOePocSi3XvaMdeaHyp7Ojqkkb3idqPf3WPGfvyZ9wlRQCozfPMVSy3fw5Ck4w6+yhVrUjCcYgohfhrPFEgmprsCuAVEVknIvYazESUdk39Nf4qVd0nIhcBWCYib6jqqrrfEP9HoBAAMtpnN/F0RJSoJt3ZVXVf/M/DAF4E8JEN01W1SFXzVTW/VVvfskNElEoJJ7uInC8iHc6+BjAawJZkDYyIkivh7Z9EpB9id3Mg9nbgd6r6U1+fTj2G6PWFi52xRSvesTuutsouL3vO5ild4e0EYy3ZIDNy8xfGm7EHf/4jM1aQyOqcHjvO2Ns/DWljb/90KrnDaPGs7Z8Sfs+uqjsAXJbwiIgoUiy9EQWCyU4UCCY7USCY7ESBYLITBSLSBSc7dGyLUWP6OWOLHi3y9JyTwNl8s81auMzpdizXKFGV2X3+8jt7RllFlb0H38hRo8zYL6ba++lZ+mXYH7o6uf1xM3b7hCfM2KJiz+KcgeGdnSgQTHaiQDDZiQLBZCcKBJOdKBAJT4RJxHlZF2rG0M86Y+8Vz41sHD4X5N1uxo6Xbzci7i2tYuxJJrj/QTP0z59zVy0AYN0yz+kWPeZu3/V9TyefC83Iq4ft1cgGd3G3J3p3uUecczsAAI/9erIZK84e6WwfN97z99LCWRNheGcnCgSTnSgQTHaiQDDZiQLBZCcKBJOdKBCRToTRk0ejK7F1s8taT/3GLtVU7bQnY/ysaIez/dTmP3sGYi/U1r6DXV6rqPQccu1RO3bQs5ZfQuw1+YYa5bVU8E2FqrnvaTP221PuUup//NxdkgOAH/5gdUOH1aLwzk4UCCY7USCY7ESBYLITBYLJThQIJjtRIOotvYnILAC3ADisqoPjbZ0BzAfQF8AuAHeq6rGmDeVbdqjbbe72DnaXL94/3IwtXbnBjP31cd+Ush5Gu71OG1BtRk7V2L2OVHoOuceafQeg2j5fS3aNJ5br7bnJ2frANLs0O+q6lWbs05/8mfdszVlD7uyzAXx49cBpAJarah6A5fGviagZqzfZ4/utf/hTHGPxwecc5gAYl9xhEVGyJfqevauqHoi/Pgiga5LGQ0Qp0uSPy6qqioi53I2IFAIobOp5iKhpEr2zHxKR7gAQ//Ow9Y2qWqSq+aqan+C5iCgJEk32JQAmxl9PBLA4OcMholRpSOnt9wCuBZAjInsBPATgEQALROReALsB3JnKQeLgQnd7pj1z6Y3K02Zs507PufIut2PvGpdr70m7T7bnXEfKzdCpvDy7X4Zna6vWxgk9ZT6/5vE4JscTuyTbE9yz3tl8tGqe2eVTQ8aZsTV/s0t2n7zBV5ZL+C8gaepNdlW92whdn+SxEFEK8RN0RIFgshMFgslOFAgmO1EgmOxEgYh0wUm/TE+sxN28q6PZY92eW+zDHbvIjuXYe5thg3sGlXfs2T3tWJY1iw74xAi725uf62MHX3Iviokyu4ufvShmlHyFq42VdmxitbsE2znT/jvbusAuy10y8EYz9s7+F83Yl6cae/ABWLQgmgUueWcnCgSTnSgQTHaiQDDZiQLBZCcKBJOdKBDNqPTm26PMPXPJWxYq9iwcuXO/Hau2zuVjl9faj77BjI0YY+8rd8dQ+2xVXx9ixsp7ua/js9/01PJQ7IltNSO1nl7JvouM8vykVnvqcrXGyp3nXW3/7AxobR/wrRK7TFZzxCrNAgvnTTBjTw93//xM+a5dAkwE7+xEgWCyEwWCyU4UCCY7USCY7ESBaEZP4z3rqlm62cN/+BdXm7FhuReYsSzPFdlS7J5ksqvMfpp9yZC3zdjkmxOcZHKxJzb1Kmfz9yb9w+zyrWn2dlgjxtiTbqK8U/S1CxCo9KwpeJ71YD3DN/Fqnxm5+PN2maS2zK5cHF7xWzM2+c5xzvZsz8/ihG82/kk97+xEgWCyEwWCyU4UCCY7USCY7ESBYLITBaIh2z/NAnALgMOqOjje9jCArwI4Ev+26ar6Un3Hyu7YA9dfc58z9tjCH5n9npnhLg3922R7q6aL29U3msa7foBVKmse67T5lG/ebMb+OMOz5VUzkeXZ/6nCU3qrrXBPDDoPbe1OuZ608JTs9h6xy6zZHey1DU8ddE+uucNT5nux2F1/Xb7soNmnIXf22QBucrQ/qarD4v/Vm+hElF71JruqrgJwNIKxEFEKNeU9+xQR2SQis0SkU9JGREQpkWiyPwOgP4BhAA4AeNz6RhEpFJFSESk9/Z5na2MiSqmEkl1VD6nq+6paC+A5AAWe7y1S1XxVzW/bxl6ZhYhSK6FkF5Hudb68DcCW5AyHiFKlIaW33wO4FkCOiOwF8BCAa0VkGAAFsAvApIacrP8l3bFwsV1is/ziO82/NNTcfabAM22sBahqbf+oVnsWoTtY7p6p2AOD7JNl+NLCLtmVLHnTjP37f7u3oQKAjW/e7mw/VWGvhzjQKA/+w1NRrDfZVfVuR/PM+voRUfPCT9ARBYLJThQIJjtRIJjsRIFgshMFohktOElkq+pkzxqr8S1WesyKeT7Necbz4a8qe9bbkJ1ZZqwGdult7XcXOtsLZtsV7Usz3VtNZYrZhXd2olAw2YkCwWQnCgSTnSgQTHaiQDDZiQLB0lszdVzt2BubD5uxY9XVzvbhBfYGcZ0bPKr0GT7cHv+ffmeX3naVu9t7nPHtLdjVDp2w94EbUNDTjP1oqb0YZXmZu72g2r1YJgCMHO6etZc1t9Lswzs7USCY7ESBYLITBYLJThQIJjtRICJ9Gv9G2V5cWfBtZ6wqx97q5rVl89yBmpeTMawUG+CJdfTESpI9kKTrP+JbZuyb35/gbJ88NrH1BAfk2hNhbhzp6djBaK+qtPtkexZy693Kjj18ixm6a0QPu1+NMSmnm93l4jHuBZ3bPPSq2Yd3dqJAMNmJAsFkJwoEk50oEEx2okAw2YkCIaqeGRcARKQ3gOcRmx2gAIpUdYaIdAYwH0BfxLaAulNVj9VzLM/JPNvx4HXvGJs3ewIH8JYZmfavs+1umfZ2R2V73MfM7GKX+eY//5h9Lt/6bgmY9kujjArg51Pusjsuus2OVduTTJBlrCc32lN1bm1fX8Begw4ZfezYGfcEpVg/65i+a+8u6ebnP4fS0v3OlegacmevAfBtVR0E4EoAk0VkEIBpAJarah6A5fGviaiZqjfZVfWAqq6Pvz4BoAxATwBjAcyJf9scAONSNEYiSoJGvWcXkb4ALgewBkBXVT0QDx2EdxIwEaVbgz8uKyJZABYBmKqqx0U+eFugqmq9HxeRQgCFTR0oETVNg+7sIpKBWKLPVdUX4s2HRKR7PN4dgHP5FFUtUtV8Vc1PxoCJKDH1JrvEbuEzAZSp6hN1QksATIy/nghgcfKHR0TJ0pDS21UAVgPYDKA23jwdsfftCxCrLe1GrPR21Hes7n3y9Z7pa5yxXl+wZxOVrXW3P32DZ6+bKI283QxdM8mOlc1casYOrZjdlBGl3bOL3Yu/XTowz+xzTfVxM/bTy+zSoacYhu8Z7eW/th8x9Zt0r+eI9rpwsefWlqoEjrnb08ddqs7Pn4PS0oPOxKj3Pbuq/h2AlVXX19efiJoHfoKOKBBMdqJAMNmJAsFkJwoEk50oEJEuOJmRAfTq5i6xTZlgzwDDqrkpGlGSlK03Q6sX2DOoalf+0Yz9dJK9AOeyEs/5NhQ724ePcC9QCAAjR99gxgaPsMtJTz4+04zd/S+TnO25n7JLbx0vsstrdlEuMf3vs2eUfeK+n5mxq4bYxxw52phhByBvoD0j7lNDjMU0c+3joYv199LG7MI7O1EgmOxEgWCyEwWCyU4UCCY7USCY7ESBiLT0dqryGEqWzHcHl4yPcijJVbHDDNUusWM+B7pfYcaK92y1zwf3+dYU2+NYU2wvApmoV5ctdLYP7rbd7JPs8lqi3vTFNtuxmZuNPdsAJHvR1HX/d5+z/VQVS29EwWOyEwWCyU4UCCY7USCY7ESBiPRpfE5OJxROdG/xM2fWRGd7zOnUDCgSl5uRhdvtCS3D+9lHHJl7rRkbf8+zDRhT+tz5lW+kewgfC39Y4Z5Qduy4vS4j7+xEgWCyEwWCyU4UCCY7USCY7ESBYLITBaIh2z/1BvA8YlsyK4AiVZ0hIg8D+CqAI/Fvna6qL/mO1eOiS/XeO37jjB1pbdea2uW61+jq1but2Sc7yx5HZjs7Vn3GjlmHrDho99l2YL8ZO7bTnpzSeufbZmzp0mVmbD+etgfT7BlrsQEA7PXp/DFrrbYNnj77PLHmT1UT2/4JQA2Ab6vqehHpAGCdiJz9aXtSVf8zWYMkotRpyF5vBwAciL8+ISJl8O9gR0TNUKPes4tIX8Q+EnZ2K9YpIrJJRGaJSKdkD46IkqfByS4iWQAWAZiqqscBPAOgP4BhiN35Hzf6FYpIqYiUnny3sskDJqLENCjZRSQDsUSfq6ovAICqHlLV91W1FsBzAJy7EKhqkarmq2r++e2ykzRsImqsepNdRATATABlqvpEnfbudb7tNgBbkj88IkqWhjyN/zSALwHYLCIb423TAdwtIsMQK8ftAuDe76eOdpkZGDywhzP2p2J7+6dn/2ukO5A1yuxz1xduNWMVFRVmbPkrq80YqtxjvAB2mezr999rxr472l5n7pdfmW3G9rfw0pDNvo7+mI+vxBaWhjyN/zsAV93OW1MnouaFn6AjCgSTnSgQTHaiQDDZiQLBZCcKRKQLTmZkKHp3cS8euXfnKk9PY3ZYlT1rbH7RzEaMrGl82xbdMNEoGwLoUWAvRjn4Uc/stYqSBowqApf/xI5teDC6cbR41oxP39ZhNxnt/zB78M5OFAgmO1EgmOxEgWCyEwWCyU4UCCY7USAiLb1VV1ejrHyrO5iZ6el5o9H+uqdPpSfm2zvufE+sq9E+wOzxPyvs8knpik1mbGl5pWcc9kKbyd8Xz7r2AMp3J/lczcU4T+yPKTifr8RmebnRPXhnJwoEk50oEEx2okAw2YkCwWQnCgSTnSgQkZbe2rXPwJDL3eWrkTV2v+F3zXC279ljL7yYC7uU1621VUIDavLsPed6DWzlbK/eae/nVlJiz1DLGuhcfRsAcPdT9my5bc/+2YztXv0NM5YYe185VPn2ZmvJ1qd7ACnBOztRIJjsRIFgshMFgslOFAgmO1Eg6n0aLyKZAFYhNvuiNYCFqvqQiOQCmAfgQgDrAHxJVd/zHav65FsoK/m6EbSfnue0Hupsf36Ovd7W/L2JbvtjP6lv38293dT9nx9h9unUzv7/unWktY4YUFVthrC7fKUdjFSiWzI1d/ZWZNGyfxYvwiBn+1GUmn0acmc/DeA6Vb0Mse2ZbxKRKwE8CuBJVb0EwDEA9qZmRJR29Sa7xlTFv8yI/6cArgOwMN4+B/55gUSUZg3dn71VfAfXw4h9ymI7gEpVPftRmL0AeqZkhESUFA1KdlV9X1WHAegFoADApQ09gYgUikipiJSeOOX5mBwRpVSjnsaraiWAlQBGAMgWkbMP+HoB7k3DVbVIVfNVNb9D+0g/nUtEddSb7CLSRUSy46/bIbZOURliSX97/NsmAlicojESURKIqvq/QWQoYg/gWiH2j8MCVf2JiPRDrPTWGcAGABNU1bsAWp8uGTr98+7JExWeddVyct1lhqUL7BLJ4g2+9emSq3/mxWZse3VzKeNQcth/1/2z3T+nANAtK8uMZXUw1j1sbfdBjTtfinfOxTvvHhTn4eyjxajqJgAf2ZRMVXcg9v6diFoAfoKOKBBMdqJAMNmJAsFkJwoEk50oEPWW3pJ6MpEjAM7uGZQDoCKyk9s4jnNxHOdqaePoo6pdXIFIk/2cE4uUqmp+Wk7OcXAcAY6Dv8YTBYLJThSIdCZ7URrPXRfHcS6O41wfm3Gk7T07EUWLv8YTBSItyS4iN4nImyKyTUSmpWMM8XHsEpHNIrJRROyV+pJ/3lkiclhEttRp6ywiy0SkPP5npzSN42ER2Re/JhtFZEwE4+gtIitF5HUReU1EvhFvj/SaeMYR6TURkUwRWSsir8bH8eN4e66IrInnzXwRadOoA6tqpP8hNlV2O4B+ANoAeBXAoKjHER/LLgA5aTjv1QCuALClTttjAKbFX08D8GiaxvEwgO9EfD26A7gi/roDgK0ABkV9TTzjiPSaABAAWfHXGQDWALgSwAIA4+PtvwbwtcYcNx139gIA21R1h8aWnp4HYGwaxpE2qroKwNEPNY9FbN0AIKIFPI1xRE5VD6jq+vjrE4gtjtITEV8TzzgipTFJX+Q1HcneE8CeOl+nc7FKBfCKiKwTkcI0jeGsrqp6IP76IHyLhqfeFBHZFP81P+VvJ+oSkb6IrZ+wBmm8Jh8aBxDxNUnFIq+hP6C7SlWvAPBZAJNF5Op0DwiI/cuO2D9E6fAMgP6I7RFwAMDjUZ1YRLIALAIwVVWP141FeU0c44j8mmgTFnm1pCPZ9wHoXedrc7HKVFPVffE/DwN4EeldeeeQiHQHgPifh9MxCFU9FP9BqwXwHCK6JiKSgViCzVXVF+LNkV8T1zjSdU3i565EIxd5taQj2UsA5MWfLLYBMB7AkqgHISLni0iHs68BjAawxd8rpZYgtnAnkMYFPM8mV9xtiOCaiIgAmAmgTFWfqBOK9JpY44j6mqRskdeonjB+6GnjGMSedG4H8ECaxtAPsUrAqwBei3IcAH6P2K+DZxB773UvYnvmLQdQDuBvADqnaRz/C2AzgE2IJVv3CMZxFWK/om8CsDH+35ior4lnHJFeEwBDEVvEdRNi/7A8WOdndi2AbQD+AKBtY47LT9ARBSL0B3REwWCyEwWCyU4UCCY7USCY7ESBYLITBYLJThQIJjtRIP4fuVckOKVtCJ4AAAAASUVORK5CYII=
+" />
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.-Utilizing-Pretrained-Models-(ResNet)">3. Utilizing Pretrained Models (ResNet)<a class="anchor-link" href="#3.-Utilizing-Pretrained-Models-(ResNet)"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;chenyaofo/pytorch-cifar-models&quot;</span><span class="p">,</span> <span class="s2">&quot;cifar10_resnet20&quot;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Downloading: &#34;https://github.com/chenyaofo/pytorch-cifar-models/archive/master.zip&#34; to /root/.cache/torch/hub/master.zip
+Downloading: &#34;https://github.com/chenyaofo/pytorch-cifar-models/releases/download/resnet/cifar10_resnet20-4118986f.pt&#34; to /root/.cache/torch/hub/checkpoints/cifar10_resnet20-4118986f.pt
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Q3.1.-Get-one-single-CIFAR-10-image-from-https://github.com/YoongiKim/CIFAR-10-images">Q3.1. Get one single CIFAR-10 image from <a href="https://github.com/YoongiKim/CIFAR-10-images">https://github.com/YoongiKim/CIFAR-10-images</a><a class="anchor-link" href="#Q3.1.-Get-one-single-CIFAR-10-image-from-https://github.com/YoongiKim/CIFAR-10-images"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>wget https://github.com/YoongiKim/CIFAR-10-images/blob/master/test/airplane/0001.jpg
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Q3.2.-Make-it-into-a-tensor-(you-can-utilize-the-transforms-that-we-previously-created)">Q3.2. Make it into a tensor (you can utilize the transforms that we previously created)<a class="anchor-link" href="#Q3.2.-Make-it-into-a-tensor-(you-can-utilize-the-transforms-that-we-previously-created)"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;./0000.jpg&quot;</span><span class="p">)</span>
+<span class="n">img_t</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Q3.3.-Load-a-pretrained-model-from-https://github.com/chenyaofo/pytorch-cifar-models">Q3.3. Load a pretrained model from <a href="https://github.com/chenyaofo/pytorch-cifar-models">https://github.com/chenyaofo/pytorch-cifar-models</a><a class="anchor-link" href="#Q3.3.-Load-a-pretrained-model-from-https://github.com/chenyaofo/pytorch-cifar-models"> </a></h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">hub</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;chenyaofo/pytorch-cifar-models&quot;</span><span class="p">,</span> <span class="s2">&quot;cifar10_resnet20&quot;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Q3.4.-Evaluate-the-pretrained-model">Q3.4. Evaluate the pretrained model<a class="anchor-link" href="#Q3.4.-Evaluate-the-pretrained-model"> </a></h1>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">torchvision</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="n">resnet</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">resnet101</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Q4.-Subclassing-nn.Module-to-create-Your-Own-Deep-ResNet">Q4. Subclassing <code>nn.Module</code> to create Your Own Deep ResNet<a class="anchor-link" href="#Q4.-Subclassing-nn.Module-to-create-Your-Own-Deep-ResNet"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="HW:-Training-Your-Own-Model">HW: Training Your Own Model<a class="anchor-link" href="#HW:-Training-Your-Own-Model"> </a></h2>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="ong-ekken/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/image%20recognition/cifar-10/2021/08/18/backup.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Notes on Python, Natural Language Processing, and Random Stuff</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/ong-ekken" title="ong-ekken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/OngEkken" title="OngEkken"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
