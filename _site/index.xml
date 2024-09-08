@@ -6,8 +6,8 @@
       version="2.0">
 <channel>
 <title>Ekken&#39;s Reflections</title>
-<link>https://ong-ekken.github.io/</link>
-<atom:link href="https://ong-ekken.github.io/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://ong-ekken.github.io/blog/</link>
+<atom:link href="https://ong-ekken.github.io/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>Ekken&#39;s Learning in public</description>
 <generator>quarto-1.5.57</generator>
 <lastBuildDate>Sun, 08 Sep 2024 15:00:00 GMT</lastBuildDate>
