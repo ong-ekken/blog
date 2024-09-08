@@ -1,0 +1,24 @@
+project:
+  type: website
+
+website:
+  title: "Ekken's Reflections"
+  site-url: https://ong-ekken.github.io/blog/
+  description: "Ekken's Learning in public"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/
+      - icon: twitter
+        href: https://twitter.com
+      - icon: rss
+        href: index.xml
+format:
+  html:
+    theme: morph
+    css: styles.css
+execute:
+  freeze: auto
+
+

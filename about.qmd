@@ -1,0 +1,20 @@
+---
+title: "About"
+image: profile.jpg
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/ekken/
+    - icon: github
+      text: Github
+      href: https://github.com/ong-ekken/
+
+---
+
+## About me
+
+Data Product Manager in the Fintech Alternative Data space, working with a team of talented data engineers and scientist/analysts. 
+
+Ex-Indeed International Product Analyst, where I had managed market product roadmaps and ran experiments through the use of big data.
